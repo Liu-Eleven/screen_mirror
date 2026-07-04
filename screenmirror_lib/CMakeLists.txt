@@ -20,6 +20,7 @@ set(PROTOCOL_SOURCES
     src/protocols/dlna/dlna.c
     src/protocols/wired/wired.c
     src/protocols/wireless/wireless.c
+    src/protocols/wireless/wfd_protocol.c
 )
 
 set(NETWORK_SOURCES
@@ -60,6 +61,27 @@ target_include_directories(screenmirror_shared PUBLIC
 )
 target_link_libraries(screenmirror_shared PRIVATE pthread)
 
+set(H133_SYSROOT "/home/share_hp/h133/tina/out/h133/p2/openwrt/staging_dir/target")
+if(EXISTS ${H133_SYSROOT})
+    target_compile_options(screenmirror_static PRIVATE --sysroot=${H133_SYSROOT})
+    target_compile_options(screenmirror_shared PRIVATE --sysroot=${H133_SYSROOT})
+    target_link_options(screenmirror_shared PRIVATE
+        --sysroot=${H133_SYSROOT}
+        -Wl,-rpath,${H133_SYSROOT}/root-h133-p2/usr/lib
+        -Wl,-rpath-link,${H133_SYSROOT}/root-h133-p2/usr/lib
+    )
+    link_directories(
+        ${H133_SYSROOT}/usr/lib
+        ${H133_SYSROOT}/root-h133-p2/usr/lib
+    )
+    target_link_libraries(screenmirror_shared PRIVATE
+        awrecorder tplayer wfd_player wpa_client wfd2 aw_dlna wfd_hdcp wfd_rtsp
+        asound wolfssl dl rt
+    )
+else()
+    target_link_libraries(screenmirror_shared PRIVATE dl rt)
+endif()
+
 # Installation
 install(TARGETS screenmirror_static screenmirror_shared
     LIBRARY DESTINATION lib
@@ -86,7 +108,7 @@ install(DIRECTORY
 
 # Test executable (optional)
 if(BUILD_TESTS)
-    add_executable(screenmirror_test examples/basic_example.c)
+    add_executable(screenmirror_test test/test_main.c)
     target_link_libraries(screenmirror_test PRIVATE screenmirror_static pthread)
     target_include_directories(screenmirror_test PRIVATE
         ${CMAKE_SOURCE_DIR}/include

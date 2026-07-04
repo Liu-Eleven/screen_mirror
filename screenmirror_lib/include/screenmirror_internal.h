@@ -108,6 +108,8 @@ typedef struct {
     /* 用户回调 */
     MirrorEventCallback user_event_callback;
     void *user_callback_data;
+    MirrorDeviceListCallback discovery_callback;
+    void *discovery_callback_data;
 } MirrorEngine;
 
 /* 全局引擎实例 */

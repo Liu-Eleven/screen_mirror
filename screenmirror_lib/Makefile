@@ -5,6 +5,9 @@
 CC ?= gcc
 AR ?= ar
 CC_FLAGS ?= -O2 -g -Wall -Wextra -Wno-unused-function
+SYSROOT ?= /home/share_hp/h133/tina/out/h133/p2/openwrt/staging_dir/target
+H133_LIB_DIR ?= $(SYSROOT)/root-h133-p2/usr/lib
+H133_SYS_LIB_DIR ?= $(SYSROOT)/usr/lib
 LIB_NAME = libscreenmirror
 LIB_VERSION_MAJOR = 1
 LIB_VERSION_MINOR = 0
@@ -35,7 +38,8 @@ PROTOCOL_SRCS = \
     $(SRC_DIR)/protocols/airplay/airplay.c \
     $(SRC_DIR)/protocols/dlna/dlna.c \
     $(SRC_DIR)/protocols/wired/wired.c \
-    $(SRC_DIR)/protocols/wireless/wireless.c
+    $(SRC_DIR)/protocols/wireless/wireless.c \
+    $(SRC_DIR)/protocols/wireless/wfd_protocol.c
 
 NETWORK_SRCS = \
     $(SRC_DIR)/network/discovery.c \
@@ -51,11 +55,26 @@ ALL_DEPS = $(addprefix $(DEP_DIR)/, $(notdir $(ALL_SRCS:.c=.d)))
 # Compile flags
 CFLAGS = $(CC_FLAGS) -I$(INCLUDE_DIR) -fPIC -pthread
 LDFLAGS_SHARED = -shared -Wl,-soname,$(LIB_NAME).so.$(LIB_VERSION_MAJOR) -pthread
+ifneq ("$(wildcard $(SYSROOT))","")
+CFLAGS += --sysroot=$(SYSROOT)
+LDFLAGS_SHARED += --sysroot=$(SYSROOT) -Wl,-rpath,$(H133_LIB_DIR) -Wl,-rpath-link,$(H133_LIB_DIR)
+endif
+H133_LIBS = -ldl -lrt
+ifneq ("$(wildcard $(SYSROOT))","")
+H133_LIBS += -L$(H133_SYS_LIB_DIR) -L$(H133_LIB_DIR) \
+	-lawrecorder -ltplayer -lwfd_player -lwpa_client -lwfd2 -law_dlna -lwfd_hdcp -lwfd_rtsp \
+	-lasound -lwolfssl
+endif
 
-.PHONY: all static shared clean install
+TEST_SRC = $(LIB_DIR)/test/test_main.c
+TEST_BIN = $(BUILD_DIR)/test_main
+
+.PHONY: all static shared test clean install
 
 # Default target
 all: static shared
+
+test: all $(TEST_BIN)
 
 # Create build directories
 $(OBJ_DIR):
@@ -109,7 +128,11 @@ shared: $(SHARED_LIB) $(SHARED_LIB_MAJOR) $(SHARED_LIB_BASE)
 
 $(SHARED_LIB): $(ALL_OBJS)
 	@echo "LD $@"
-	@$(CC) $(LDFLAGS_SHARED) -o $@ $^
+	@$(CC) $(LDFLAGS_SHARED) -o $@ $^ $(H133_LIBS)
+
+$(TEST_BIN): $(TEST_SRC) $(STATIC_LIB)
+	@echo "CC $<"
+	@$(CC) $(CC_FLAGS) -I$(INCLUDE_DIR) -o $@ $< $(STATIC_LIB) -pthread -ldl -lrt
 
 $(SHARED_LIB_MAJOR): $(SHARED_LIB)
 	@ln -sf $(notdir $(SHARED_LIB)) $@

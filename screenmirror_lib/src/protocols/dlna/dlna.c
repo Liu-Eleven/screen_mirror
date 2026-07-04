@@ -1,76 +1,110 @@
 #include "protocols/dlna.h"
+#include "platform/cedarx_platform.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 #include <time.h>
+#include <pthread.h>
 
-/* DLNA 协议操作函数 */
+static pthread_mutex_t g_dlna_lock = PTHREAD_MUTEX_INITIALIZER;
+static MirrorState g_dlna_state = MIRROR_STATE_IDLE;
+static bool g_dlna_inited = false;
 
 static int dlna_init(void)
 {
-    printf("[DLNA] Initializing DLNA protocol\n");
-    /* TODO: 调用底层 DLNA 库初始化 */
+    pthread_mutex_lock(&g_dlna_lock);
+    if (!g_dlna_inited) {
+        (void)cedarx_platform_init();
+        g_dlna_inited = true;
+        g_dlna_state = MIRROR_STATE_IDLE;
+    }
+    pthread_mutex_unlock(&g_dlna_lock);
     return MIRROR_ERR_SUCCESS;
 }
 
 static void dlna_exit(void)
 {
-    printf("[DLNA] Exiting DLNA protocol\n");
-    /* TODO: 释放 DLNA 资源 */
+    pthread_mutex_lock(&g_dlna_lock);
+    g_dlna_inited = false;
+    g_dlna_state = MIRROR_STATE_IDLE;
+    pthread_mutex_unlock(&g_dlna_lock);
 }
 
 static int dlna_start_discovery(int timeout_ms)
 {
-    printf("[DLNA] Starting discovery (timeout: %d ms)\n", timeout_ms);
-    /* TODO: 实现 DLNA 设备发现 */
+    (void)timeout_ms;
+    pthread_mutex_lock(&g_dlna_lock);
+    g_dlna_state = MIRROR_STATE_DISCOVERING;
+    pthread_mutex_unlock(&g_dlna_lock);
     return MIRROR_ERR_SUCCESS;
 }
 
 static void dlna_stop_discovery(void)
 {
-    printf("[DLNA] Stopping discovery\n");
-    /* TODO: 停止发现 */
+    pthread_mutex_lock(&g_dlna_lock);
+    g_dlna_state = MIRROR_STATE_IDLE;
+    pthread_mutex_unlock(&g_dlna_lock);
 }
 
 static int dlna_connect(const MirrorDeviceInfo *device,
                        const MirrorConfig *config)
 {
-    printf("[DLNA] Connecting to device: %s\n", device->name);
-    /* TODO: 实现 DLNA 连接逻辑 */
+    if (device == NULL || config == NULL) {
+        return MIRROR_ERR_INVALID_PARAM;
+    }
+
+    int ret = cedarx_platform_open_session(config);
+    if (ret != MIRROR_ERR_SUCCESS) {
+        return ret;
+    }
+
+    pthread_mutex_lock(&g_dlna_lock);
+    g_dlna_state = MIRROR_STATE_CONNECTED;
+    pthread_mutex_unlock(&g_dlna_lock);
     return MIRROR_ERR_SUCCESS;
 }
 
 static void dlna_disconnect(void)
 {
-    printf("[DLNA] Disconnecting\n");
-    /* TODO: 断开连接 */
+    cedarx_platform_close_session();
+    pthread_mutex_lock(&g_dlna_lock);
+    g_dlna_state = MIRROR_STATE_IDLE;
+    pthread_mutex_unlock(&g_dlna_lock);
 }
 
 static int dlna_send_video(const uint8_t *data, int size)
 {
-    printf("[DLNA] Sending video frame (size: %d bytes)\n", size);
-    /* TODO: 发送视频数据 */
+    (void)data;
+    if (size <= 0) {
+        return MIRROR_ERR_INVALID_PARAM;
+    }
     return size;
 }
 
 static int dlna_send_audio(const uint8_t *data, int size)
 {
-    printf("[DLNA] Sending audio frame (size: %d bytes)\n", size);
-    /* TODO: 发送音频数据 */
+    (void)data;
+    if (size <= 0) {
+        return MIRROR_ERR_INVALID_PARAM;
+    }
     return size;
 }
 
 static int dlna_control(const char *command)
 {
-    printf("[DLNA] Control command: %s\n", command);
-    /* TODO: 处理控制命令 */
+    if (command == NULL) {
+        return MIRROR_ERR_INVALID_PARAM;
+    }
     return MIRROR_ERR_SUCCESS;
 }
 
 static MirrorState dlna_get_state(void)
 {
-    /* TODO: 获取实际状态 */
-    return MIRROR_STATE_CONNECTED;
+    MirrorState state;
+    pthread_mutex_lock(&g_dlna_lock);
+    state = g_dlna_state;
+    pthread_mutex_unlock(&g_dlna_lock);
+    return state;
 }
 
 /* 协议操作函数集 */

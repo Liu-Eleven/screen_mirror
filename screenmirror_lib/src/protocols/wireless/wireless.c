@@ -3,75 +3,95 @@
 #include <string.h>
 #include <stdio.h>
 #include <time.h>
+#include <pthread.h>
 
-/* WiFi 无线投屏操作函数 */
+static pthread_mutex_t g_wireless_lock = PTHREAD_MUTEX_INITIALIZER;
+static MirrorState g_wireless_state = MIRROR_STATE_IDLE;
 
 static int wireless_init(void)
 {
-    printf("[WIRELESS] Initializing WiFi wireless protocol\n");
-    /* TODO: 初始化 WiFi 模块 */
+    pthread_mutex_lock(&g_wireless_lock);
+    g_wireless_state = MIRROR_STATE_IDLE;
+    pthread_mutex_unlock(&g_wireless_lock);
     return MIRROR_ERR_SUCCESS;
 }
 
 static void wireless_exit(void)
 {
-    printf("[WIRELESS] Exiting WiFi wireless protocol\n");
-    /* TODO: 释放 WiFi 资源 */
+    pthread_mutex_lock(&g_wireless_lock);
+    g_wireless_state = MIRROR_STATE_IDLE;
+    pthread_mutex_unlock(&g_wireless_lock);
 }
 
 static int wireless_start_discovery(int timeout_ms)
 {
-    printf("[WIRELESS] Starting WiFi device discovery (timeout: %d ms)\n", timeout_ms);
-    /* TODO: 扫描 WiFi 投屏设备 */
+    (void)timeout_ms;
+    pthread_mutex_lock(&g_wireless_lock);
+    g_wireless_state = MIRROR_STATE_DISCOVERING;
+    pthread_mutex_unlock(&g_wireless_lock);
     return MIRROR_ERR_SUCCESS;
 }
 
 static void wireless_stop_discovery(void)
 {
-    printf("[WIRELESS] Stopping WiFi discovery\n");
-    /* TODO: 停止扫描 */
+    pthread_mutex_lock(&g_wireless_lock);
+    g_wireless_state = MIRROR_STATE_IDLE;
+    pthread_mutex_unlock(&g_wireless_lock);
 }
 
 static int wireless_connect(const MirrorDeviceInfo *device,
                            const MirrorConfig *config)
 {
-    printf("[WIRELESS] Connecting WiFi device: %s (IP: %s)\n",
-           device->name, device->ip_address);
-    /* TODO: 建立 WiFi TCP 连接 */
+    (void)config;
+    if (device == NULL) {
+        return MIRROR_ERR_INVALID_PARAM;
+    }
+    pthread_mutex_lock(&g_wireless_lock);
+    g_wireless_state = MIRROR_STATE_CONNECTED;
+    pthread_mutex_unlock(&g_wireless_lock);
     return MIRROR_ERR_SUCCESS;
 }
 
 static void wireless_disconnect(void)
 {
-    printf("[WIRELESS] Disconnecting WiFi\n");
-    /* TODO: 断开 WiFi 连接 */
+    pthread_mutex_lock(&g_wireless_lock);
+    g_wireless_state = MIRROR_STATE_IDLE;
+    pthread_mutex_unlock(&g_wireless_lock);
 }
 
 static int wireless_send_video(const uint8_t *data, int size)
 {
-    printf("[WIRELESS] Sending video frame (size: %d bytes)\n", size);
-    /* TODO: 通过 WiFi TCP 发送视频 */
+    (void)data;
+    if (size <= 0) {
+        return MIRROR_ERR_INVALID_PARAM;
+    }
     return size;
 }
 
 static int wireless_send_audio(const uint8_t *data, int size)
 {
-    printf("[WIRELESS] Sending audio frame (size: %d bytes)\n", size);
-    /* TODO: 通过 WiFi TCP 发送音频 */
+    (void)data;
+    if (size <= 0) {
+        return MIRROR_ERR_INVALID_PARAM;
+    }
     return size;
 }
 
 static int wireless_control(const char *command)
 {
-    printf("[WIRELESS] Control command: %s\n", command);
-    /* TODO: WiFi 控制命令 */
+    if (command == NULL) {
+        return MIRROR_ERR_INVALID_PARAM;
+    }
     return MIRROR_ERR_SUCCESS;
 }
 
 static MirrorState wireless_get_state(void)
 {
-    /* TODO: 获取 WiFi 连接状态 */
-    return MIRROR_STATE_CONNECTED;
+    MirrorState state;
+    pthread_mutex_lock(&g_wireless_lock);
+    state = g_wireless_state;
+    pthread_mutex_unlock(&g_wireless_lock);
+    return state;
 }
 
 /* 协议操作函数集 */

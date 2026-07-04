@@ -1,75 +1,86 @@
 #include "protocols/miracast.h"
+#include "protocols/wfd_protocol.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <time.h>
 
-/* Miracast 协议操作函数 */
+static ProtocolOps *g_wfd_ops = NULL;
 
 static int miracast_init(void)
 {
-    printf("[MIRACAST] Initializing Miracast protocol\n");
-    /* TODO: 调用底层 Miracast 库初始化 */
-    return MIRROR_ERR_SUCCESS;
+    g_wfd_ops = wfd_protocol_get_ops();
+    return (g_wfd_ops != NULL) ? g_wfd_ops->init() : MIRROR_ERR_UNKNOWN;
 }
 
 static void miracast_exit(void)
 {
-    printf("[MIRACAST] Exiting Miracast protocol\n");
-    /* TODO: 释放 Miracast 资源 */
+    if (g_wfd_ops != NULL) {
+        g_wfd_ops->exit();
+    }
 }
 
 static int miracast_start_discovery(int timeout_ms)
 {
-    printf("[MIRACAST] Starting discovery (timeout: %d ms)\n", timeout_ms);
-    /* TODO: 实现 Miracast 设备发现 */
-    return MIRROR_ERR_SUCCESS;
+    if (g_wfd_ops == NULL) {
+        return MIRROR_ERR_NOT_INIT;
+    }
+    return g_wfd_ops->start_discovery(timeout_ms);
 }
 
 static void miracast_stop_discovery(void)
 {
-    printf("[MIRACAST] Stopping discovery\n");
-    /* TODO: 停止发现 */
+    if (g_wfd_ops != NULL) {
+        g_wfd_ops->stop_discovery();
+    }
 }
 
 static int miracast_connect(const MirrorDeviceInfo *device,
                            const MirrorConfig *config)
 {
-    printf("[MIRACAST] Connecting to device: %s\n", device->name);
-    /* TODO: 实现 Miracast 连接逻辑 */
-    return MIRROR_ERR_SUCCESS;
+    if (g_wfd_ops == NULL) {
+        return MIRROR_ERR_NOT_INIT;
+    }
+    return g_wfd_ops->connect(device, config);
 }
 
 static void miracast_disconnect(void)
 {
-    printf("[MIRACAST] Disconnecting\n");
-    /* TODO: 断开连接 */
+    if (g_wfd_ops != NULL) {
+        g_wfd_ops->disconnect();
+    }
 }
 
 static int miracast_send_video(const uint8_t *data, int size)
 {
-    printf("[MIRACAST] Sending video frame (size: %d bytes)\n", size);
-    /* TODO: 发送视频数据 */
-    return size;
+    if (g_wfd_ops == NULL) {
+        return MIRROR_ERR_NOT_INIT;
+    }
+    return g_wfd_ops->send_video(data, size);
 }
 
 static int miracast_send_audio(const uint8_t *data, int size)
 {
-    printf("[MIRACAST] Sending audio frame (size: %d bytes)\n", size);
-    /* TODO: 发送音频数据 */
-    return size;
+    if (g_wfd_ops == NULL) {
+        return MIRROR_ERR_NOT_INIT;
+    }
+    return g_wfd_ops->send_audio(data, size);
 }
 
 static int miracast_control(const char *command)
 {
-    printf("[MIRACAST] Control command: %s\n", command);
-    /* TODO: 处理控制命令 */
-    return MIRROR_ERR_SUCCESS;
+    if (g_wfd_ops == NULL) {
+        return MIRROR_ERR_NOT_INIT;
+    }
+    return g_wfd_ops->control(command);
 }
 
 static MirrorState miracast_get_state(void)
 {
-    /* TODO: 获取实际状态 */
-    return MIRROR_STATE_CONNECTED;
+    if (g_wfd_ops == NULL) {
+        return MIRROR_STATE_IDLE;
+    }
+    return g_wfd_ops->get_state();
 }
 
 /* 协议操作函数集 */

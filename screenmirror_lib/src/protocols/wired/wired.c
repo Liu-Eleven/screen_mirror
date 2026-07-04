@@ -3,74 +3,95 @@
 #include <string.h>
 #include <stdio.h>
 #include <time.h>
+#include <pthread.h>
 
-/* USB 有线投屏操作函数 */
+static pthread_mutex_t g_wired_lock = PTHREAD_MUTEX_INITIALIZER;
+static MirrorState g_wired_state = MIRROR_STATE_IDLE;
 
 static int wired_init(void)
 {
-    printf("[WIRED] Initializing USB wired protocol\n");
-    /* TODO: 初始化 USB 接口 */
+    pthread_mutex_lock(&g_wired_lock);
+    g_wired_state = MIRROR_STATE_IDLE;
+    pthread_mutex_unlock(&g_wired_lock);
     return MIRROR_ERR_SUCCESS;
 }
 
 static void wired_exit(void)
 {
-    printf("[WIRED] Exiting USB wired protocol\n");
-    /* TODO: 释放 USB 资源 */
+    pthread_mutex_lock(&g_wired_lock);
+    g_wired_state = MIRROR_STATE_IDLE;
+    pthread_mutex_unlock(&g_wired_lock);
 }
 
 static int wired_start_discovery(int timeout_ms)
 {
-    printf("[WIRED] Starting USB device discovery (timeout: %d ms)\n", timeout_ms);
-    /* TODO: 扫描 USB 设备 */
+    (void)timeout_ms;
+    pthread_mutex_lock(&g_wired_lock);
+    g_wired_state = MIRROR_STATE_DISCOVERING;
+    pthread_mutex_unlock(&g_wired_lock);
     return MIRROR_ERR_SUCCESS;
 }
 
 static void wired_stop_discovery(void)
 {
-    printf("[WIRED] Stopping USB discovery\n");
-    /* TODO: 停止扫描 */
+    pthread_mutex_lock(&g_wired_lock);
+    g_wired_state = MIRROR_STATE_IDLE;
+    pthread_mutex_unlock(&g_wired_lock);
 }
 
 static int wired_connect(const MirrorDeviceInfo *device,
                         const MirrorConfig *config)
 {
-    printf("[WIRED] Connecting USB device: %s\n", device->name);
-    /* TODO: 建立 USB 连接 */
+    (void)config;
+    if (device == NULL) {
+        return MIRROR_ERR_INVALID_PARAM;
+    }
+    pthread_mutex_lock(&g_wired_lock);
+    g_wired_state = MIRROR_STATE_CONNECTED;
+    pthread_mutex_unlock(&g_wired_lock);
     return MIRROR_ERR_SUCCESS;
 }
 
 static void wired_disconnect(void)
 {
-    printf("[WIRED] Disconnecting USB\n");
-    /* TODO: 断开 USB 连接 */
+    pthread_mutex_lock(&g_wired_lock);
+    g_wired_state = MIRROR_STATE_IDLE;
+    pthread_mutex_unlock(&g_wired_lock);
 }
 
 static int wired_send_video(const uint8_t *data, int size)
 {
-    printf("[WIRED] Sending video frame (size: %d bytes)\n", size);
-    /* TODO: 通过 USB 发送视频 */
+    (void)data;
+    if (size <= 0) {
+        return MIRROR_ERR_INVALID_PARAM;
+    }
     return size;
 }
 
 static int wired_send_audio(const uint8_t *data, int size)
 {
-    printf("[WIRED] Sending audio frame (size: %d bytes)\n", size);
-    /* TODO: 通过 USB 发送音频 */
+    (void)data;
+    if (size <= 0) {
+        return MIRROR_ERR_INVALID_PARAM;
+    }
     return size;
 }
 
 static int wired_control(const char *command)
 {
-    printf("[WIRED] Control command: %s\n", command);
-    /* TODO: USB 控制命令 */
+    if (command == NULL) {
+        return MIRROR_ERR_INVALID_PARAM;
+    }
     return MIRROR_ERR_SUCCESS;
 }
 
 static MirrorState wired_get_state(void)
 {
-    /* TODO: 获取 USB 连接状态 */
-    return MIRROR_STATE_CONNECTED;
+    MirrorState state;
+    pthread_mutex_lock(&g_wired_lock);
+    state = g_wired_state;
+    pthread_mutex_unlock(&g_wired_lock);
+    return state;
 }
 
 /* 协议操作函数集 */

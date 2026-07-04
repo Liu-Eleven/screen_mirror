@@ -48,6 +48,10 @@ bool state_machine_can_transition(StateMachine *sm, MirrorState new_state)
 
     MirrorState current = sm->current_state;
 
+    if (new_state == current) {
+        return true;
+    }
+
     /* 定义合法的状态转移 */
     switch (current) {
         case MIRROR_STATE_IDLE:
