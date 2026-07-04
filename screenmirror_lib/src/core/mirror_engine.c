@@ -22,10 +22,13 @@ static void fill_mock_device(MirrorMode mode, MirrorDeviceInfo *device)
 
     memset(device, 0, sizeof(*device));
     strncpy(device->name, names[mode], sizeof(device->name) - 1);
+    device->name[sizeof(device->name) - 1] = '\0';
     strncpy(device->mac_address, "00:11:22:33:44:55",
             sizeof(device->mac_address) - 1);
+    device->mac_address[sizeof(device->mac_address) - 1] = '\0';
     strncpy(device->ip_address, "192.168.1.100",
             sizeof(device->ip_address) - 1);
+    device->ip_address[sizeof(device->ip_address) - 1] = '\0';
     device->signal_strength = 80;
     device->mode = mode;
     device->model_id = 1;

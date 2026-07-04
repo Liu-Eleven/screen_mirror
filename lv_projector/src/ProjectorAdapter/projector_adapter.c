@@ -149,7 +149,7 @@ int projector_adapter_build_mirror_config(MirrorConfig *config,
                                           const ProjectorAdapterConfig *adapter_config)
 {
     if (config == NULL || adapter_config == NULL) {
-        return -1;
+        return PROJECTOR_ADAPTER_ERR_INVALID_PARAM;
     }
 
     memset(config, 0, sizeof(*config));
@@ -169,7 +169,7 @@ int projector_adapter_build_mirror_device(MirrorDeviceInfo *device,
                                           const ProjectorAdapterDevice *adapter_device)
 {
     if (device == NULL || adapter_device == NULL) {
-        return -1;
+        return PROJECTOR_ADAPTER_ERR_INVALID_PARAM;
     }
 
     memset(device, 0, sizeof(*device));
@@ -375,7 +375,7 @@ int projector_adapter_start_services(ProjectorAdapterProtocol protocol)
     pthread_mutex_lock(&ctx->lock);
     if (!ctx->initialized) {
         pthread_mutex_unlock(&ctx->lock);
-        return -1;
+        return PROJECTOR_ADAPTER_ERR_NOT_READY;
     }
     ctx->protocol = protocol;
     ctx->config.protocol = protocol;
@@ -422,7 +422,7 @@ int projector_adapter_on_device_selected(const ProjectorAdapterDevice *device)
     MirrorConfig mirror_config;
 
     if (device == NULL) {
-        return -1;
+        return PROJECTOR_ADAPTER_ERR_INVALID_PARAM;
     }
 
     pthread_mutex_lock(&ctx->lock);
@@ -430,10 +430,10 @@ int projector_adapter_on_device_selected(const ProjectorAdapterDevice *device)
     pthread_mutex_unlock(&ctx->lock);
 
     if (projector_adapter_build_mirror_device(&mirror_device, device) < 0) {
-        return -1;
+        return PROJECTOR_ADAPTER_ERR_INVALID_PARAM;
     }
     if (projector_adapter_build_mirror_config(&mirror_config, &ctx->config) < 0) {
-        return -1;
+        return PROJECTOR_ADAPTER_ERR_INVALID_PARAM;
     }
 
     projector_adapter_store_current_device(&mirror_device);
@@ -474,13 +474,13 @@ int projector_adapter_get_current_device(ProjectorAdapterDevice *device)
     ProjectorAdapterContext *ctx = projector_adapter_get_context();
 
     if (device == NULL) {
-        return -1;
+        return PROJECTOR_ADAPTER_ERR_INVALID_PARAM;
     }
 
     pthread_mutex_lock(&ctx->lock);
     if (!ctx->has_current_device) {
         pthread_mutex_unlock(&ctx->lock);
-        return -1;
+        return PROJECTOR_ADAPTER_ERR_NO_DEVICE;
     }
     *device = ctx->current_device;
     pthread_mutex_unlock(&ctx->lock);

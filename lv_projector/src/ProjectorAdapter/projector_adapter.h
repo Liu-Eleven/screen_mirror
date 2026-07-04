@@ -56,6 +56,11 @@ typedef void (*ProjectorAdapterDeviceCallback)(const ProjectorAdapterDevice *dev
                                                int device_count,
                                                void *user_data);
 
+#define PROJECTOR_ADAPTER_SUCCESS            0
+#define PROJECTOR_ADAPTER_ERR_INVALID_PARAM -1
+#define PROJECTOR_ADAPTER_ERR_NOT_READY     -2
+#define PROJECTOR_ADAPTER_ERR_NO_DEVICE     -3
+
 int projector_adapter_init(const ProjectorAdapterConfig *config);
 int projector_adapter_deinit(void);
 int projector_adapter_set_callbacks(ProjectorAdapterStateCallback state_callback,

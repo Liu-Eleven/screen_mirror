@@ -74,11 +74,11 @@ static void wirelesssp_adapter_state_cb(ProjectorAdapterState state,
     (void)state;
     (void)user_data;
 
+    pthread_mutex_lock(&lvgl_mutex);
     if (wirelesssp_status_label == NULL || !lv_obj_is_valid(wirelesssp_status_label)) {
+        pthread_mutex_unlock(&lvgl_mutex);
         return;
     }
-
-    pthread_mutex_lock(&lvgl_mutex);
     lv_label_set_text_fmt(wirelesssp_status_label, "#ffffff %s #",
                           message ? message : lv_get_string(STR_WIFI_CONNECTING));
     pthread_mutex_unlock(&lvgl_mutex);

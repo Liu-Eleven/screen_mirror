@@ -154,7 +154,7 @@ $(ADAPTER_TEST_BIN): $(STATIC_LIB) \
 		$(ADAPTER_DIR)/projector_adapter.c \
 		$(ADAPTER_DIR)/ui_event_handler.c \
 		$(ADAPTER_DIR)/mirror_event_handler.c \
-		$(ALL_SRCS)
+		$(STATIC_LIB)
 
 adapter-test: $(ADAPTER_TEST_BIN)
 
