@@ -4,6 +4,7 @@
 #include "screenmirror.h"
 #include <pthread.h>
 #include <stdint.h>
+#include <stdbool.h>
 
 /* ========== 错误码定义 ========== */
 #define MIRROR_ERR_SUCCESS           0
