@@ -77,7 +77,7 @@ static void wirelesssp_adapter_state_cb(ProjectorAdapterState state,
     (void)user_data;
 
     pthread_mutex_lock(&lvgl_mutex);
-    if (wirelesssp_status_label == NULL || !lv_obj_is_valid(wirelesssp_status_label)) {
+    if (!lv_obj_is_valid(wirelesssp_status_label)) {
         pthread_mutex_unlock(&lvgl_mutex);
         return;
     }

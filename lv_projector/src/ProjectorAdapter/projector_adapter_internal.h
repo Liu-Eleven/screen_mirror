@@ -2,11 +2,8 @@
 #define PROJECTOR_ADAPTER_INTERNAL_H
 
 #include "projector_adapter.h"
-#include "screenmirror.h"
+#include "screenmirror_internal.h"
 #include <pthread.h>
-
-#define PROJECTOR_ADAPTER_SCREENMIRROR_ERR_ALREADY_INIT -1
-#define PROJECTOR_ADAPTER_SCREENMIRROR_ERR_NOT_INIT     -2
 
 typedef struct {
     pthread_mutex_t lock;

@@ -27,6 +27,17 @@ static void emit_engine_event(MirrorEventType type, int error_code,
     }
 }
 
+static void set_state_machine_state(StateMachine *sm, MirrorState state)
+{
+    if (sm == NULL) {
+        return;
+    }
+
+    pthread_mutex_lock(&sm->lock);
+    sm->current_state = state;
+    pthread_mutex_unlock(&sm->lock);
+}
+
 static void fill_mock_device(MirrorMode mode, MirrorDeviceInfo *device)
 {
     static const char *names[] = {
@@ -124,9 +135,7 @@ int screenmirror_exit(void)
     has_active_session = (g_mirror_engine->state != MIRROR_STATE_IDLE);
     g_mirror_engine->discovery_running = false;
     g_mirror_engine->state = MIRROR_STATE_IDLE;
-    if (state_machine_get_state(g_mirror_engine->state_machine) != MIRROR_STATE_IDLE) {
-        state_machine_transition(g_mirror_engine->state_machine, MIRROR_STATE_IDLE);
-    }
+    set_state_machine_state(g_mirror_engine->state_machine, MIRROR_STATE_IDLE);
     pthread_mutex_unlock(&g_mirror_engine->lock);
 
     if (discovery_running) {
@@ -240,9 +249,7 @@ int screenmirror_stop_discovery(void)
 
     g_mirror_engine->discovery_running = false;
     g_mirror_engine->state = MIRROR_STATE_IDLE;
-    if (state_machine_get_state(g_mirror_engine->state_machine) != MIRROR_STATE_IDLE) {
-        state_machine_transition(g_mirror_engine->state_machine, MIRROR_STATE_IDLE);
-    }
+    set_state_machine_state(g_mirror_engine->state_machine, MIRROR_STATE_IDLE);
 
     pthread_mutex_unlock(&g_mirror_engine->lock);
 
