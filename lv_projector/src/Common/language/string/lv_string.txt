@@ -1,0 +1,398 @@
+lv_string_id	english	chinese	french	german	japanese	italian	spanish	russian
+STR_QR_CONNECT_AP	First scan QR code Set AP network	请扫码连接本设备	Veuillez balayer le code \n pour connecter cet appareil	Scannen Sie zuerst den QR-Code. Stellen Sie das AP-Netzwerk ein	QRコードの初回スキャン APネットワークの設定	Prima scansiona il codice QR Imposta la rete AP	Primero escanee el código QR Configure la red AP	Первое сканирование QR-кода Настройка сети AP
+STR_QR_SCAN_WIFI	Second scan QR code Set WiFi network	请扫码联网	Veuillez balayer \n le code réseau	Zweiter Scan des QR-Codes. WLAN-Netzwerk einrichten	2 回目の QR コードのスキャン WiFi ネットワークの設定	Seconda scansione del codice QR Imposta la rete WiFi	Segundo escaneo del código QR Establecer red WiFi	Второе сканирование QR-кода Установить сеть WiFi
+STR_QR_CONFIG	Scan QR code Set device parameters	请扫码配置参数	s'il vous plaît balayez les \n paramètres de configuration du code	QR-Code scannen Geräteparameter einstellen	QRコードをスキャンしてデバイスパラメータを設定します	Scansiona il codice QR Imposta i parametri del dispositivo	Escanear código QR Establecer parámetros del dispositivo	Сканировать QR-код Установить параметры устройства
+STR_WIFI_SCANNING	WiFi is scanning ...	WiFi正在扫描 ...	Le WiFi est scanné...	WLAN scannt ...	WiFi がスキャン中です...	Il WiFi sta scansionando...	WiFi está escaneando...	WiFi сканирует...
+STR_WIFI_CONNECTING	WiFi is connecting ...	WiFi连接中 ...	Connexion WiFi en cours...	WLAN verbindet sich ...	Wi-Fiが接続中です...	Il Wi-Fi si sta connettendo...	WiFi se está conectando...	WiFi подключается...
+STR_MIRA_CONNECTING	Miracast is connecting ...	同屏连接中 ...	Connexion android\ndans le même écran...	Miracast verbindet ...	ミラキャストが接続中です...	Miracast si connette...	Miracast se está\nconectando...	Miracast подключается...
+STR_MIRA_CONNECT_OK	Miracast connect OK.	同屏连接成功	Connexion android\nmême écran avec succès	Miracast-Verbindung OK.	ミラキャスト接続OK。	Miracast si connette bene.	Miracast conecta bien.	Miracast подключается\nнормально.
+STR_MIRA_GOT_IP_OK	Miracast is obtaining stream (%d) ....	Miracast 获取流中 (%d) ...	Miracast is obtaining stream (%d) ....					
+STR_AIR_PLAY_MUSIC	Aircast is playing music	苹果同屏播放音乐	Musique sur le même écran d’apple	Aircast spielt Musik	エアキャストが音楽を再生しています	Aircast sta riproducendo musica	Aircast está reproduciendo música.	Aircast играет музыку
+STR_INSERT_ANDROID_OR_APPLE	Please plug in android or apple device!	请插入苹果或者安卓设备!	Veuillez insérer un appareil apple ou android!	Bitte schließen Sie ein Android- oder Apple-Gerät an!	AndroidまたはAppleデバイスを接続してください。	Si prega di collegare il dispositivo Android o Apple!	¡Conecte el dispositivo Android o Apple!	Пожалуйста, подключите устройство Android или Apple!
+STR_REINSERT_ANDROID_OR_APPLE	Please pull out and plug in android or apple device!	请拔出，再插入苹果或者安卓设备!	Veuillez débrancher et rebrancher votre appareil apple ou android!	Bitte ziehen Sie das Android- oder Apple-Gerät heraus und schließen Sie es an!	Android または Apple デバイスを抜き差ししてください。	Si prega di estrarre e collegare il dispositivo Android o Apple!	¡Saca y conecta el dispositivo Android o Apple!	Пожалуйста, вытащите и подключите устройство Android или Apple!
+STR_PICTURE_MODE	Image Mode	图像模式	Mode Image	Bildmodus	画像モード	Modalità immagine	Modo de imagen	Режим изображения
+STR_CONSTRAST	Contrast	对比度	Contraste	Kontrast	コントラスト	Contrasto	Contraste	Контраст
+STR_HUE	Hue	色调	ton	Farbton	色相	Tinta	Matiz	оттенок
+STR_BRIGHTNESS	Brightness	亮度	Luminosité	Helligkeit	輝度	Luminosità	Brillo	Яркость
+STR_COLOR	Color	颜色	Couleur	Farbe	カラー	Colore	Color	Цвет
+STR_SHARPNESS	Sharpness	清晰度	Clarté	Schärfe	鋭度	Nitidezza	Nitidez	Острота
+STR_COLOR_TEMP	Color Temperature	色温	Température de Couleur	Farbtemperatur	色温度	Temperatura di Colore	Temperatura del Color	Цветовая температура
+STR_SOUND_MODE	Sound Mode	声音模式	Sound Mode	Klangmodus	サウンドモード	Modalità audio	Modo de sonido	Звуковой режим
+STR_TREBLE	Treble	高音	Tweeter	Verdreifachen	高音域	Acuti	Triplicar	ВЧ
+STR_BASS	Bass	低音	Bass	Bass	ベース	Basso	Bajo	Бас
+STR_BALANCE	Balance	平衡	Balance	Gleichgewicht	バランス	Bilancia	Balance	Баланс
+STR_BT_NAME	Bluetooth	蓝牙	Bluetooth	Bluetooth	ブルートゥース	Bluetooth	Bluetooth	Bluetooth
+STR_SEARCH_BT	Search Bluetooth	搜索蓝牙	Rechercher Bluetooth	Suchen Sie nach Bluetooth	Bluetoothを検索	Cerca Bluetooth	Buscar Bluetooth	Поиск Bluetooth
+STR_BT_DEVICE	Device name	设备名称	Nom de l’appareil	Gerätename	装置名	Nome del dispositivo	Nombre del dispositivo	Имя устройства
+STR_BT_MY_DEV	Paired devices	已配对设备	L’appareil est jumelé	Gekoppelte Geräte	ペアリングされたデバイス	Dispositivi accoppiati	Dispositivos vinculados	Сопряженные устройства
+STR_BT_OTHER_DEV	Available devices	可用的设备	Appareils disponibles	Verfügbare Geräte	利用可能なデバイス	Dispositivi disponibili	Dispositivos disponibles	Доступные устройства
+STR_NO_BT	No Device	无设备	No Device	Kein Gerät	デバイスなし	Nessun dispositivo	Sin dispositivo	Нет устройства
+STR_BT_CONN	Connected	已连接	Connecté	In Verbindung gebracht	接続済み	Collegato	Conectado	Связанный
+STR_BT_DISCONN	Disconnected	未连接	Non connecté	Getrennt	切断されました	Disconnesso	Desconectado	Отключено
+STR_BT_DISCONNECTING	Disconnecting	正在断开...	Enregistré	Gerettet	保存されました	Salvato	Salvado	Сохранено
+STR_BT_SAVED	Saved	已保存	Disconnect	Trennen	切断する	Disconnetti	Desconectar	Отключить
+STR_BT_MAKE_DISCONN	Disconnect	断开	Connect	Verbinden	接続	Collegare	Conectar	Соединять
+STR_BT_MAKE_CONN	Connect	连接	connecté	Verbinden	接続中	Collegamento	Conectando	Подключение
+STR_WIFI_SEARCHING	Searching	正在搜索	Rechercher	Suchen	検索中	Ricerca	buscando	Идет поиск
+STR_WIFI_DEVICE_ABNORMAL	WiFi is abnormal or not ready, please check or try again	WiFi异常或者初始化中，请检查或稍后再试	Le WiFi est anormal ou n’est pas prêt, veuillez vérifier ou réessayer	Das WLAN ist abnormal oder nicht bereit. Bitte überprüfen Sie es oder versuchen Sie es erneut	WiFi が異常であるか、準備ができていません。確認するか、もう一度お試しください。	Il WiFi è anomalo o non è pronto, controlla o riprova	WiFi es anormal o no está listo, verifique o intente nuevamente	Wi-Fi работает ненормально или не готов, проверьте или повторите попытку.
+STR_WIFI_NO_DEVICE	No wifi device	无网络设备	pas de \n périphérique réseau	Kein WLAN-Gerät	Wi-Fi デバイスがありません	Nessun dispositivo Wi-Fi	Sin dispositivo wifi	Нет Wi-Fi устройства
+STR_WIFI_PWD_NULL	password cannot be null	密码不能为空	mot de passe ne peut pas être vide	Das Passwort darf nicht null sein	パスワードを null にすることはできません	la password non può essere nulla	la contraseña no puede ser nula	пароль не может быть нулевым
+STR_WIFI_CONN_SUCCESS	Connection success!	连接成功！	Connexion réussie!	Verbindungserfolg!	接続成功！	Connessione riuscita!	¡Conexión exitosa!	Подключение успешно!
+STR_WIFI_CONN_FAILED	Connection failed!	连接失败！	échec de la connexion!	Verbindung fehlgeschlagen!	接続に失敗しました！	Connessione fallita!	¡La conexión falló!	Ошибка подключения!
+STR_WIFI_RE_ENTER_PWD	Re-enter the password?	重输入密码？	Retaper le mot de passe?	Passwort erneut eingeben?	パスワードを再入力しますか?	Reinserire la password?	¿Volver a introducir la contraseña?	Повторно ввести пароль?
+STR_PROMPT_YES	Yes	是	Yes	Ja	はい	SÌ	Sí	Да
+STR_PROMPT_NO	No	否	NO	NEIN	いいえ	NO	No	Нет
+STR_ENTER_WORD	Enter the password for 8 to 63 bits	请输入8到63位密码	Entrez le mot de passe de 8 à 63 chiffres	Geben Sie das Passwort für 8 bis 63 Bit ein	8～63ビットのパスワードを入力してください	Immettere la password da 8 a 63 bit	Introduzca la contraseña de 8 a 63 bits	Введите пароль от 8 до 63 бит
+STR_WIFI_SSID_NULL	SSID cannot be null	SSID 不能为空	SSID ne peut pas être vide	SSID darf nicht null sein	SSID を null にすることはできません	L'SSID non può essere nullo	SSID no puede ser nulo	SSID не может быть нулевым
+STR_WIFI_SSID_TOO_LONG	SSID should be less than 64 bits	SSID应该小于64位	le SSID doit être inférieur à 64 bits	Die SSID sollte weniger als 64 Bit betragen	SSID は 64 ビット未満である必要があります	L'SSID deve essere inferiore a 64 bit	SSID debe ser inferior a 64 bits	SSID должен быть меньше 64 бит
+STR_WIFI_CANCEL	Cancel	取消	Annuler	Stornieren	キャンセル	Annulla	Cancelar	Отмена
+STR_BT_DELETE	Delete	忽略	Ignorer	Löschen	消去	Eliminare	Borrar	Удалить
+STR_OSD_LANG_TITLE	OSD Language	OSD语言	Langue OSD	OSD-Sprache	OSD言語	Lingua dell'OSD	Idioma OSD	Язык экранного меню
+STR_OSD_LANG	OSD Language	语言设置	OSD Langue	OSD-Sprache	OSD言語	Lingua dell'OSD	Idioma OSD	Язык экранного меню
+STR_FLIP	Projection Mode	投屏模式	Mode de Projection	Projektionsmodus	投影モード	Modalità Proiezione	Modo de Proyección	Режим проекции
+STR_ASPECT_RATIO	Aspect Ratio	画面比例	Ratio d'aspect	Seitenverhältnis	アスペクト比	Rapporto d'aspetto	Relación de Aspecto	Соотношение сторон
+STR_RESTORE_FACTORY_DEFAULT	Factory Setting Reset	恢复出厂设置	Retour aux paramètres d'usine	Werkseinstellungen zurückgesetzt	工場出荷時設定リセット	Ripristino delle impostazioni di fabbrica	Restablecimiento configuración de fábrica	Сброс к заводским настройкам
+STR_UPGRADE	Software Upgrade	软件升级	Mise à jour logicielle	Software Upgrade	ソフトウェア・更新	Aggiornamento Software	Actualización de Software	Обновление программного обеспечения
+STR_UPGRADE_NOT_POWER_OFF	Upgrading please do not\npower off	正在升级，请勿断电	Mise à niveau, ne \npas éteindre	Bitte nicht aktualisieren.\nAusschalten	アップグレード中は電源を切らないでください\n	Aggiornamento, non\nspegnere	Actualizando, por favor no apague	Обновление, пожалуйста,\nне выключайте питание
+STR_UPGRADE_DOWNLOADING	Download...	下载中...	téléchargement en cours...	Herunterladen...	ダウンロード...	Scaricamento...	Descargar...	Скачать...
+STR_UPGRADEING	Upgrading...	升级中...	en cours de mise à niveau	Aktualisieren...	アップグレード...	Aggiorna...	Actualizar...	Обновить...
+STR_AUTO_SLEEP	Auto Sleep	自动休眠	Veille Automatique	Automatischer Schlaf	オートスリープ	Sospensione Automatica	Suspensión Auto	Автоматический сон
+STR_OSD_TIMER	OSD Timer	菜单显示时间	Minuterie OSD	OSD Timer	OSDタイマー	Timer dell'OSD	Temporizador OSD	Таймер экранного меню
+STR_UPGRADE_NO_DEV	Please Insert USB!	请插入USB！	s'il vous plaît insérer USB!	Bitte USB einstecken!	USBを挿入してください！	Si prega di inserire USB!	¡Por favor, inserte el USB!	Пожалуйста, вставьте USB!
+STR_UPGRADE_NO_SOFTWATE	Please Provide The \n Upgrade File!	请提供升级文件！	s'il vous plaît fournir \n les fichiers de mise à jour!	Bitte geben Sie die \n Upgrade-Datei an!	\n アップグレード ファイルを提供してください。	Si prega di fornire il \n file di aggiornamento!	Proporcione el archivo \n de actualización.	Пожалуйста, предоставьте файл обновления \n!
+STR_UPGRADE_LOAD_ERR	load file err!	载入文件错误！	erreur de chargement du fichier!	Fehler beim Laden der Datei!	ファイルの読み込みエラー!	carica file err!	error de carga de archivo!	ошибка загрузки файла!
+STR_UPGRADE_CRC_ERR	crc err!	校验错误！	erreur de vérification!	crc irrt!	crc エラー!	crc errore!	error crc!	crc ошибка!
+STR_UPGRADE_VERSION_ERR	version err!	版本错误！	erreur de version	Versionsfehler!	バージョンが間違っています!	errore di versione!	error de versión!	ошибка версии!
+STR_UPGRADE_DECO_ERR	decompress err!	解压缩错误！	erreur de décompression!	Dekomprimieren, Fehler!	解凍エラー！	decomprimere err!	descomprimir error!	распаковать ошибку!
+STR_UPGRADE_ERR	upgrade err	升级错误！	erreur de mise à jour!	Upgrade-Fehler	アップグレードエラー	aggiornamento errore	error de actualización	ошибка обновления
+STR_UPGRADE_SUCCESS_MSG1	upgrade success, reboot	升级成功，	Mise à niveau réussie, redémarrage 	Upgrade erfolgreich, Neustart	アップグレード成功、再起動	aggiornamento riuscito, riavvio	actualización exitosa, reiniciar	обновление успешное, перезагрузить
+STR_UPGRADE_SUCCESS_MSG2	s later	s后重启	s plus tard	s später	後ほど	s più tardi	s más tarde	позже
+STR_KEYSTONE	Keystone	梯形校正	Keystone	Trapezkorrektur	台形	Chiave di volta	Keystone	Краеугольный камень
+STR_VERSION_INFO	Version Info	版本信息	Information de Version	Versions Information	バージョン情報	Info Versione	Información de Versión	Информация о версии
+STR_PICTURE_MODE_TITLE	Picture	图像	Image	Bild	画像	Immagine	Imagen	Картина
+STR_SOUND_MODE_TITLE	Sound	声音	Sound	Klang	音	Suono	Sonido	Звук
+STR_OPTION_MODE_TITLE	System	系统	Système	System	システム	Sistema	Sistema	Система
+STR_ADJUST_MODE_TITLE	Adjust	调节	Adjust	Anpassen	調整	Regolare	Ajustar	Регулировать
+STR_FOOT_SURE	Enter	确定	Entrer	Eingeben	入力	accedere	Ingresar	Входить
+STR_FOOT_MENU	Menu	菜单	Menu	Zurück	戻る	Menù	Menú	Меню
+STR_FOOT_MOVE	Move	移动	Move	Umzug	動く	Mossa	Mover	Двигаться
+STR_FOOT_OFF	Off	离开	off	Aus	オフ	Spento	Apagado	Выключенный
+STR_MOVIE	Movie	电影	Film	Film	動画	Film	Película	Фильм
+STR_MUSIC	Music	音乐	Musique	Musik	音楽	Musique	Música	Музыка
+STR_PHOTO	Photo	照片	Photo	Foto	写真	Foto	Foto	Фото
+STR_TEXT	TXT	电子书	TXT	TXT	書籍	TXT	TXT	Книга
+STR_BACK	Back	返回	Back	Zurück	戻る	Indietro	Atrás	Назад
+STR_PLAY	Play	播放	Jouer	Spielen	再生	Giocare	Jugar	Играть
+STR_PAUSE	Pause	暂停	Pause	Pause	一時停止	Pausa	Pausa	Пауза
+STR_STOP	Stop	停止	Arrêt	Stoppen	停止	Fermare	Detener	Останавливаться
+STR_FF	FF	快进	FF	FF	FF	FF	FF	ФФ
+STR_FB	FB	快退	FB	FB	FB	FB	FB	ФБ
+STR_NEXT	Next	下一曲	Suivant	Nächste	次	Prossimo	Próximo	Следующий
+STR_PREV	Prev	上一曲	Précédent	Vorher	前へ	Prec	Anterior	Пред.
+STR_ROUND	Round	列表循环	Round	Runden	循環	Girare	Redondo	Круглый
+STR_LISTROUND	Round	列表循环	Round	Runden	循環	Girare	Redondo	Круглый
+STR_SINGLEROUND	Single	单曲循环	Single	Einzel	独身	Separare	Soltero	Одинокий
+STR_ZOOMIN	Zoom+	放大	Zoom+	Zoom+	ズーム+	Zoom+	Zoom+	Зум+
+STR_ZOOMOUT	Zoom-	缩小	Zoom-	Zoom-	ズーム-	Zoom-	Zoom-	Увеличить-
+STR_ROTATE_LEFT	Left	逆时针	Gauche	Links	左	Sinistra	Izquierda	Левый
+STR_ROTATE_RIGHT_K	Right	顺时针	Droit	Rechts	右	Giusto	Derecho	Верно
+STR_NO_EFFECT	Effect	无特效	Effect	Wirkung	効果	Effetto	Efecto	Эффект
+STR_NOR_EFFECT	Normal	普通	Normal	Normal	普通	Normale	Normal	Нормальный
+STR_SHUTTER_EFFECT	Shutter	百叶窗	Shutter	Verschluss	シャッター	Otturatore	Obturador	Затвор
+STR_BRUSH_EFFECT	Brush	飞入	Brush	Bürste	みがきます	Spazzola	Cepillar	Щетка
+STR_SLIDE_EFFECT	Slide	滑动	Slide	Gleiten	滑り台	Diapositiva	Deslizar	Горка
+STR_RAND_EFFECT	Random	随机	Aléatoire	Willkürlich	ランダム	Casuale	Aleatorio	Случайный
+STR_FADE_EFFECT	Fade	消失	Disparaît	Verblassen	フェード	Dissolvenza	Desteñir	Тускнеть
+STR_FILE_FAIL	Open File Fail	打开文件失败	échec de l'ouverture du fichier	Fehler beim Öffnen der Datei	ファイルを開くのに失敗しました	Apertura file non riuscita	Error al abrir archivo	Ошибка открытия файла
+STR_AUDIO_USPT	Audio Track Unsupport	音频轨道不支持	piste Audio non supportée	Audiospur wird nicht unterstützt	オーディオトラックの非サポート	Traccia audio non supportata	No se admite la pista de audio	Аудиодорожка не поддерживается
+STR_VIDEO_USPT	Video Track Unsupport	视频轨道不支持	piste vidéo non prise en charge	Videospur wird nicht unterstützt	ビデオトラックの非サポート	Traccia video non supportata	Pista de video no compatible	Видеодорожка не поддерживается
+STR_USPT_VIDEO_TYPE	Unsupport Video Type	视频类型不支持	Video Type not supported	Videotyp wird nicht unterstützt	サポートされていないビデオタイプ	Tipo di video non supportato	Tipo de video no compatible	Неподдерживаемый тип видео
+STR_USPT_AUDIO_TYPE	Unsupport Audio Type	音频类型不支持	Type Audio non supporté	Audiotyp wird nicht unterstützt	サポートされていないオーディオ タイプ	Tipo di audio non supportato	Tipo de audio no compatible	Неподдерживаемый тип аудио
+STR_AUDIO_ERROR	Audio Decode Error	音频解码失败	échec du décodage Audio	Fehler bei der Audiodekodierung	オーディオデコードエラー	Errore di decodifica audio	Error de decodificación de audio	Ошибка декодирования аудио
+STR_VIDEO_ERROR	Video Decode Error	视频解码失败	échec de décodage Vidéo	Video-Dekodierungsfehler	ビデオデコードエラー	Errore di decodifica video	Error de decodificación de video	Ошибка декодирования видео
+STR_PIC_ERROR	Picture Decode Error	图片解码失败	échec de décodage d'image	Bilddekodierungsfehler	画像デコードエラー	Errore di decodifica dell'immagine	Error de decodificación de imagen	Ошибка декодирования изображения
+STR_HDMI_TITLE1	HDMI1	高清1	HDMI1	HDMI1	HDMI1	HDMI1	HDMI1	HDMI1
+STR_HDMI_TITLE2	HDMI2	高清2	HDMI2	HDMI2	HDMI2	HDMI2	HDMI2	HDMI2
+STR_HDMI_TITLE	HDMI	高清	HDMI	HDMI	HDMI	HDMI	HDMI	HDMI
+STR_MEDIA_TITLE	Media	多媒体	Médias	Medien	メディア	Media	Medios	СМИ
+STR_AV_TITLE	AV	视频	AV	EIN V	AV	AV	AV	средний
+STR_HOME_TITLE	Home	主页	Home	Heim	家	Casa	Hogar	Дом
+STR_SETTING_TITLE	Setting	设置	Paramètres	Einstellung	設定	Impostazione	Configuración	Параметр
+STR_IPTV_YTB	YouTube	YouTube	YouTube	Youtube	YouTube	Youtube	YouTube	YouTube
+STR_HELP_TITLE	Help	帮助	Help	Hilfe	ヘルプ	Aiuto	Ayuda	Помощь
+STR_CHANNEL_TITLE	Source	信号源	Source	Quelle	ソース	Fonte	Fuente	Источник
+STR_WIFI_TITLE	WiFi	WiFi	WiFi	WiFi	WiFi	WiFi	WiFi	WiFi
+STR_WIRED_TITLE	Wired Screen	有线同屏	Wired Screen	Kabelgebundene\nProjektion	有線スクリーン	Schermo cablato	Wired Screen	Проводной экран
+STR_WIRELESS_TITLE	Wireless\nScreen	无线同屏	Wireless Screen	Drahtlose\nProjektion	無線スクリーン	Schermo wireless	Wireless Screen	Беспроводной\nэкран
+STR_OFF	Off	关	Off	Aus	オフ	Spento	Apagado	Выключенный
+STR_ON	On	开	On	An	オン	SU	En	На
+STR_STANDARD	Standard	标准	Standard	Standard	標準	Di serie	Estándar	Стандарт
+STR_DYNAMIC	Dynamic	动态	Dynamique	Dynamisch	動的	Dinamico	Dinámica	Динамический
+STR_MILD	Mild	温和	Doux	Weich	マイルド	Mite	Suave	Мягкий
+STR_USER	User	用户	Utilisateur	Benutzer	ユーザー	Utente	Usuario	Пользователь
+STR_COLD	Cold	冷色温	Froid	cooler Ton	寒色	Freddo	Frío	Холодный
+STR_WARM	Warm	暖色温	Chaud	warmer Ton	暖色	Caldo	Cálido	Теплый
+STR_SPORTS	Sports	运动	Sports	Sport	スポーツ	Gli sport	Deportes	Виды спорта
+STR_ENGLISH	English	英语	Anglais	Englisch	英語	Inglese	Inglés	Английский
+STR_CHINESE	Chinese	中文	Chinois	Chinesisch	中国語	Cinese	Chino	Китайский
+STR_FRONT_TABLE	Front Projection	桌上正投	Avant sur Table	Frontprojektion	正面投影	Tavolo Anteriore	Proyección Frontal	Передний стол
+STR_FRONT_CEILING	Ceiling Front Projection	吊装正投	Avant au Plafond 	Decken-Frontprojektion	天井正面投影	Soffitto Anteriore	Proyección Frontal de techo	Передний потолок
+STR_BACK_TABLE	Rear Projection	桌上背投	Arrière sur Tableau	Rückprojektion	背面投影	Tavolo Posteriore	Proyección Trasera	Задний стол
+STR_BACK_CEILING	Ceiling Rear Projection	吊装背投	Arrière au Plafond	Deckenrückprojektion	天井背面投影	Soffitto posteriore	Proyección Trasera de techo	Назад Потолок
+STR_RESTORE_OK_1	Ok	确定	Ok	OK	Ok	OK	De acuerdo	Хорошо
+STR_RESTORE_OK_2	Ok?	确定?	Ok?	OK?	Ok？	OK?	¿De acuerdo?	Хорошо?
+STR_RESTORE_CLOSE	Close	关闭	Close	Schließen	近い	Vicino	Cerca	Закрывать
+STR_OSD_TIME_5S	5s	5秒	5s	5s	5秒	5s	5s	5 с
+STR_OSD_TIME_10S	10s	10秒	10s	10s	10代	10s	10s	10 с
+STR_OSD_TIME_15S	15s	15秒	15s	15s	15秒	15s	15s	15 с
+STR_OSD_TIME_20S	20s	20秒	20s	20s	20代	20s	20s	20 с
+STR_OSD_TIME_25S	25s	25秒	25s	25s	25秒	25s	25s	25 с
+STR_OSD_TIME_30S	30s	30秒	30s	30s	30代	30s	30s	30 с
+STR_AUTO_SLEEP_1H	60m	60分钟	60m	60m	60m	60m	60m	60м
+STR_AUTO_SLEEP_2H	120m	120分钟	120m	120m	120m	120m	120m	120м
+STR_AUTO_SLEEP_3H	180m	180分钟	180m	180m	180m	180m	180m	180м
+STR_INPUT_SOURCE	Source	信号源	Source	Quelle	ソース	Fonte	Fuente	Источник
+STR_VOLUME	Volume	声音	Son	Volumen	音量	Volume	Volumen	Объем
+STR_LIST	List	播放列表	List	Aufführen	リスト	Elenco	Lista	Список
+STR_INFO	INFO	信息	INFO	DIE INFO	情報	INFORMAZIONI	INFORMACIÓN	ИНФОРМАЦИЯ
+STR_SF	SF	慢放	SF	SF	SF	SF	SF	СФ
+STR_STEP	STEP	步进	STEP	SCHRITT	ステップ	FARE UN PASSO	PASO	ШАГ
+STR_INFO_RES	Resolution:	分辨率:	Résolution :	Auflösung:	解決：	Risoluzione:	Resolución:	Разрешение:
+STR_INFO_FRAME	Frame:	帧数:	Cadres:	Rahmen:	フレーム：	Telaio:	Marco:	Рамка:
+STR_INFO_AUDIO	Audio:	音轨:	Pistes :	Audio:	オーディオ：	Audio:	Audio:	Аудио:
+STR_INFO_SUBTITLE	Subtitle:	字幕:	Sous-titres	Untertitel:	字幕：	Sottotitolo:	Subtitular:	Подзаголовок:
+STR_INFO_SIZE	Size:	大小:	Size:	Größe:	サイズ：	Misurare:	Tamaño:	Размер:
+STR_INFO_ALBUM	Album:	专辑:	Album:	Album:	アルバム：	Album:	Álbum:	Альбом:
+STR_INFO_ARTIST	Artist:	艺术家:	Artist:	Künstler:	アーティスト：	Artista:	Artista:	Художник:
+STR_INFO_BIT	Bitrate:	码率:	Débit:	Bitrate:	ビットレート:	Velocità in bit:	Tasa de bits:	Битрейт:
+STR_INFO_EXIT	Exit	退出	Sortie	Ausfahrt	出口	Uscita	Salida	Выход
+STR_PANEL_CLOSE	Close	关闭屏幕	Close	Schließen	近い	Vicino	Cerca	Закрывать
+STR_MUTE	Mute	静音	Mute	Stumm	無音	Muto	Silenciar	Немой
+STR_MUSIC_OFF	OFF	关闭音乐	Off	Aus	オフ	Spento	Off	ВЫКЛЮЧЕННЫЙ
+STR_MUSIC_ON	ON	打开音乐	On	An	オン	SU	On	НА
+STR_MUSIC_SRC	Source	音乐资源	Source	Quelle	ソース	Fonte	Fuente	Источник
+STR_FILE_DATE	Date:	日期:	Date:	Datum:	日にち：	Data:	Fecha:	Дата:
+STR_FILE_TIME	Time:	时间:	Time:	Zeit:	時間：	Tempo:	Tiempo:	Время:
+STR_SETUP	Ratio	画面比例	Ratio	Verhältnis	比	Rapporto	Relación	Соотношение
+STR_ASPECT_AUTO	Auto	自动	Auto	Auto	自動	Auto	Auto	Авто
+STR_ASPECT_4_3	4:3	4:3	4:3	4:3	4:3	4:3	4:3	4:3
+STR_ASPECT_16_9	16:9	16:9	16:9	16:9	16:9	16:9	16:9	16:9
+STR_USB_MOUNT_FAIL_MSG	Mount failed	挂载失败	Mount failed	Die Montage ist fehlgeschlagen	マウントに失敗しました	Montaggio fallito	Montaje fallido	Ошибка монтирования
+STR_NETWORK_ERR	Network Error!	网络错误！	Erreur Réseau!	Netzwerkfehler!	ネットワークエラー！	Errore di rete!	¡Error de red!	Ошибка сети!
+STR_CONNECT_WIFI_FAIL	Connect WiFi fail!	连接WiFi出错！	Erreur de connexion WiFi!	WLAN-Verbindung fehlgeschlagen!	WiFi の接続に失敗しました!	Connessione Wi-Fi fallita!	Fallo de conexion WiFi!	Подключить WiFi не удается!
+STR_CONNECT_WIFI_FIRST	Please connect WiFi first!	请先连接WiFi！	Veuillez d'abord vous connecter au WiFi!	Bitte verbinden Sie zuerst WLAN!	まず WiFi を接続してください。	Si prega di collegare prima il WiFi!	¡Por favor conecte WiFi primero!	Сначала подключите Wi-Fi!
+STR_VIDEO_DATA_ERR	Video data decoding error!	视频数据解码错！	Les données vidéo sont mal décodées!	Fehler bei der Dekodierung der Videodaten!	ビデオデータのデコードエラー!	Errore di decodifica dei dati video!	¡Error de decodificación de datos de video!	Ошибка декодирования видеоданных!
+STR_AUDIO_DATA_ERR	audio data decoding error!	音频数据解码错！	Les données audio sont mal décodées!	Fehler bei der Dekodierung der Audiodaten!	音声データのデコードエラーです！	errore di decodifica dei dati audio!	¡Error de decodificación de datos de audio!	ошибка декодирования аудиоданных!
+STR_VIDEO_FORMAT_NOT_SUPPORT	Video format not support!	视频格式不支持！	Le format vidéo n'est pas pris en charge!	Videoformat wird nicht unterstützt!	ビデオ形式はサポートされていません!	Formato video non supportato!	¡El formato de video no es compatible!	Формат видео не поддерживает!
+STR_AUDIO_FORMAT_NOT_SUPPORT	Audio format not support!	音频格式不支持！	Le format audio n'est pas pris en charge!	Audioformat wird nicht unterstützt!	オーディオ形式はサポートされていません!	Formato audio non supportato!	¡El formato de audio no es compatible!	Аудио формат не поддерживает!
+STR_WIFI_DISCONNECT	Wifi Disconnect!	WiFi断开连接！	WiFi déconnecté!	WLAN-Verbindung unterbrochen!	Wi-Fiが切断されました！	Wi-Fi Disconnettiti!	¡Desconexión Wifi!	Отключить Wi-Fi!
+STR_MEDIA_CONTAINER_NOT_SUPPORT	Media(container) not support!	媒体容器不支持！	Le conteneur média n'est pas pris en charge!	Medien (Container) werden nicht unterstützt!	メディア(コンテナ)はサポートされていません!	Supporto (contenitore) non supportato!	¡Los medios (contenedores) no son compatibles!	Носитель (контейнер) не поддерживается!
+STR_WIFI_SAVED	Saved WI-FI	已保存WI-FI	WI-FI enregistré	WLAN gespeichert	保存されたWi-Fi	Wi-Fi salvato	WIFI guardado	Сохраненный WI-FI
+STR_WIFI_NEARBY	Nearby WI-FI	附近的WI-FI	Wi-Fi proche	WLAN in der Nähe	近くのWi-Fi	WI-FI nelle vicinanze	WIFI cercano	Ближайший WI-FI
+STR_WIFI_SEARCH	Search	搜索	Search	Suchen	検索	Ricerca	Buscar	Поиск
+STR_WIFI_ADD	Add Net	添加网络	Ajouter	Netz hinzufügen	ネットを追加	Aggiungi rete	Agregar red	Добавить сеть
+STR_WIFI_RET	Home	主页	Home	Heim	家	Casa	Hogar	Дом
+STR_WIFI_STRENGTH	Signal Strength	信号强度	Signal Force	Signalstärke	シグナル強度	La potenza del segnale	Intensidad de señal	Сила сигнала
+STR_WIFI_SECURITY	Security	安全	Sécurité	Sicherheit	安全	Sicurezza	Seguridad	Безопасность
+STR_WIFI_PWD	Password	密码	Password	Passwort	パスワード	Parola d'ordine	Contraseña	Пароль
+STR_WIFI_SHOW_PWD	Show password	显示密码	Show password	Passwort anzeigen	パスワードを表示	Mostra password	Mostrar contraseña	Показать пароль
+STR_WIFI_NET_MODE	Net Mode	网络模式	Mode réseau	Netzmodus	ネットモード	Modalità rete	Modo neto	Сетевой режим
+STR_WIFI_IP_ADDR	IP Address	IP地址	IP Address	IP Adresse	IPアドレス	Indirizzo IP	Dirección IP	Айпи адрес
+STR_WIFI_NET_MASK	Net Mask	掩码	Masque	Netzmaske	ネットマスク	Maschera di rete	Máscara de red	Сетевая маска
+STR_WIFI_GATE_WAY	Gate Way	网关	Gate Way	Torweg	ゲートウェイ	Via Porta	camino de la puerta	Путь к воротам
+STR_WIFI_DNS	DNS	DNS	DNS	DNS	DNS	DNS	DNS	DNS
+STR_WIFI_MAC	MAC	MAC	MAC	MAC	マック	MAC	MAC	МАК
+STR_WIFI_STATIC_IP	Static IP	静态IP	IP statique	Statische IP	固定IP	IP statico	IP estática	Статический IP
+STR_WIFI_CONNECT_ERR	Connect timeout or\npassword error	连接超时或密码错误	délai de connexion expiré \nou mot de passe incorrect	Zeitüberschreitung bei der Verbindung oder Passwortfehler	接続タイムアウトまたは\nパスワード エラー	Timeout di connessione o\nerrore di password	Error de tiempo de espera de conexión o\ncontraseña	Время ожидания подключения или\nошибка пароля
+STR_WIFI_NOT_CONNECT	WiFi not turned on!	WiFi未打开!	le WiFi n'est pas activé!	WLAN nicht eingeschaltet!	WiFiがオンになっていません!	Wi-Fi non acceso!	WiFi no encendido!	WiFi не включен!
+STR_RESET	Reset	重置	Réinitialiser	Zurücksetzen	リセット	Ripristina	Reiniciar	Перезагрузить
+STR_FOCUS_FORWAD	Forward	前移	Avant	Nach vorne	前方	Inoltrare	Adelante	Вперед
+STR_FOCUS_BACK	Backward	后移	En arrière	Rückwärts	後方へ	Indietro	Hacia atrás	Назад
+STR_FOCUS	Focus	对焦	Focus	Fokus	集中	Messa a fuoco	Enfocar	Фокус
+STR_EBOOK_UP	Up	上一页	Up	Hoch	上	Su	Arriba	Вверх
+STR_EBOOK_DOWN	Down	下一页	Down	Runter	下	Giù	Abajo	Вниз
+STR_EBOOK_PREV	Prev	上一部	Prév	Vorher	前へ	Prec	Anterior	Пред.
+STR_EBOOK_NEXT	Next	下一部	Next	Nächste	次	Prossimo	Próximo	Следующий
+STR_SUBTITLE_MSG	Unsupport Subtitle Type	字幕类型不支持	Type de sous-titre non supporté	Untertiteltyp wird nicht unterstützt	字幕タイプをサポートしていない	Tipo di sottotitoli non supportato	Tipo de subtítulo no compatible	Отменить поддержку типа субтитров
+STR_ZOOMMOVE	Move	移动	Move	Umzug	動く	Mossa	Mover	Двигаться
+STR_MP_NO_DEV	No Device	无设备	No Device	Kein Gerät	デバイスなし	Nessun dispositivo	Sin dispositivo	Нет устройства
+STR_MIRROR_ROTATE_ON	Mirror rotate on	镜像旋转开	Miroir tourner sur	Spiegel dreht sich weiter	ミラー回転オン	Lo specchio ruota	Rotación del espejo activada	Зеркало вращается
+STR_MIRROR_ROTATE_OFF	Mirror rotate off	镜像旋转关	Le miroir s'éteint	Spiegel dreht sich aus	ミラー回転オフ	Lo specchio ruota fuori	Rotación del espejo desactivada	Зеркало выключено
+STR_FRENCH	French	法语	Français	Französisch	フランス語	francese	Francés	Французский
+STR_LANG	English	中文	Français	Deutsch	日本語	Italiano	Español	Русский
+STR_ENTER_STANDBY	Do you want to perform a shutdown?	您要执行关机吗？	Voulez-vous effectuer un arrêt ?	Möchten Sie einen Shutdown durchführen?	シャットダウンを実行しますか?	Vuoi eseguire uno spegnimento?	¿Desea realizar un apagado?	Вы хотите выполнить отключение?
+STR_WINDOW_SCALE	Zoom	缩放	Zoom	Zoom	ズーム	Zoom	Zoom	Увеличить
+STR_WIFI_NOT_READY	WI-FI initializing…,please wait	WI-FI初始化中…,请稍后	Initialisation WI-FI ..., veuillez patienter	WI-FI wird initialisiert…, bitte warten	WI-FIを初期化中…、お待ちください	Inizializzazione WI-FI in corso…,attendere	WI-FI inicializándose..., por favor espere	Инициализация WI-FI…, подождите
+STR_WIFI_READY	WI-FI initializing…,please wait	WI-FI初始化中…,请稍后	Initialisation WI-FI ..., veuillez patienter	WI-FI wird initialisiert…, bitte warten	WI-FIを初期化中…、お待ちください	Inizializzazione WI-FI in corso…,attendere	WI-FI inicializándose..., por favor espere	Инициализация WI-FI…, подождите
+STR_ANDROID_SCAN_QR	Please scan the code of Android device to install software	安卓设备请扫码安装软件	Appareils Android Veuillez balayer le Code pour installer le logiciel	Bitte scannen Sie den Code des Android-Geräts, um die Software zu installieren	Android デバイスのコードをスキャンしてソフトウェアをインストールしてください	Eseguire la scansione del codice del dispositivo Android per installare il software	Escanee el código del dispositivo Android para instalar el software	Пожалуйста, отсканируйте код устройства Android, чтобы установить программное обеспечение
+STR_USB_UPG_READ	USB upgrade, reading ...	USB升级，读取中	Mise à niveau USB, lecture ...	USB-Upgrade, Lesen ...	USB アップグレード、読み取り中...	Aggiornamento USB, lettura...	Actualización USB, lectura...	Обновление USB, чтение ...
+STR_NET_UPG_DOWNLOAD	Network upgrade, downloading ...	网络升级，下载中	Mise à niveau du réseau, téléchargement ...	Netzwerk-Upgrade, Herunterladen ...	ネットワークのアップグレード、ダウンロード中...	Aggiornamento di rete, download...	Actualización de red, descarga...	Обновление сети, загрузка...
+STR_USB_UPG_OPEN_FILE_FAIL	Open USB upgraded file fail!	打开升级文件失败	Échec du fichier de mise à niveau USB ouvert!	Beim Öffnen der aktualisierten USB-Datei ist ein Fehler aufgetreten!	USB アップグレード ファイルを開くのに失敗しました!	Apri file aggiornato USB fallito!	¡Error al abrir el archivo USB actualizado!	Не удалось открыть обновленный файл USB!
+STR_USB_UPG_FILE_LARGE	Upgraded file too large!	升级文件太大	Fichier mis à niveau trop volumineux!	Aktualisierte Datei zu groß!	アップグレードされたファイルが大きすぎます。	File aggiornato troppo grande!	¡El archivo actualizado es demasiado grande!	Обновленный файл слишком большой!
+STR_USB_UPG_READ_FAIL	Read USB upgraded file error!	读取升级文件错	Lire l’erreur de fichier mis à niveau USB!	Fehler beim Lesen der USB-aktualisierten Datei!	USB アップグレード ファイルの読み取りエラー!	Leggi errore file aggiornato USB!	¡Error de lectura de archivo USB actualizado!	Ошибка чтения обновленного файла USB!
+STR_NET_UPG_HTTP_BAD	HTTP server bad!	HTTP服务器有错	Serveur HTTP mauvais!	HTTP-Server schlecht!	HTTPサーバーが悪い！	Server HTTP difettoso!	¡Servidor HTTP malo!	HTTP-сервер неисправен!
+STR_UPG_USER_CANCEL	User download interrupt!	取消升级	Interruption du téléchargement de l’utilisateur!	Benutzer-Download-Unterbrechung!	ユーザーのダウンロードが中断されました!	Interruzione download utente!	¡Interrupción de descarga de usuario!	Прерывание загрузки пользователя!
+STR_UPG_PRODUCT_ID_MISMATCH	Board product ID mismatch!	升级产品型号不匹配	Incompatibilité de l’ID de produit de la carte !	Die Produkt-ID der Platine stimmt nicht überein!	ボードのプロダクト ID が一致しません!	Mancata corrispondenza dell'ID prodotto della scheda!	¡No coincide el ID del producto de la placa!	Несоответствие идентификатора продукта Board!
+STR_UPG_SW_VER_NOT_UPG	Software version is new, do not need upgrade!	已经是最新软件，无需升级	La version du logiciel est nouvelle, n’a pas besoin de mise à niveau!	Die Softwareversion ist neu, kein Upgrade erforderlich!	ソフトウェアのバージョンは新しいため、アップグレードする必要はありません。	La versione del software è nuova, non è necessario l'aggiornamento!	La versión del software es nueva, ¡no necesita actualización!	Версия программного обеспечения новая, обновление не требуется!
+STR_UPG_SW_ILLGAL	Upgraded firmware is corrupted or illgal!	升级固件被破坏	Le firmware mis à jour est corrompu ou illgal!	Die aktualisierte Firmware ist beschädigt oder illegal!	アップグレードされたファームウェアが破損しているか、違法です。	Il firmware aggiornato è danneggiato o illegale!	¡El firmware actualizado está dañado o no es válido!	Обновленная прошивка повреждена или недействительна!
+STR_UPG_UNZIP_FAIL	Decompress upgraded firmware fail!	解压升级固件失败	Décompresser le firmware mis à niveau échoue !	Dekomprimieren der aktualisierten Firmware schlägt fehl!	アップグレードされたファームウェアの解凍に失敗しました。	La decompressione del firmware aggiornato fallisce!	¡Falló el firmware actualizado al descomprimir!	Распаковать обновленную прошивку не получится!
+STR_UPG_BURNING	Burning flash, DO NOT power off!	Flash烧写中，不要断电	Flash brûlant, NE PAS éteindre!	Brennender Blitz, NICHT ausschalten!	フラッシュが燃えているので、電源を切らないでください。	Flash in fiamme, NON spegnere!	Flash ardiente, ¡NO lo apague!	Горящая вспышка, НЕ выключайте питание!
+STR_USB_UPG_OK	Upgrade successful, Plugout U-disk, then reboot ...	升级成功，请拔出U盘，重启	Mise à niveau réussie, Plugout U-disk, puis redémarrage ...	Upgrade erfolgreich, U-Disk ausstecken, dann neu starten ...	アップグレードは成功しました。U ディスクを取り外して、再起動します...	Aggiornamento riuscito, Plugout U-disk, quindi riavviare...	Actualización exitosa, Plugout U-disk, luego reinicie...	Обновление прошло успешно, подключите U-диск, затем перезагрузитесь...
+STR_NET_UPG_OK	Upgrade successful, reboot now ...	升级成功，正在重启	Mise à niveau réussie, redémarrez maintenant ...	Upgrade erfolgreich, jetzt neu starten ...	アップグレードは成功しました。今すぐ再起動してください...	Aggiornamento riuscito, riavvia ora...	Actualización exitosa, reinicie ahora...	Обновление прошло успешно, перезагрузите сейчас...
+STR_UPG_BURN_FAIL	Flash burn fail, reboot now ...	Flash烧写失败，正在重启	La gravure flash échoue, redémarrez maintenant ...	Flash-Brennen fehlgeschlagen, jetzt neu starten ...	フラッシュ書き込みに失敗しました。今すぐ再起動してください...	Masterizzazione flash fallita, riavvia ora...	Error de grabación flash, reinicie ahora...	Сбой записи флэш-памяти, перезагрузите сейчас ...
+STR_BT_DISCONNECTED	BT disconnected	蓝牙已断开	BT déconnecté	BT-Verbindung getrennt	BTが切断されました	BT disconnesso	BT desconectado	БТ отключен
+STR_BT_CONNECTED	BT connected	蓝牙已连接	BT connecté	BT verbunden	BT接続済み	BT connesso	BT conectado	Bluetooth подключен
+STR_BT_CONN_FAILED	BT connect failed	蓝牙连接失败	Échec de BT Connect	BT-Verbindung fehlgeschlagen	BT接続に失敗しました	Connessione BT non riuscita	Conexión BT fallida	Не удалось подключиться по BT
+STR_HDMI_FORMAT_USPT	Not Support Format	不支持格式	Format non pris en charge	Nicht unterstütztes Format	サポートされていない形式	Formato non supportato	Formato no compatible	Не поддерживает формат
+STR_NO_SIGNAL	NO SIGNAL	无信号	PAS DE SIGNAL	KEIN SIGNAL	信号がありません	NESSUN SEGNALE	SIN SEÑAL	НЕТ СИГНАЛА
+STR_VIDEO_LINK_ERR	Video link error	链接获取失败	Échec de l’obtention du lien vidéo	Fehler beim Videolink	ビデオリンクエラー	Errore di collegamento video	error de enlace de video	Ошибка ссылки на видео
+STR_VIDEO_LINK_ERR_PLAY_NEXT	Video link error,play next	链接获取失败，播放下一个节目	Échec de l’obtention du lien. Lire le prochain programme	Fehler beim Videolink, als nächstes abspielen	ビデオリンクエラー、次に再生	Errore collegamento video, riproduci dopo	Error de enlace de video, reproducir a continuación	Ошибка ссылки на видео, воспроизвести дальше
+STR_VIDEO_LINK_ERR_PLAY_PREV	Video link error,play prev	链接获取失败，播放上一个节目	Échec de l’acquisition du lien, lecture du programme précédent	Fehler beim Videolink, vorherige Wiedergabe abspielen	ビデオリンクエラー、前を再生	Errore collegamento video, riproduci prec	Error de enlace de video, reproducir anterior	Ошибка ссылки на видео, воспроизвести пред.
+STR_VIDEO_PLAY_FAIL	Video play fail	播放失败	Échec de jouer	Videowiedergabe fehlgeschlagen	動画の再生に失敗する	Riproduzione video fallita	Error de reproducción de video	Ошибка воспроизведения видео
+STR_FIRST_VIDEO	The first video	第一个视频	La première vidéo	Das erste Video	最初のビデオ	Il primo filmato	el primer vídeo	Первое видео
+STR_LAST_VIDEO	The last video	最后一个视频	La dernière vidéo	Das letzte Video	最後のビデオ	L'ultimo filmato	el último vídeo	Последнее видео
+STR_VIDEO_PLAY_FAIL_PLAY_NEXT	Video play fail,play next	播放失败，播放下一个节目	Jouer échec jouer prochain spectacle	Videowiedergabe fehlgeschlagen, nächste Wiedergabe	動画の再生に失敗しました。次に再生してください	La riproduzione del video fallisce, riproduci il prossimo	Fallo en la reproducción del video, reproduzca a continuación	Не удалось воспроизвести видео, воспроизвести следующее
+STR_WIFI_PLUGOUT_REBOOT	WiFi plug out, reboot now ...	WiFi拔出, 重启...	Prise WiFi, redémarrez maintenant ...	WLAN-Stecker raus, jetzt neu starten ...	Wi-Fi プラグを抜いて、今すぐ再起動してください...	Spegni il WiFi, riavvia ora...	Enchufe WiFi, reinicie ahora ...	Отключить Wi-Fi, перезагрузить сейчас ...
+STR_VIDEO_INFO_ERR_RETRY	Video info acquisition failed,\npress ok to retry.	视频信息获取失败，按下OK键重试	Impossible d’obtenir l’information vidéo, appuyez sur OK pour réessayer	Die Erfassung der Videoinformationen ist fehlgeschlagen.\nDrücken Sie „OK“, um es noch einmal zu versuchen.	ビデオ情報の取得に失敗しました。\n[OK]を押して再試行してください。	Acquisizione delle informazioni sul video non riuscita,\npremi OK per riprovare.	No se pudo adquirir la información del video,\npresione ok para volver a intentarlo.	Не удалось получить информацию о видео.\nНажмите \"ОК\", чтобы повторить попытку.
+STR_VIDEO_INFO_ERR_RETRY_AGAIN	Video info acquisition failed,\nretry again.	视频信息获取失败，请重试	Échec de l’obtention des informations vidéo, veuillez réessayer	Die Erfassung der Videoinformationen ist fehlgeschlagen.\nVersuchen Sie es erneut.	ビデオ情報の取得に失敗しました。\nもう一度やり直してください。	Acquisizione delle informazioni sul video non riuscita,\nriprova.	No se pudo adquirir la información del video,\ninténtalo de nuevo.	Не удалось получить информацию о видео.\nПовторите попытку.
+STR_PREVIEW_ERROR	Preview fail	预览失败	Échec de l’aperçu	Vorschau fehlgeschlagen	プレビュー失敗	Anteprima fallita	Vista previa fallida	Ошибка предварительного просмотра
+STR_IMG_DIS_REALSIZE	Realsize	原图	Taille réelle	Realisieren	リアルサイズ	Realizza	Tamaño real	Реальный размер
+STR_IMG_DIS_THUMBNAIL	Thumbnail	缩略图	Miniature	Miniaturansicht	サムネイル	Miniatura	Miniatura	Миниатюра
+STR_IMG_DIS_AUTO	Auto	自动	Auto	Auto	自動	Auto	Auto	Авто
+STR_IMG_DIS_CROP	Crop	裁剪	jabot	Ernte	作物	Raccolto	Cultivo	Обрезать
+STR_IMG_DIS_FULLSCREEN	Full	满屏	Pleine	Voll	満杯	Pieno	Lleno	Полный
+STR_UPGRADE_PROMPT	upgrade?	升级?	mise à niveau?	Aktualisierung?	アップグレード？	aggiornamento?	¿mejora?	обновление?
+STR_AUTO_KEYSTONE	Auto Keystone Correction	自动梯形校正	Correction Trapézoïdale Auto	Automatische Trapezkorrektur	自動台形補正	Trapezio Automatico	Corrección Trapezoidal Auto	автоматическая коррекция
+STR_MANUAL_KEYSTONE	Manual Keystone Correction	手动梯形校正	Correction Trapézoïdale Manuelle	Manueller Keystone	手動台形補正	Trapezio Manuale	Corrección Trapezoidal Manual	ручная калибровка
+STR_PLUS	+	+	+	+	+	+	+	+
+STR_MINUS	-	-	-	-	-	-	-	-
+STR_HOME_BG	Homepage Color	主页颜色	Couleur page d'accueil	Hintergrundfarbe der Homepage	背景色	Colore della home page	Color de página inicio	Цвет домашней страницы
+STR_COLOR_BLUE	Blue	蓝色	Bleu	Blau	青	Blu	Azul	Синий
+STR_COLOR_DARK_BLUE	Dark blue	深蓝	Bleu foncé	Dunkelblau	濃紺	Blu scuro	Azul oscuro	Темно-синий
+STR_COLOR_WHITE	White	白色	Blanc	Weiss	白	Bianco	Blanco	Белый
+STR_COLOR_GREY	Grey	灰色	Gris	Grau	グレー	Grigio	Gris	Серый
+STR_FACTORY_RESET_CONTENT	Do you want to restore factory settings?	是否恢复出厂设置？	Voulez-vous restaurer les réglages d'usine ?	Möchten Sie die Werkseinstellungen wiederherstellen?	工場出荷時の設定を復元しますか?	Vuoi ripristinare le impostazioni di fabbrica?	¿Quieres restaurar la configuración de fábrica?	Хотите восстановить заводские настройки?
+STR_PHOTO_PREV	Prev	上一张	Next	Vorher	前へ	Prec	Anterior	Пред.
+STR_PHOTO_NEXT	Next	下一张	Préc	Nächste	次	Prossimo	Próximo	Следующий
+STR_NETWORK_UPGRADE	Do you want to upgrade to the new version?	您想要升级新的版本?	Voulez-vous passer à la nouvelle version ?	Möchten Sie auf die neue Version upgraden?	新しいバージョンにアップグレードしますか?	Vuoi eseguire l'aggiornamento alla nuova versione?	¿Quieres actualizar a la nueva versión?	Хотите перейти на новую версию?
+STR_ZOOMIN_STATE	Zoom	放大	Zoom	Zoom	ズーム	Zoom	Zoom	Увеличить
+STR_ZOOMOUT_STATE	Zoom	缩小	Zoom	Zoom	ズーム	Zoom	Zoom	Увеличить
+STR_BT_MAC	devices MAC address	设备MAC地址	Adresse MAC de l’appareil	MAC-Adresse des Geräts	デバイスのMACアドレス	indirizzo MAC dei dispositivi	dirección MAC de los dispositivos	MAC-адрес устройства
+STR_BT_CONN_FAILED1	Cannot establish connection with	无法与设备	Cannot connect with	Es kann keine Verbindung hergestellt werden	との接続を確立できません	Impossibile stabilire una connessione con	No se puede establecer conexión con	Не удается установить соединение с
+STR_BT_CONN_FAILED2	Please check and try again	建立连接,请检查后重试	Please check and try again	Bitte überprüfen Sie es und versuchen Sie es erneut	確認してもう一度お試しください	Si prega di verificare e riprovare	Por favor revisa e intenta de nuevo	Пожалуйста проверьте и попробуйте снова
+STR_FAC_BT_UPGRADE_MODE	蓝牙升级	蓝牙升级	蓝牙升级	蓝牙升级	蓝牙升级	蓝牙升级	蓝牙升级	蓝牙升级
+STR_FAC_VIDOE_TEST	USB视频测试	USB视频测试	USB视频测试	USB视频测试	USB视频测试	USB视频测试	USB视频测试	USB视频测试
+STR_OAT_ONLINE_UPDATE	Online Update  	在线升级	Mise à jour en ligne	Online Update	オンライン・更新	Aggiornamento in linea	Actualización en línea	Онлайн-обновление
+STR_CAST_SSID_DEVICE	Device	设备	Appareil	Gerät	デバイス	Dispositivo	Dispositivo	Устройство
+STR_SET_SLEEP_COUNTDOWN	s Shutdown,Press any key to cancel	s关机,按任意按键取消	s Fermer,Appuyez sur n'importe quelle touche pour annuler	s Abschalten,Zum Abbrechen drücken Sie eine beliebige Taste	s シャットダウン、キャンセルするにはいずれかのキーを押してください	s Fermare,Premere un tasto qualsiasi per annullare	s Cerrar,Presione cualquier tecla para cancelar	с Неисправность,Нажмите любую клавишу, чтобы отменить
+STR_AUTO_SLEEP_10M	10m	10分钟	10m	10m	10m	10m	10m	10м
+STR_AUTO_SLEEP_20M	20m	20分钟	20m	20m	20m	20m	20m	20м
+STR_AUTO_SLEEP_30M	30m	30分钟	30m	30m	30m	30m	30m	30м
+STR_AUTO_SLEEP_90M	90m	90分钟	90m	90m	90m	90m	90m	90м
+STR_FAC_KETSTONE_CALIBRATION	梯形校准 	梯形校准 	梯形校准 	梯形校准 	梯形校准 	梯形校准 	梯形校准 	梯形校准 
+STR_VIDEO_DELAY	Video delay	视频延时	Délai vidéo	Video-Verzögerung	視頻延遲	Ritardo video	Retardo de vídeo	Задержка видео
+STR_FAC_AUDIO_TEST	USB音频测试	USB音频测试	USB音频测试	USB音频测试	USB音频测试	USB音频测试	USB音频测试	USB音频测试
+STR_FAC_FAN_ADJUST	风扇调试	风扇调试	风扇调试	风扇调试	风扇调试	风扇调试	风扇调试	风扇调试
+STR_FAC_WIFI_SET	wifi设置	wifi设置	wifi设置	wifi设置	wifi设置	wifi设置	wifi设置	wifi设置
+STR_FAC_BT_SET	蓝牙设置	蓝牙设置	蓝牙设置	蓝牙设置	蓝牙设置	蓝牙设置	蓝牙设置	蓝牙设置
+STR_FAC_SHARPNESS_TEST	清晰度测试	清晰度测试	清晰度测试	清晰度测试	清晰度测试	清晰度测试	清晰度测试	清晰度测试
+STR_FAC_WHITE_SCENE_TEST	白场	白场	白场	白场	白场	白场	白场	白场
+STR_FAC_BLACK_SCENE_TEST	黑场	黑场	黑场	黑场	黑场	黑场	黑场	黑场
+STR_FAC_BRIGHTNESS_TEST	九宫格	九宫格	九宫格	九宫格	九宫格	九宫格	九宫格	九宫格
+STR_FAC_AGEING_TEST	老化测试	老化测试	老化测试	老化测试	老化测试	老化测试	老化测试	老化测试
+STR_FAC_PCB_TEST	PCB测试	PCB测试	PCB测试	PCB测试	PCB测试	PCB测试	PCB测试	PCB测试
+STR_TOAST_IOS17_CAST_WARN	Cannot support iOS 17 miracast with cable.	不支持有线 iOS 17同屏	Impossible de prendre en charge iOS 17 Miracast avec câble.	iOS 17 Miracast mit Kabel kann nicht unterstützt werden.	ケーブルでは iOS 17 ミラキャストをサポートできません。	Impossibile supportare Miracast iOS 17 con cavo.	No es compatible con iOS 17 miracast con cable.	Невозможно поддерживать miracast iOS 17 по кабелю.
+STR_FRONT_CEILING2	Front Ceiling	吊装正投	Plafond Avant	Vordere Decke	天井正面投影	Soffitto Anteriore	Techo Frontal	Передний потолок
+STR_BACK_TABLE2	Back Table	桌上背投	Table Arrière	Rücktisch	背面投影	Tabella Posteriore	Mesa Trasera	Задний стол
+STR_BACK_CEILING2	Back Ceiling	吊装背投	Plafond Arrière	Hintere Decke	天井背面投影	Soffitto Posteriore	Techo Trasero	Назад Потолок
+STR_MOSAIC_EFFECT	Mosaic	马赛克	Mosaique	Mosaik	モザイク 	Mosaico	Mosaico	Мозаика
+STR_USB_READ_ERROR	USB disk read error occurred,\nplease re-plug	USB读取错误，请重新插拔	Erreur de lecture USB, s’il vous plaît rebrancher	USB-Disk-Lesefehler aufgetreten, bitte neu einstecken	USBディスクの読み取りエラーが発生しました、再度差し込んでください	Errore di lettura del disco USB, si prega di ricollegare	Se produjo un error de lectura del disco USB, por favor vuelva a enchufarlo	Произошла ошибка чтения USB-диска, пожалуйста, переподключите
+STR_WIFI_DEV_DETECTING	WiFi detecting ...	WiFi 检测中 ...	Détection WiFi ...	WLAN wird erkannt ...	WiFiを検出中...	Rilevamento WiFi in corso...	Detectando WiFi...	Поиск WiFi...
+STR_WIFI_DEV_DETECT_FAIL	WiFi detect fail!	WiFi 检测失败	La détection WiFi a échoué	WLAN-Erkennung fehlgeschlagen!	WiFi検出に失敗しました！	Rilevamento WiFi non riuscito!	¡Fallo al detectar WiFi!	Ошибка обнаружения WiFi!
+STR_WIFI_DEV_DETECT_OK	WiFi detect success!	WiFi 检测成功	Détection wifi réussie	WLAN-Erkennung erfolgreich!	WiFi検出に成功しました！	Rilevamento WiFi riuscito!	¡Éxito al detectar WiFi!	Успешное обнаружение WiFi!
+STR_LIMITED	Copyright limited	版权受限	Droits d'auteur limités	Copyright beschränkt	著作権制限	Copyright limitato	Derechos de autor limitados	Авторское право ограничено
+STR_IUSB_NO_DATA	Connect fail! Please reboot or reconnect the phone.	连接错误，请重连或者重启手机	Erreur de connexion, veuillez vous reconnecter ou redémarrer le téléphone	Verbindung fehlgeschlagen! Bitte das Telefon neu starten oder erneut anschließen.	接続失敗！再起動するか、電話を再接続してください。	Connessione fallita! Si prega di riavviare o ricollegare il telefono.	¡Error de conexión! Por favor reinicie o vuelva a conectar el teléfono.	Сбой подключения! Пожалуйста, перезагрузите или повторно подключите телефон.
+STR_MP_UI_ERR	Playback Error (Code: %d-%d)	播放出错 (错误码: %d-%d)	Playback Error (Code: %d-%d)	Wiedergabefehler (Code: %d-%d)	再生エラー（コード：%d-%d）	Errore di riproduzione (Codice: %d-%d)	Error de reproducción (Código: %d-%d)	Ошибка воспроизведения (Код: %d-%d)
+STR_MP_UI_ERR_RETRY	Playback Error,try again (Code: %d-%d)	播放出错,请重试 (错误码: %d-%d)	Playback Error,try again (Code: %d-%d)	Wiedergabefehler, versuchen Sie es erneut (Code: %d-%d)	再生エラー、もう一度試してください（コード：%d-%d）	Errore di riproduzione, riprova (Codice: %d-%d)	Error de reproducción, inténtelo de nuevo (Código: %d-%d)	Ошибка воспроизведения, попробуйте еще раз (Код: %d-%d)
+STR_CVBS_IN_GAIN	CVBS in gain	视频输入增益	Gain de CVBS	CVBS-Eingangsgewinn	CVBS入力ゲイン	Guadagno in ingresso CVBS	Ganancia de entrada CVBS	Усиление CVBS-входа
+STR_UPGRADE_PRODUCT_ERR	upgrade product number err!	升级软件产品型号错误!	Mettre à niveau le numéro de produit Err !	Produktregistrierungsfehler!	製品番号のアップグレードエラー！	Errore di aggiornamento del numero di prodotto!	¡Error de número de producto de actualización!	Ошибка обновления номера продукта!
+STR_FACTORY_SETTING	Factory Setting	工厂设置	Set en usine	Werkseinstellung	工場設定	Impostazioni di fabbrica	Configuración de fábrica	Заводские настройки
+STR_CVBS_TRAINING	CVBS训练	CVBS训练	CVBS训练	CVBS训练	CVBS训练	CVBS训练	CVBS训练	CVBS训练
+STR_CVBS_RUNNING	CVBS训练中	CVBS训练中	CVBS训练中	CVBS训练中	CVBS训练中	CVBS训练中	CVBS训练中	CVBS训练中
+STR_EXIT_HDMI_RX_FIRST	HDMI FIRST EXIT	HDMI FIRST EXIT	HDMI FIRST EXIT	HDMI FIRST EXIT	HDMI FIRST EXIT	HDMI FIRST EXIT	HDMI FIRST EXIT	HDMI FIRST EXIT
+STR_EXIT_MP_FIRST	MP FIRST EXIT	MP FIRST EXIT	MP FIRST EXIT	MP FIRST EXIT	MP FIRST EXIT	MP FIRST EXIT	MP FIRST EXIT	MP FIRST EXIT
+STR_CVBS_TRAINING_OK	CVBS 训练成功	CVBS 训练成功	CVBS 训练成功	CVBS 训练成功	CVBS 训练成功	CVBS 训练成功	CVBS 训练成功	CVBS 训练成功
+STR_CVBS_RUNNING_FAILED	RUNNING FAILED CVBS	RUNNING FAILED CVBS	RUNNING FAILED CVBS	RUNNING FAILED CVBS	RUNNING FAILED CVBS	RUNNING FAILED CVBS	RUNNING FAILED CVBS	RUNNING FAILED CVBS
+STR_ALPHAS_HOME_SET	Set	设置	Ensemble	Satz	セット	Impostato	Colocar	Набор
+STR_ALPHAS_HOME_WIFI	WI-FI	WI-FI	WI-FI	WI-FI	WI-FI	WI-FI	WI-FI	WI-FI
+STR_ALPHAS_HOME_BT	BT	BT	BT	BT	BT	BT	BT	BT
+STR_ALPHAS_HOME_IOSCAST	iOS Cast	iOS 同屏	Distribution iOS	iOS-Besetzung	iOSキャスト	Trasmissione iOS	Reparto de iOS	iOS Литье
+STR_ALPHAS_HOME_DLNA	DLNA	DLNA	DLNA	DLNA	DLNA	DLNA	DLNA	DLNA
+STR_ALPHAS_HOME_MIR	Android Miracast	Android Miracast	Android Miracast	Android Miracast	Android Miracast	Android Miracast	Android Miracast	Android Miracast
+STR_ALPHAS_DLNA_STR1	(The phone/Pad must be on the same\nnetwork as the projector device.)	（手机/平板必须与投影设备在同一网络上。）	(Le téléphone/La tablette doit être sur le même réseau que le dispositif de \nprojection.)	(Das Telefon/Das Tablet muss im selben Netzwerk wie das Projektionsgerät sein.)	（スマートフォン/タブレットはプロジェクターと同じネットワーク上にある\n必要があります。）	(Il telefono/il tablet deve essere nella stessa rete del dispositivo di proiezione.)	(El teléfono/La tableta debe estar en la misma red que el dispositivo de \nproyección.)	(Телефон/Планшет должен быть в той же сети, что и устройство \nпроекции.)
+STR_ALPHAS_DLNA_STR2	1. Open the video playing app.	1. 打开视频播放应用程序。	1. Ouvrez l'application de lecture vidéo.	1. Öffne die Videowiedergabe-App.	1. ビデオ再生アプリを開く。	1. Apri l'applicazione di riproduzione video.	1. Abre la aplicación de reproducción de video.	1. Откройте приложение для проигрывания видео.
+STR_ALPHAS_DLNA_STR3	2. Click the TV icon and select the device\n name: 	2. 点击电视图标，选择设备名称：	2. Cliquez sur l'icône TV et sélectionnez le nom du dispositif :	2. Klicken Sie auf das TV-Symbol und wählen Sie den \nGerätenamen:	2. テレビアイコンをクリックして、デバイス名を選択して\nください：	2. Fare clic sull'icona TV e selezionare il nome del \ndispositivo:	2. Haz clic en el ícono de TV y selecciona el nombre \ndel dispositivo:	2. Нажмите на значок телевизора и выберите \nимя устройства:
+STR_ALPHAS_MIR_STR1	Miracast	Miracast	Miracast	Miracast	Miracast	Miracast	Miracast	Miracast
+STR_ALPHAS_MIR_STR2	1. Open the settings menu on your\n Android Mobile/Pad.	1. 在您的安卓手机/平板上打开设置菜单。	1. Ouvrez le menu des paramètres sur votre téléphone/tablette Android.	1. Öffnen Sie das Einstellungsmenü auf Ihrem Android-Mobiltelefon/Tablet.	1. Androidモバイル/タブレットで設定メニューを開いてください。	1. Apri il menu delle impostazioni sul tuo dispositivo Android mobile/tablet.	1. Abre el menú de configuración en tu dispositivo Android móvil/tableta.	1. Откройте меню настроек на вашем мобильном телефоне/планшете \nAndroid.
+STR_ALPHAS_MIR_STR3	2. Access your display settings or screen\n mirroring.	2. 进入您的显示设置或屏幕镜像。	2. Accédez à vos paramètres d'affichage ou de mise en miroir de l'écran.	2. Greifen Sie auf Ihre Anzeigeeinstellungen oder Bildschirmspiegelung zu.	2. ディスプレイ設定または画\n面ミラーリングにアクセスしてください。	2. Accedi alle impostazioni del display o alla duplicazione dello schermo.	2. Accede a la configuración de la pantalla o a la duplicación de pantalla.	2. Перейдите к настройкам отображения или зеркального отображения \nэкрана.
+STR_ALPHAS_MIR_STR4	3. Select Your Miracast receiver : 	3. 选择您的Miracast接收器：	3. Sélectionnez votre récepteur Miracast : 	3. Wählen Sie Ihren Miracast-Empfänger aus: 	3. Miracastレシーバーを選択してください：	3. Selezionare il ricevitore Miracast: 	3. Seleccione su receptor Miracast: 	3. Выберите ваш Miracast-приемник: 
+STR_ALPHAS_IOSCAST_STR1	iOS Connect by Cables	苹果设备有线同屏	Connexion iOS par câble	iOS-Verbindung per Kabel	ケーブルでのiOS接続	Connettiti su iOS tramite cavi	Conexión por cable de iOS	Подключение к iOS по кабелям
+STR_ALPHAS_IOSCAST_STR2	Connect your iPhone to the projector via the original iPhone charging cable. 	将数据线连接投影仪USB接口	Connectez votre iPhone au projecteur via le câble de chargement \nd'origine de l'iPhone.	Verbinden Sie Ihr iPhone über das originale iPhone-Ladekabel mit dem \nProjektor.	オリジナルのiPhone充電ケーブルを使用して、iPhoneをプロジェクター\nに接続します。	Collega il tuo iPhone al proiettore tramite il cavo di ricarica originale \ndell'iPhone.	Conecta tu iPhone al proyector mediante el cable de carga original del \niPhone.	Подключите ваш iPhone к проектору с помощью оригинального \nкабеля зарядки iPhone.
+STR_ALPHAS_IOSCAST_STR3	(Cable has a USB port and Lighting port)	（数据线上有一个USB接口和Lightning接口）	(Le câble possède un port USB et un port Lightning)	(Das Kabel hat einen USB-Anschluss und einen Lightning-Anschluss) 	（ケーブルにはUSBポートとライトニングポートがあります）	(Il cavo ha una porta USB e una porta Lightning)	(El cable tiene un puerto USB y un puerto Lightning)	(Кабель имеет порт USB и порт Lightning)
+STR_ALPHAS_IOSCAST_STR4	2. Please click             when the iPhone shows a pop-up window.	2. 当iPhone显示弹出窗口时，请单击        。	2. Veuillez cliquer sur                              lorsque l'iPhone affiche une fenêtre \ncontextuelle.	2. Bitte klicken Sie auf                    , wenn auf dem iPhone ein Popup-Fenster \nangezeigt wird.	2. iPhoneにポップアップウィンドウが表示されたら、                   をクリック\nしてください。	2. Fare clic su                 quando l'iPhone mostra una finestra pop-up.	2. Por favor, haga clic en                    cuando aparezca una ventana \nemergente en el iPhone.	2. Пожалуйста, нажмите на                     , когда появится всплывающее \nокно на iPhone.
+STR_ALPHAS_IOSCAST_STR5	\"Trust\"	\"信任\"	\"Faire confiance\"	\"Vertrauen\"	\"信頼する\"	\"Fiducia\"	\"Confianza\"	\"Доверие \"
+STR_ALPHAS_IOSCAST_STR6	3. Enter device password.	3. 输入设备密码。	3. Saisissez le mot de passe de l'appareil.	3. Geben Sie das Gerätepasswort ein.	3. デバイスのパスワードを入力してください。	3. Inserisci la password del dispositivo.	3. Ingresa la contraseña del dispositivo.	3. Введите пароль устройства.
+STR_ALPHAS_IOSCAST_STR7	iOS Cast	iOS 同屏	Distribution iOS	iOS-Besetzung	iOSキャスト	Trasmissione iOS	Reparto de iOS	iOS Литье
+STR_ALPHAS_IOSCAST_STR8	(The phone/Pad must be on the same\nnetwork as the projector device.)	（ios设备必须与投影仪设备在同一网络上。）	(Le téléphone/tablette doit être sur le même réseau que l'appareil de \nprojection.)	(Das Telefon / Pad muss im selben Netzwerk wie das Projektorgerät sein.)	（電話/パッドは、プロジェクターデバイスと同じネットワーク上にある必要があります。）	(Il telefono / Pad deve essere sulla stessa rete del dispositivo di proiezione.)	(El teléfono/tableta debe estar en la misma red que el dispositivo del \nproyector.)	(Телефон / планшет должен быть в той же сети, что и устройство \nпроектора.)
+STR_ALPHAS_IOSCAST_STR9	1. Open your iPhone Control Centre and\n select Screen Mirroring	1. 打开iPhone控制中心，选择屏幕镜像。	1. Ouvrez le Centre de contrôle de votre iPhone et sélectionnez \n\"Recopie vidéo\".	1. Öffnen Sie das Kontrollzentrum auf Ihrem iPhone und wählen Sie \n\"Bildschirmsynchronisierung\".	1. iPhoneのコントロールセンターを開き、画面ミラーリングを選択します。	1. Apri il Centro di controllo del tuo iPhone e seleziona \"Duplicazione \nschermo\".	1. Abre el Centro de control en tu iPhone y selecciona \"Duplicación de \npantalla\".	1. Откройте Центр управления на вашем iPhone и выберите \n\"Зеркалирование экрана\".
+STR_ALPHAS_IOSCAST_STR10	2. Click the device name:  	2. 点击设备名称：	2. Cliquez sur le nom du périphérique : 	2. Klicken Sie auf den Gerätenamen: 	2. デバイス名をクリックしてください：	2. Fai clic sul nome del dispositivo: 	2. Haz clic en el nombre del dispositivo: 	2. Нажмите на название устройства: 
+STR_SUPPORT_TITLE	Support	支持	Soutien	Unterstützung	サポート	Supporto	Ayuda	Поддержка
+STR_INSERT_USB_DEV	Please insert a USB flash drive.	请插入U盘设备	Veuillez insérer une clé USB	Bitte stecken Sie einen USB-Stick ein	USBメモリを挿入してください	Inserire una chiavetta USB	Por favor, inserte una memoria USB	Пожалуйста, вставьте USB-накопитель
+STR_MOTOR_FOCUS_TIP	The focus has reached the maximum/minimumdistance, please adjust the machine distance	焦距已达到最大/最小距离，请调整机器距离	La mise au point a atteint la distance maximale/minimale, veuillez ajuster la distance de la machine	Der Fokus hat den maximalen/minimalen Abstand erreicht, bitte passen Sie den Maschinenabstand an	フォーカスが最大/最小距離に達しました。機械の距離を調整してください	La messa a fuoco ha raggiunto la distanza massima/minima, regolare la distanza della macchina	El enfoque ha alcanzado la distancia máxima/mínima, ajuste la distancia de la máquina	Фокус достиг максимального/минимального расстояния, отрегулируйте расстояние до машины.
+STR_ALPHAS_HOME_ACCESS	Exclusive Access	专属权益	Accès Exclusif	Exklusiven Zugang	限定アクセス	Accesso Esclusivo	Acceso Exclusivo	Эксклюзивный доступ
+STR_ALPHAS_ACCESS_WARRANTY	Warranty	保修单	garantie	Garantie	保証	Garanzia	Garantía	Гарантия
+STR_ALPHAS_ACCESS_TECH_SUPPORT	Tech Support	技术支持	Support technique	Technischer Support	技術サポート	Supporto tecnico	Apoyo técnico	Техническая поддержка
+STR_ALPHAS_ACCESS__FREE_ACCESSORY	Free Accessory	免费配件	Accessoires gratuits	Kostenloses Zubehör	無料のアクセサリ	Accessori gratuiti	Accesorios gratis	Бесплатные аксессуары
+STR_TIMER_SHUTDOWN	Scheduled shutdown	定时关机	Arrêt programmé	Geplantes Herunterfahren	計画シャットダウン	Arresto programmato	Apagado programado	Запланированное отключение
+STR_SELECT_SHUTDOWN_TIME	Please select shutdown time	请选择关机时间	Veuillez sélectionner l'heure d'arrêt	Bitte wählen Sie die Abschaltzeit	シャットダウン時間を選択してください	Seleziona l'orario di spegnimento	Por favor seleccione la hora de apagado	Пожалуйста, выберите время выключения
+STR_WIFI_NAME	WLAN	无线网络	réseau sans fil	drahtloses Netzwerk	ワイヤレスネットワーク	rete senza fili	red inalámbrica	беспроводная сеть
+STR_SEARCH_WIFI	Search Wi-Fi	搜索无线网络	Rechercher des réseaux sans fil	Suchen Sie nach drahtlosen Netzwerken	ワイヤレスネットワークを検索する	Cerca reti wireless	Buscar redes inalámbricas	Поиск беспроводных сетей
+STR_WIFI_MY_DEV	Paired devices	已配对设备	Appareil couplé	Gekoppeltes Gerät	ペアリングされたデバイス	Dispositivo accoppiato	Dispositivo emparejado	Сопряженное устройство
+STR_WIFI_OTHER_DEV	Available devices	可用的设备	Appareils disponibles	Verfügbare Geräte	利用可能なデバイス	Dispositivi disponibili	Dispositivos disponibles	Доступные устройства
+STR_WIFI_CONNING	Connecting	正在连接	De liaison	Verbinden	接続中	Connessione	Conectando	Подключение
+STR_WIFI_CONN	Connect	连接	connecter	verbinden	接続する	collegare	conectar	соединять
+STR_BT_CONNECTING	Connecting	正在连接...	De liaison...	Verbinden...	接続中...	Connessione...	Conectando...	Подключение...
+STR_BT_UNPAIR	No Pair	未配对	Non jumelé	Nicht gepaart	ペアリングされていません	Non accoppiato	No emparejado	Не в паре
+STR_BT_CONNING	Connecting	正在连接	De liaison	Verbinden	接続中	Connessione	Conectando	Подключение
+STR_BT_SEARCHING	Searching	正在搜索	Recherche	Suchen	検索中	Ricerca	Búsqueda	Идет поиск
+STR_KEYSTONE_INFO	[OK] button to choose corner,  [Up Down Left Right] key to adjust angle, [Return] key to quit	[确定] 按钮选择角，[上下左右] 键调整角度，[返回] 键退出	Bouton [OK] pour sélectionner l'angle, touches [Haut, Bas, Gauche et Droite] pour régler l'angle, touche [Retour] pour quitter	[OK]-Taste zum Auswählen des Winkels, [Up, Down, Left und Right]-Tasten zum Anpassen des Winkels, [Return]-Taste zum Verlassen	[OK]ボタンで角度を選択、[上下左右]キーで角度を調整、[Return]キーで終了	Pulsante [OK] per selezionare l'angolazione, tasti [Su, Giù, Sinistra e Destra] per regolare l'angolazione, tasto [Invio] per uscire	Botón [OK] para seleccionar el ángulo, teclas [Arriba, Abajo, Izquierda y Derecha] para ajustar el ángulo, tecla [Regresar] para salir	Кнопка [OK] для выбора угла, клавиши [Вверх, вниз, влево и вправо] для регулировки угла, клавиша [Return] для выхода
+STR_BT_CONN_SUCCESS	Connection success!	连接成功！	Connexion réussie!	Verbindungserfolg!	接続成功！	Connessione riuscita!	¡Conexión exitosa!	Подключение успешно!
+STR_BT_CONN_FAILED	Connection failed!	连接失败！	échec de la connexion!	Verbindung fehlgeschlagen!	接続に失敗しました！	Connessione fallita!	¡La conexión falló!	Ошибка подключения!
+STR_SOUND_OUTPUT	Sound output	声音输出	Sortie sonore	Tonausgabe	サウンド出力	Uscita sonora	Salida de sonido	Гукавы вывад
+STR_SOUND_ARC	HDMI ARC	HDMI ARC	HDMI ARC	HDMI ARC	HDMI ARC	HDMI ARC	HDMI ARC	HDMI ARC
+STR_SOUND_OWA	OWA	OWA	OWA	OWA	OWA	OWA	OWA	OWA
+STR_SOUND_SPEAKER	Speaker	喇叭	Trompette	Horn	ラッパ	corno	Bocina	рог
+STR_SOUND_HEADPHONE	Headphone	耳机	Écouteurs	Headset	イヤホン	auricolare	Auriculares	загаловак
+STR_BT_PLEASE_TURNOFF_FIRST	please close bt first	请先关闭蓝牙	Veuillez d'abord désactiver le Bluetooth	Bitte schalten Sie zuerst Bluetooth aus	まずBluetoothをオフにしてください	Disattiva prima il Bluetooth	Primero apague el Bluetooth	Пожалуйста, сначала отключите Bluetooth
+STR_BT_SINK_SPK_MODE	sink mode	音箱模式	Mode haut-parleur	Lautsprechermodus	スピーカーモード	Modalità altoparlante	Modo altavoz	Режим динамика
+STR_DONT_OPERATE	The task is being executed. Please do not operate yet.	正在执行任务，先请勿操作	Tâche en cours, veuillez ne pas opérer maintenant	Aufgabe läuft, bitte jetzt nicht bedienen	タスクが進行中です。今は操作しないでください	Attività in corso, non operare adesso	Tarea en progreso, no la opere ahora	Задача выполняется, пожалуйста, не работайте сейчас
+STR_ANDROID_WIREDSP	Android Connect by Cables	安卓设备有线同屏	Connexion Android par câble	Android Connect über Kabel	ケーブルでAndroidに接続する	Connessione Android tramite cavo	Conectar Android por cable	Name
+STR_ANDROID_WIREDSP_INFO1	1. Scan the left QR code.	1. 扫描左侧二维码，	1. Scannez le Code QR gauche.	1. Scannen Sie den linken QR-Code.	1.左側のQRコードをスキャンします。	1. Scansiona il codice QR sinistro.	1. escanee el Código QR izquierdo.	1. Сканаваць левы код QR.
+STR_ANDROID_WIREDSP_INFO2	2. In the pop-up window of your phone, select View and Install App.	2. 在手机弹框中选择查看并安装应用。	2. Dans la fenêtre contextuelle de votre téléphone, sélectionnez afficher et installer les applications.	2. Wählen Sie im Popup-Fenster Ihres Telefons App anzeigen und installieren aus.	2.携帯電話のポップアップウィンドウで、アプリケーションの表示とインストールを選択します。	2. Nella finestra pop-up del telefono, selezionare Visualizza e installa app.	2. en la ventana emergente del teléfono, elija ver e instalar la Aplicación.	2. У выплыўным акне вашага тэлефона вылучыце Прагляд і Усталяваць праграму.
+STR_ANDROID_WIREDSP_INFO3	1. Confirm to open USBCast in the pop-up window of your phone.	在手机弹框中打开USBCast，	1.confirmez que vous ouvrez usbcast dans la fenêtre contextuelle de votre téléphone.	1. Bestätigen Sie, dass Sie USBCast im Popup-Fenster Ihres Telefons öffnen.	1.携帯電話のポップアップウィンドウでUSBCastを開くことを確認します。	1. Confermare di aprire USBCast nella finestra pop-up del telefono.	1. confirme que usbcast se abre en la ventana emergente del teléfono.	1. Пацвердзіце адкрыццё USBCast in the pop- up window of your phone.
+STR_ANDROID_WIREDSP_INFO4	2. It can automatically be wired to the same screen.	即可自动有线同屏。	2. Il peut se connecter automatiquement au même écran.	2. Es kann automatisch an den gleichen Bildschirm verdrahtet werden.	2.同じ画面に自動的に接続できます。	2. Può essere automaticamente collegato allo stesso schermo.	2. se puede conectar automáticamente a la misma pantalla.	2. Яна можа аўтаматычна прывязацца да аднаго экрана.
+STR_ANDROID_WIREDSP_INFO5	Attention:	注意：	Salutation:	Achtung:	に告げる:	Attenzione:	Aviso:	Увага:
+STR_ANDROID_WIREDSP_INFO6	Avoid Frequent Plugging & Unplugging for a stable Connection.	避免频繁插拔以获得稳定的连接。	Évitez les branchements fréquents pour une connexion stable.	Vermeiden Sie häufiges Stecken, Trennen Sie das Stecken für eine stabile Verbindung.	安定した接続を得るために、頻繁な抜き差しを回避します。	Evitare frequenti collegamenti e scollegamenti per una connessione stabile.	Evite los enchufes frecuentes para obtener una conexión estable.	Адхіліць частых ўключэнняў і адключэнняў для стабільнага злучэння.
+STR_ANDROID_WIREDSP_INFO7	Certain Android models require selecting 'Transfer File' for screen mirroring.	某些Android型号需要选择【传输文件】才能进行屏幕镜像。	Certains modèles Android doivent sélectionner \"transférer des fichiers\" pour la mise en miroir de l'écran.	Bestimmte Android-Modelle erfordern die Option \"Datei übertragen\" für die Bildschirmspiegelung.	一部のAndroidモデルでは、画面ミラーリングに「ファイル転送」を選択する必要があります。	Alcuni modelli Android richiedono la selezione di 'Transfer File' per il mirroring dello schermo.	Algunos modelos Android requieren la opción \"transferir archivos\" para reflejar la pantalla.	Некаторыя мадэлі Android патрабуюць выбар 'Перадачы файла' для адлюстравання экрана.
+STR_BT_TRY_RECONNECT	Bluetooth trying to reconnect	蓝牙尝试回连	Bluetooth tente de se reconnecter	Bluetooth versucht, eine Verbindung wiederherzustellen	Bluetooth が再接続を試みます	Il Bluetooth tenta di riconnettersi	Bluetooth intenta volver a conectarse	Bluetooth пытается подключиться обратно
+STR_ALPHAS_HOME_WINDOWS	Windows	Windows无线同屏	Windows	Windows	Windows	Windows	Windows	Windows
+STR_ALPHAS_WINDOWS_STR1	Click Screen Mirror	点击屏幕镜像	Cliquez sur Miroir d'Écran	Klicken Sie auf Bildschirmspiegelung	スクリーンミラーをクリック	Clicca su Specchio dello Schermo	Haz clic en Espejo de Pantalla	Нажмите на Зеркало Экрана
+STR_ALPHAS_WIRELESS_INFO01	1.Please scan the QR code to get the device's Wi-Fi username and password.	1.请扫码获取设备Wi-Fi账号和密码，	1.Veuillez scanner le code QR pour obtenir le nom d'utilisateur et le mot de passe Wi-Fi de l'appareil.	1.Si prega di scansionare il codice QR per ottenere il nome utente e la password Wi-Fi del dispositivo.	1.QRコードをスキャンして、デバイスのWi-Fiのユーザー名とパスワードを取得してください。	1.Si prega di scansionare il codice QR per ottenere il nome utente e la password Wi-Fi del dispositivo.	1.Por favor, escanee el código QR para obtener el nombre de usuario y la contraseña del Wi-Fi del dispositivo.	Пожалуйста, отсканируйте QR-код, чтобы получить имя пользователя и пароль Wi-Fi устройства.
+STR_ALPHAS_WIRELESS_INFO02	2.Connect both your phone and the projector to the same network.	2.将手机和投影连到同个网络。	2.Connectez votre téléphone et le projecteur au même réseau.	2.Collega sia il tuo telefono che il proiettore alla stessa rete.	2.スマートフォンとプロジェクターを同じネットワークに接続します。	2.Collega sia il tuo telefono che il proiettore alla stessa rete.	2.Conecte su teléfono y el proyector a la misma red.	Подключите оба устройства, телефон и проектор, к одной сети.
+STR_WIFI_OPENING	Network is turning on...	网络正在打开...	Le réseau s'ouvre...	Das Netzwerk öffnet sich...	ネットワークが開いています...	La rete si sta aprendo...	La red se está abriendo...	La red se está abriendo...
+STR_WIFI_CLOSEING	Network is turning off...	网络正在关闭...	Le réseau est en train de s'arrêter...	Das Netzwerk wird heruntergefahren...	ネットワークがシャットダウンしています...	La rete si sta spegnendo...	La red se está cerrando...	La red se está cerrando...
+STR_BT_OPENING	Bluetooth is turning on...	蓝牙正在打开...	Le Bluetooth s'active...	Bluetooth schaltet sich ein...	Bluetooth がオンになっています...	Il Bluetooth si sta attivando...	Bluetooth se está activando...	Bluetooth se está activando...
+STR_BT_CLOSEING	Bluetooth is turning off...	蓝牙正在关闭...	Le Bluetooth s'éteint...	Bluetooth wird heruntergefahren...	Bluetooth がシャットダウンしています...	Il Bluetooth si sta spegnendo...	Bluetooth se está apagando...	Bluetooth se está apagando...
+STR_BT_READY	Bluetooth initializing…,please wait	蓝牙初始化中…,请稍后	Initialisation Bluetooth..., veuillez patienter	Bluetooth wird initialisiert..., bitte warten	Bluetooth を初期化しています...、お待ちください	Inizializzazione Bluetooth..., attendere	Bluetooth inicializándose..., por favor espere	Инициализация Bluetooth..., пожалуйста, подождите
+STR_BT_DEV_DETECT_FAIL	Bluetooth detect fail!	蓝牙检测失败！	La détection Bluetooth a échoué !	Bluetooth-Erkennung fehlgeschlagen!	Bluetooth の検出に失敗しました。	Rilevamento Bluetooth non riuscito!	¡Error en la detección de Bluetooth!	Не удалось обнаружить Bluetooth!
+STR_SHOUTDOWN	Shutting down...	正在关机中...	Arrêt en cours...	Herunterfahren...	シャットダウン中...	Spegnimento in corso...	Apagando...	Выключение...

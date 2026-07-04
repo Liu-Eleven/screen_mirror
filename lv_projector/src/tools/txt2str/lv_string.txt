@@ -1,0 +1,4 @@
+lv_string_id	english	chinese
+STR_QR_CONNECT_AP	First scan QR code Set AP network	请扫码连接本设备
+STR_QR_SCAN_WIFI	Second scan QR code Set WiFi network	请扫码联网
+STR_QR_CONFIG	Scan QR code Set device parameters	请扫码配置参数
