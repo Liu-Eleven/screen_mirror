@@ -47,12 +47,17 @@ void projector_adapter_handle_mirror_event(const MirrorEvent *event, void *user_
         return;
     }
 
-    if (event->data != NULL &&
-        (event->type == MIRROR_EVENT_CONNECTED ||
-         event->type == MIRROR_EVENT_DEVICE_FOUND ||
-         event->type == MIRROR_EVENT_STATE_CHANGED)) {
-        device = (const MirrorDeviceInfo *)event->data;
-        projector_adapter_store_current_device(device);
+    switch (event->type) {
+        case MIRROR_EVENT_CONNECTED:
+        case MIRROR_EVENT_DEVICE_FOUND:
+        case MIRROR_EVENT_STATE_CHANGED:
+            if (event->data != NULL) {
+                device = (const MirrorDeviceInfo *)event->data;
+                projector_adapter_store_current_device(device);
+            }
+            break;
+        default:
+            break;
     }
 
     switch (event->type) {
