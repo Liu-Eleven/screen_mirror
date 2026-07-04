@@ -258,7 +258,11 @@ void projector_adapter_notify_devices(const MirrorDeviceInfo *devices,
 
     adapter_devices = calloc((size_t)device_count, sizeof(*adapter_devices));
     if (adapter_devices == NULL) {
-        projector_adapter_notify_state(PROJECTOR_ADAPTER_STATE_ERROR, "适配层内存不足");
+        char alloc_error[64];
+
+        snprintf(alloc_error, sizeof(alloc_error),
+                 "适配层内存不足，无法同步 %d 个设备", device_count);
+        projector_adapter_notify_state(PROJECTOR_ADAPTER_STATE_ERROR, alloc_error);
         return;
     }
 
@@ -296,7 +300,7 @@ int projector_adapter_init(const ProjectorAdapterConfig *config)
     pthread_mutex_unlock(&ctx->lock);
 
     ret = screenmirror_init();
-    if (ret < 0 && ret != -1) {
+    if (ret < 0 && ret != SCREENMIRROR_ADAPTER_ERR_ALREADY_INIT) {
         return ret;
     }
 
@@ -329,7 +333,7 @@ int projector_adapter_deinit(void)
     projector_adapter_stop_services();
 
     ret = screenmirror_exit();
-    if (ret < 0 && ret != -2) {
+    if (ret < 0 && ret != SCREENMIRROR_ADAPTER_ERR_NOT_INIT) {
         return ret;
     }
 
@@ -393,12 +397,12 @@ int projector_adapter_stop_services(void)
     int ret = 0;
 
     ret = screenmirror_stop_discovery();
-    if (ret < 0 && ret != -2) {
+    if (ret < 0 && ret != SCREENMIRROR_ADAPTER_ERR_NOT_INIT) {
         return ret;
     }
 
     ret = screenmirror_disconnect();
-    if (ret < 0 && ret != -2) {
+    if (ret < 0 && ret != SCREENMIRROR_ADAPTER_ERR_NOT_INIT) {
         return ret;
     }
 

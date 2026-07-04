@@ -5,6 +5,9 @@
 #include "screenmirror.h"
 #include <pthread.h>
 
+#define SCREENMIRROR_ADAPTER_ERR_ALREADY_INIT -1
+#define SCREENMIRROR_ADAPTER_ERR_NOT_INIT     -2
+
 typedef struct {
     pthread_mutex_t lock;
     bool initialized;
