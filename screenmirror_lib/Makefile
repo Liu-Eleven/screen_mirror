@@ -17,12 +17,15 @@ SRC_DIR = $(LIB_DIR)/src
 BUILD_DIR = $(LIB_DIR)/build
 OBJ_DIR = $(BUILD_DIR)/obj
 DEP_DIR = $(BUILD_DIR)/dep
+ADAPTER_DIR = ../lv_projector/src/ProjectorAdapter
+TEST_DIR = $(LIB_DIR)/tests
 
 # Output
 STATIC_LIB = $(BUILD_DIR)/$(LIB_NAME).a
 SHARED_LIB = $(BUILD_DIR)/$(LIB_NAME).so.$(LIB_VERSION_MAJOR).$(LIB_VERSION_MINOR).$(LIB_VERSION_PATCH)
 SHARED_LIB_MAJOR = $(BUILD_DIR)/$(LIB_NAME).so.$(LIB_VERSION_MAJOR)
 SHARED_LIB_BASE = $(BUILD_DIR)/$(LIB_NAME).so
+ADAPTER_TEST_BIN = $(BUILD_DIR)/projector_adapter_test
 
 # Source files
 CORE_SRCS = \
@@ -52,7 +55,7 @@ ALL_DEPS = $(addprefix $(DEP_DIR)/, $(notdir $(ALL_SRCS:.c=.d)))
 CFLAGS = $(CC_FLAGS) -I$(INCLUDE_DIR) -fPIC -pthread
 LDFLAGS_SHARED = -shared -Wl,-soname,$(LIB_NAME).so.$(LIB_VERSION_MAJOR) -pthread
 
-.PHONY: all static shared clean install
+.PHONY: all static shared clean install adapter-test test
 
 # Default target
 all: static shared
@@ -137,6 +140,26 @@ install-local: all
 	@cp $(SHARED_LIB_BASE) ./install/lib/ 2>/dev/null || true
 	@cp $(INCLUDE_DIR)/screenmirror.h ./install/include/
 	@echo "Local installation complete"
+
+$(ADAPTER_TEST_BIN): $(STATIC_LIB) \
+		$(ADAPTER_DIR)/projector_adapter.c \
+		$(ADAPTER_DIR)/ui_event_handler.c \
+		$(ADAPTER_DIR)/mirror_event_handler.c \
+		$(TEST_DIR)/projector_adapter_test.c
+	@echo "CC $@"
+	@$(CC) $(CFLAGS) \
+		-I$(ADAPTER_DIR) \
+		-o $@ \
+		$(TEST_DIR)/projector_adapter_test.c \
+		$(ADAPTER_DIR)/projector_adapter.c \
+		$(ADAPTER_DIR)/ui_event_handler.c \
+		$(ADAPTER_DIR)/mirror_event_handler.c \
+		$(ALL_SRCS)
+
+adapter-test: $(ADAPTER_TEST_BIN)
+
+test: adapter-test
+	@$(ADAPTER_TEST_BIN)
 
 # Clean
 clean:

@@ -6,6 +6,31 @@
 /* 全局引擎实例 */
 MirrorEngine *g_mirror_engine = NULL;
 
+static void fill_mock_device(MirrorMode mode, MirrorDeviceInfo *device)
+{
+    static const char *names[] = {
+        "Miracast Demo Device",
+        "AirPlay Demo Device",
+        "DLNA Demo Device",
+        "USB Demo Device",
+        "Wireless Demo Device",
+    };
+
+    if (device == NULL) {
+        return;
+    }
+
+    memset(device, 0, sizeof(*device));
+    strncpy(device->name, names[mode], sizeof(device->name) - 1);
+    strncpy(device->mac_address, "00:11:22:33:44:55",
+            sizeof(device->mac_address) - 1);
+    strncpy(device->ip_address, "192.168.1.100",
+            sizeof(device->ip_address) - 1);
+    device->signal_strength = 80;
+    device->mode = mode;
+    device->model_id = 1;
+}
+
 /**
  * 初始化投屏库
  */
@@ -63,21 +88,27 @@ int screenmirror_init(void)
  */
 int screenmirror_exit(void)
 {
+    bool discovery_running = false;
+    bool has_active_session = false;
+
     if (g_mirror_engine == NULL) {
         return MIRROR_ERR_NOT_INIT;
     }
 
     pthread_mutex_lock(&g_mirror_engine->lock);
+    discovery_running = g_mirror_engine->discovery_running;
+    has_active_session = (g_mirror_engine->state != MIRROR_STATE_IDLE);
+    pthread_mutex_unlock(&g_mirror_engine->lock);
 
-    /* 停止发现 */
-    if (g_mirror_engine->discovery_running) {
+    if (discovery_running) {
         screenmirror_stop_discovery();
     }
 
-    /* 断开连接 */
-    if (g_mirror_engine->state != MIRROR_STATE_IDLE) {
+    if (has_active_session) {
         screenmirror_disconnect();
     }
+
+    pthread_mutex_lock(&g_mirror_engine->lock);
 
     /* 销毁资源 */
     state_machine_destroy(g_mirror_engine->state_machine);
@@ -125,6 +156,9 @@ int screenmirror_start_discovery(MirrorMode mode, int timeout_ms,
                                 MirrorDeviceListCallback callback,
                                 void *user_data)
 {
+    MirrorEvent event;
+    MirrorDeviceInfo device;
+
     if (g_mirror_engine == NULL) {
         return MIRROR_ERR_NOT_INIT;
     }
@@ -152,11 +186,26 @@ int screenmirror_start_discovery(MirrorMode mode, int timeout_ms,
     printf("[MIRROR] Discovery started for mode: %d, timeout: %d ms\n", mode, timeout_ms);
 
     /* 发送状态变化事件 */
-    MirrorEvent event = {
+    event = (MirrorEvent) {
         .type = MIRROR_EVENT_STATE_CHANGED,
         .error_code = 0,
         .error_msg = NULL,
         .data = NULL,
+    };
+    event_system_emit(g_mirror_engine->event_sys, &event);
+
+    if (g_mirror_engine->user_event_callback) {
+        g_mirror_engine->user_event_callback(&event, g_mirror_engine->user_callback_data);
+    }
+
+    fill_mock_device(mode, &device);
+    callback(&device, 1, user_data);
+
+    event = (MirrorEvent) {
+        .type = MIRROR_EVENT_DEVICE_FOUND,
+        .error_code = 0,
+        .error_msg = NULL,
+        .data = &device,
     };
     event_system_emit(g_mirror_engine->event_sys, &event);
 
@@ -185,7 +234,9 @@ int screenmirror_stop_discovery(void)
 
     g_mirror_engine->discovery_running = false;
     g_mirror_engine->state = MIRROR_STATE_IDLE;
-    state_machine_transition(g_mirror_engine->state_machine, MIRROR_STATE_IDLE);
+    if (state_machine_get_state(g_mirror_engine->state_machine) != MIRROR_STATE_IDLE) {
+        state_machine_transition(g_mirror_engine->state_machine, MIRROR_STATE_IDLE);
+    }
 
     pthread_mutex_unlock(&g_mirror_engine->lock);
 
@@ -213,6 +264,8 @@ int screenmirror_stop_discovery(void)
 int screenmirror_connect(const MirrorDeviceInfo *device,
                         const MirrorConfig *config)
 {
+    MirrorEvent event;
+
     if (g_mirror_engine == NULL) {
         return MIRROR_ERR_NOT_INIT;
     }
@@ -233,6 +286,7 @@ int screenmirror_connect(const MirrorDeviceInfo *device,
     memcpy(&g_mirror_engine->current_device, device, sizeof(MirrorDeviceInfo));
     memcpy(&g_mirror_engine->config, config, sizeof(MirrorConfig));
     g_mirror_engine->current_mode = config->mode;
+    g_mirror_engine->discovery_running = false;
 
     /* 更新状态 */
     g_mirror_engine->state = MIRROR_STATE_CONNECTING;
@@ -244,7 +298,7 @@ int screenmirror_connect(const MirrorDeviceInfo *device,
            device->name, config->mode);
 
     /* 发送连接开始事件 */
-    MirrorEvent event = {
+    event = (MirrorEvent) {
         .type = MIRROR_EVENT_STATE_CHANGED,
         .error_code = 0,
         .error_msg = NULL,
@@ -256,8 +310,22 @@ int screenmirror_connect(const MirrorDeviceInfo *device,
         g_mirror_engine->user_event_callback(&event, g_mirror_engine->user_callback_data);
     }
 
-    /* TODO: 根据 config->mode 调用相应的协议实现 */
-    /* 这里仅作演示，实际需要分发到不同协议处理 */
+    pthread_mutex_lock(&g_mirror_engine->lock);
+    g_mirror_engine->state = MIRROR_STATE_CONNECTED;
+    state_machine_transition(g_mirror_engine->state_machine, MIRROR_STATE_CONNECTED);
+    pthread_mutex_unlock(&g_mirror_engine->lock);
+
+    event = (MirrorEvent) {
+        .type = MIRROR_EVENT_CONNECTED,
+        .error_code = 0,
+        .error_msg = NULL,
+        .data = (void *)device,
+    };
+    event_system_emit(g_mirror_engine->event_sys, &event);
+
+    if (g_mirror_engine->user_event_callback) {
+        g_mirror_engine->user_event_callback(&event, g_mirror_engine->user_callback_data);
+    }
 
     return MIRROR_ERR_SUCCESS;
 }
@@ -278,6 +346,7 @@ int screenmirror_disconnect(void)
         return MIRROR_ERR_SUCCESS;
     }
 
+    g_mirror_engine->discovery_running = false;
     g_mirror_engine->state = MIRROR_STATE_IDLE;
     state_machine_transition(g_mirror_engine->state_machine, MIRROR_STATE_IDLE);
 

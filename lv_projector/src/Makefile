@@ -6,6 +6,8 @@ LVGL_DIR_NAME ?= lvgl
 LVGL_DIR ?= ${shell pwd}
 CFLAGS ?= -O3 -g0 -I$(LVGL_DIR)/ -Wall -Wshadow -Wundef -Wmissing-prototypes -Wno-discarded-qualifiers -Wall -Wextra -Wno-unused-function -Wno-error=strict-prototypes -Wpointer-arith -fno-strict-aliasing -Wno-error=cpp -Wuninitialized -Wmaybe-uninitialized -Wno-unused-parameter -Wno-missing-field-initializers -Wtype-limits -Wsizeof-pointer-memaccess -Wno-format-nonliteral -Wno-cast-qual -Wunreachable-code -Wno-switch-default -Wreturn-type -Wmultichar -Wformat-security -Wno-ignored-qualifiers -Wno-error=pedantic -Wno-sign-compare -Wno-error=missing-prototypes -Wdouble-promotion -Wclobbered -Wdeprecated -Wempty-body -Wtype-limits -Wshift-negative-value -Wstack-usage=2048 -Wno-unused-value -Wno-unused-parameter -Wno-missing-field-initializers -Wuninitialized -Wmaybe-uninitialized -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -Wtype-limits -Wsizeof-pointer-memaccess -Wno-format-nonliteral -Wpointer-arith -Wno-cast-qual -Wmissing-prototypes -Wunreachable-code -Wno-switch-default -Wreturn-type -Wmultichar -Wno-discarded-qualifiers -Wformat-security -Wno-ignored-qualifiers -Wno-sign-compare
 LDFLAGS ?= -lm -lasound -lwfd_player -lwfd2 -lwpa_client
+SCREENMIRROR_DIR ?= $(abspath $(LVGL_DIR)/../../screenmirror_lib)
+LDFLAGS += -L$(SCREENMIRROR_DIR)/build -lscreenmirror -pthread
 BIN = lv_projector
 
 #include
@@ -20,10 +22,12 @@ INCLUDES = -I$(LVGL_DIR)/ \
             -I$(LVGL_DIR)/Common/language/string \
             -I$(LVGL_DIR)/AWCast \
             -I$(LVGL_DIR)/USBCast \
+            -I$(LVGL_DIR)/ProjectorAdapter \
             -I$(LVGL_DIR)/Layer \
             -I$(LVGL_DIR)/WiredSP \
             -I$(LVGL_DIR)/WirelessSP \
             -I$(LVGL_DIR)/Factory_test \
+            -I$(SCREENMIRROR_DIR)/include \
             -I$(LICHEE_TOP_DIR)/platform/allwinner/multimedia/libtmedia/tplayer/awsink/ \
             -I$(LICHEE_TOP_DIR)/platform/allwinner/multimedia/libtmedia/tplayer/ \
             -I$(LICHEE_TOP_DIR)/platform/allwinner/multimedia/libcedarx/ \
@@ -52,6 +56,7 @@ SRCDIRS = $(LVGL_DIR)/widget \
         $(LVGL_DIR)/WirelessSP \
         $(LVGL_DIR)/System \
         $(LVGL_DIR)/Bluetooth \
+        $(LVGL_DIR)/ProjectorAdapter \
         $(LVGL_DIR)/Factory_test
 
 ALL_SUB_DIRS  =  $(shell find $(SRCDIRS) -maxdepth 3 -type d)
@@ -100,6 +105,7 @@ $(AWCAST_LIB):
 	@echo "CC $<"
 
 default: $(AOBJS) $(COBJS) $(MAINOBJ) $(AWCAST_LIB)
+	$(MAKE) -C $(SCREENMIRROR_DIR)
 	$(CC) -o $(BIN) $(MAINOBJ) $(AOBJS) $(COBJS) $(LDFLAGS) $(INCLUDES)
 
 clean:

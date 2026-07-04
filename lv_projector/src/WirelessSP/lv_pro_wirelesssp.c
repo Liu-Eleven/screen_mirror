@@ -7,9 +7,9 @@
 
 #include <stdlib.h>
 
-#include "../AWCast/awcast.h"
 #include "../Network/lv_pro_res_wifi.h"
 #include "../Network/lv_pro_wifi_activity.h"
+#include "../ProjectorAdapter/projector_adapter.h"
 #include "../lv_pro_launcher.h"
 #include "../widget/lv_pro_img_text.h"
 #include "../widget/lv_pro_res.h"
@@ -19,6 +19,7 @@
 
 lv_obj_t *WirelessSP_activity;
 lv_group_t *WirelessSP_group;
+static lv_obj_t *wirelesssp_status_label;
 
 static int wirelesssp_wifimode = -1;  // STA = 0, AP = 1
 static const char *ssid = "allwinner-ap";
@@ -60,8 +61,27 @@ static void lv_pro_wirelesssp_ssid_info(void)
 {
     char device_name_info[64] = {0};
 
-    sprintf(device_name_info,"%s: %s",lv_get_string(STR_CAST_SSID_DEVICE),__Get_AWCast_device_name());
+    sprintf(device_name_info, "%s: %s",
+            lv_get_string(STR_CAST_SSID_DEVICE),
+            projector_adapter_get_device_name());
     lv_label_set_text_fmt(lv_obj_get_child(lv_obj_get_child(WirelessSP_activity, 2), 0), "#ffffff %s #", device_name_info);
+}
+
+static void wirelesssp_adapter_state_cb(ProjectorAdapterState state,
+                                        const char *message,
+                                        void *user_data)
+{
+    (void)state;
+    (void)user_data;
+
+    if (wirelesssp_status_label == NULL || !lv_obj_is_valid(wirelesssp_status_label)) {
+        return;
+    }
+
+    pthread_mutex_lock(&lvgl_mutex);
+    lv_label_set_text_fmt(wirelesssp_status_label, "#ffffff %s #",
+                          message ? message : lv_get_string(STR_WIFI_CONNECTING));
+    pthread_mutex_unlock(&lvgl_mutex);
 }
 
 static void wirelesssp_activity_event_handler(lv_event_t *e)
@@ -184,6 +204,7 @@ int lv_pro_wirelesssp_init(void)
     lv_label_set_text_fmt(note_label, "#ffffff %s #", lv_get_string(STR_WIFI_CONNECTING));
     lv_obj_align(note_label, LV_ALIGN_RIGHT_MID, -20, 0);
     lv_obj_add_event_cb(note_label, wirelesssp_event_handler, LV_EVENT_KEY, NULL);
+    wirelesssp_status_label = note_label;
     lv_group_add_obj(WirelessSP_group, note_label);
     lv_group_focus_obj(note_label);
 
@@ -214,27 +235,32 @@ int lv_pro_wirelesssp_deinit(void)
         lv_obj_del(WirelessSP_activity);
         WirelessSP_activity = NULL;
     }
+    wirelesssp_status_label = NULL;
     return 0;
 }
 
 static int create_wirelesssp(void)
 {
-    static lv_obj_t *htc_msg_box = NULL;
+    ProjectorAdapterConfig config = {
+        .protocol = PROJECTOR_PROTOCOL_MIRACAST,
+        .max_bitrate = 10000,
+        .resolution_width = 1920,
+        .resolution_height = 1080,
+        .refresh_rate = 60,
+        .connect_timeout_ms = 5000,
+        .enable_audio = true,
+        .enable_hdcp = false,
+        .device_name = "LV Projector",
+        .extra_config = NULL,
+    };
 
     lv_pro_wirelesssp_init();
     load_current_channel(WirelessSP_activity, WirelessSP_group);
 
-    AWCast_init();
+    projector_adapter_init(&config);
+    projector_adapter_set_callbacks(wirelesssp_adapter_state_cb, NULL, NULL);
     lv_pro_wirelesssp_ssid_info();
-    AWCast_StartService();
-
-    /*
-    if (wirelesssp_wifimode < 0) {
-        if (!lv_obj_is_valid(htc_msg_box)) {
-            htc_msg_box =
-                lv_pro_create_message_box((char *)lv_get_string(STR_CONNECT_WIFI_FIRST), 3000);
-         }
-    }*/
+    projector_ui_on_screen_loaded();
     return 0;
 }
 
@@ -247,9 +273,8 @@ static int destory_wirelesssp(void)
         wirelesssp_wifimode = -1;
     }
 
-    AWCastExitShow();
-    AWCast_StopService();
-    AWCast_exit();
+    projector_ui_on_screen_unloaded();
+    projector_adapter_deinit();
     return 0;
 }
 
