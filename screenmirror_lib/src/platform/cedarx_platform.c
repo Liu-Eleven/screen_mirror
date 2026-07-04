@@ -17,6 +17,7 @@ typedef struct {
 } CedarxPlatformCtx;
 
 static CedarxPlatformCtx g_cedarx_ctx = {
+    .lock = PTHREAD_MUTEX_INITIALIZER,
     .initialized = false,
     .session_open = false,
 };
@@ -35,15 +36,11 @@ static void* open_bsp_library(const char *name)
  */
 int cedarx_platform_init(void)
 {
+    pthread_mutex_lock(&g_cedarx_ctx.lock);
     if (g_cedarx_ctx.initialized) {
+        pthread_mutex_unlock(&g_cedarx_ctx.lock);
         return MIRROR_ERR_SUCCESS;
     }
-
-    if (pthread_mutex_init(&g_cedarx_ctx.lock, NULL) != 0) {
-        return MIRROR_ERR_UNKNOWN;
-    }
-
-    pthread_mutex_lock(&g_cedarx_ctx.lock);
 
     g_cedarx_ctx.libwfd2 = open_bsp_library("libwfd2.so");
     g_cedarx_ctx.libtplayer = open_bsp_library("libtplayer.so");
@@ -89,8 +86,6 @@ void cedarx_platform_exit(void)
     g_cedarx_ctx.initialized = false;
 
     pthread_mutex_unlock(&g_cedarx_ctx.lock);
-    pthread_mutex_destroy(&g_cedarx_ctx.lock);
-
     printf("[PLATFORM] Cedarx platform exited\n");
 }
 
@@ -156,7 +151,7 @@ void* cedarx_get_encoder(void)
         return NULL;
     }
 
-    return g_cedarx_ctx.libtplayer;
+    return g_cedarx_ctx.libwfd2;
 }
 
 /**

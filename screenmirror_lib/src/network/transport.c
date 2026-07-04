@@ -18,15 +18,6 @@ typedef struct {
     int port;
 } TransportContext;
 
-static int set_nonblock(int fd)
-{
-    int flags = fcntl(fd, F_GETFL, 0);
-    if (flags < 0) {
-        return -1;
-    }
-    return fcntl(fd, F_SETFL, flags | O_NONBLOCK);
-}
-
 static TransportHandle create_tcp(const char *host, int port)
 {
     TransportContext *ctx = (TransportContext *)calloc(1, sizeof(TransportContext));
@@ -54,9 +45,6 @@ static TransportHandle create_tcp(const char *host, int port)
     }
 
     ctx->connected = (connect(ctx->fd, (struct sockaddr *)&ctx->addr, sizeof(ctx->addr)) == 0);
-    if (!ctx->connected) {
-        set_nonblock(ctx->fd);
-    }
 
     return (TransportHandle)ctx;
 }

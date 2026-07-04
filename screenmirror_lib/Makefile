@@ -5,7 +5,7 @@
 CC ?= gcc
 AR ?= ar
 CC_FLAGS ?= -O2 -g -Wall -Wextra -Wno-unused-function
-SYSROOT ?= /home/share_hp/h133/tina/out/h133/p2/openwrt/staging_dir/target
+SYSROOT ?= $(H133_SYSROOT)
 H133_LIB_DIR ?= $(SYSROOT)/root-h133-p2/usr/lib
 H133_SYS_LIB_DIR ?= $(SYSROOT)/usr/lib
 LIB_NAME = libscreenmirror
@@ -55,12 +55,12 @@ ALL_DEPS = $(addprefix $(DEP_DIR)/, $(notdir $(ALL_SRCS:.c=.d)))
 # Compile flags
 CFLAGS = $(CC_FLAGS) -I$(INCLUDE_DIR) -fPIC -pthread
 LDFLAGS_SHARED = -shared -Wl,-soname,$(LIB_NAME).so.$(LIB_VERSION_MAJOR) -pthread
-ifneq ("$(wildcard $(SYSROOT))","")
+ifneq ("$(SYSROOT)","")
 CFLAGS += --sysroot=$(SYSROOT)
 LDFLAGS_SHARED += --sysroot=$(SYSROOT) -Wl,-rpath,$(H133_LIB_DIR) -Wl,-rpath-link,$(H133_LIB_DIR)
 endif
 H133_LIBS = -ldl -lrt
-ifneq ("$(wildcard $(SYSROOT))","")
+ifneq ("$(SYSROOT)","")
 H133_LIBS += -L$(H133_SYS_LIB_DIR) -L$(H133_LIB_DIR) \
 	-lawrecorder -ltplayer -lwfd_player -lwpa_client -lwfd2 -law_dlna -lwfd_hdcp -lwfd_rtsp \
 	-lasound -lwolfssl

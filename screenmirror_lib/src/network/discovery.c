@@ -5,6 +5,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <time.h>
+#include <errno.h>
 
 /* 设备发现实现 */
 
@@ -29,7 +30,11 @@ static void* discovery_thread_func(void *arg)
         return NULL;
     }
 
-    usleep((useconds_t)(args->timeout_ms > 200 ? 200000 : args->timeout_ms * 1000));
+    struct timespec discovery_delay;
+    discovery_delay.tv_sec = args->timeout_ms / 1000;
+    discovery_delay.tv_nsec = (long)(args->timeout_ms % 1000) * 1000000L;
+    while (nanosleep(&discovery_delay, &discovery_delay) != 0 && errno == EINTR) {
+    }
 
     pthread_mutex_lock(&g_discovery_lock);
     bool running = g_discovery_running;

@@ -41,8 +41,7 @@ make test                # 编译并运行 test/test_main.c
 make install-local       # 安装到 ./install 目录
 ```
 
-> H133 交叉编译默认读取：`/home/share_hp/h133/tina/out/h133/p2/openwrt/staging_dir/target`。
-> 若环境路径不同，可通过 `make SYSROOT=/your/sysroot` 覆盖。
+> H133 交叉编译请显式指定：`make SYSROOT=/home/share_hp/h133/tina/out/h133/p2/openwrt/staging_dir/target`。
 
 编译产物：
 ```

@@ -22,6 +22,7 @@ typedef struct {
 } WfdProtocolCtx;
 
 static WfdProtocolCtx g_wfd_ctx = {
+    .lock = PTHREAD_MUTEX_INITIALIZER,
     .initialized = false,
     .connected = false,
     .state = MIRROR_STATE_IDLE,
@@ -41,15 +42,11 @@ static void* resolve_any(void *lib, const char *const *symbols, size_t count)
 
 static int wfd_init(void)
 {
+    pthread_mutex_lock(&g_wfd_ctx.lock);
     if (g_wfd_ctx.initialized) {
+        pthread_mutex_unlock(&g_wfd_ctx.lock);
         return MIRROR_ERR_SUCCESS;
     }
-
-    if (pthread_mutex_init(&g_wfd_ctx.lock, NULL) != 0) {
-        return MIRROR_ERR_UNKNOWN;
-    }
-
-    pthread_mutex_lock(&g_wfd_ctx.lock);
 
     g_wfd_ctx.libwfd2 = dlopen("libwfd2.so", RTLD_LAZY | RTLD_LOCAL);
     if (g_wfd_ctx.libwfd2 != NULL) {
@@ -63,7 +60,9 @@ static int wfd_init(void)
         g_wfd_ctx.fn_start_discovery = (FnIntArg)resolve_any(g_wfd_ctx.libwfd2, start_syms, 2);
         g_wfd_ctx.fn_stop_discovery = (FnNoArgInt)resolve_any(g_wfd_ctx.libwfd2, stop_syms, 2);
     } else {
-        printf("[WFD] libwfd2.so not found, using fallback stub behavior\n");
+        const char *error = dlerror();
+        printf("[WFD] libwfd2.so not found (%s), using fallback stub behavior\n",
+               error != NULL ? error : "unknown error");
     }
 
     g_wfd_ctx.initialized = true;
@@ -95,7 +94,6 @@ static void wfd_exit(void)
     g_wfd_ctx.state = MIRROR_STATE_IDLE;
 
     pthread_mutex_unlock(&g_wfd_ctx.lock);
-    pthread_mutex_destroy(&g_wfd_ctx.lock);
 }
 
 static int wfd_start_discovery(int timeout_ms)

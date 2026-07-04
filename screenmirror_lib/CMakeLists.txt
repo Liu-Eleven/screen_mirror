@@ -61,7 +61,11 @@ target_include_directories(screenmirror_shared PUBLIC
 )
 target_link_libraries(screenmirror_shared PRIVATE pthread)
 
-set(H133_SYSROOT "/home/share_hp/h133/tina/out/h133/p2/openwrt/staging_dir/target")
+set(H133_SYSROOT_DEFAULT "")
+if(DEFINED ENV{H133_SYSROOT} AND NOT "$ENV{H133_SYSROOT}" STREQUAL "")
+    set(H133_SYSROOT_DEFAULT "$ENV{H133_SYSROOT}")
+endif()
+set(H133_SYSROOT "${H133_SYSROOT_DEFAULT}" CACHE PATH "H133 BSP sysroot path")
 if(EXISTS ${H133_SYSROOT})
     target_compile_options(screenmirror_static PRIVATE --sysroot=${H133_SYSROOT})
     target_compile_options(screenmirror_shared PRIVATE --sysroot=${H133_SYSROOT})

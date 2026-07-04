@@ -216,6 +216,9 @@ int screenmirror_start_discovery(MirrorMode mode, int timeout_ms,
         g_mirror_engine->discovery_running = false;
         g_mirror_engine->state = MIRROR_STATE_IDLE;
         pthread_mutex_unlock(&g_mirror_engine->lock);
+        if (ops->exit != NULL) {
+            ops->exit();
+        }
         return MIRROR_ERR_UNKNOWN;
     }
     if (ops->start_discovery != NULL && ops->start_discovery(timeout_ms) != MIRROR_ERR_SUCCESS) {
@@ -314,6 +317,10 @@ int screenmirror_connect(const MirrorDeviceInfo *device,
     pthread_mutex_unlock(&g_mirror_engine->lock);
 
     if (ops->init != NULL && ops->init() != MIRROR_ERR_SUCCESS) {
+        pthread_mutex_lock(&g_mirror_engine->lock);
+        g_mirror_engine->state = MIRROR_STATE_ERROR;
+        (void)state_machine_transition(g_mirror_engine->state_machine, MIRROR_STATE_ERROR);
+        pthread_mutex_unlock(&g_mirror_engine->lock);
         return MIRROR_ERR_UNKNOWN;
     }
     if (ops->connect != NULL && ops->connect(device, config) != MIRROR_ERR_SUCCESS) {
