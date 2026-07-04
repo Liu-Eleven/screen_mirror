@@ -55,7 +55,7 @@ ALL_DEPS = $(addprefix $(DEP_DIR)/, $(notdir $(ALL_SRCS:.c=.d)))
 CFLAGS = $(CC_FLAGS) -I$(INCLUDE_DIR) -fPIC -pthread
 LDFLAGS_SHARED = -shared -Wl,-soname,$(LIB_NAME).so.$(LIB_VERSION_MAJOR) -pthread
 
-.PHONY: all static shared clean install adapter-test test
+.PHONY: all static shared clean install adapter-test test test-adapter
 
 # Default target
 all: static shared
@@ -156,7 +156,7 @@ $(ADAPTER_TEST_BIN): $(STATIC_LIB) \
 		$(ADAPTER_DIR)/mirror_event_handler.c \
 		$(STATIC_LIB)
 
-adapter-test: $(ADAPTER_TEST_BIN)
+adapter-test test-adapter: $(ADAPTER_TEST_BIN)
 
 test: adapter-test
 	@$(ADAPTER_TEST_BIN)

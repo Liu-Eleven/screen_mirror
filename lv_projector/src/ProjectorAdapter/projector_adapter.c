@@ -300,7 +300,7 @@ int projector_adapter_init(const ProjectorAdapterConfig *config)
     pthread_mutex_unlock(&ctx->lock);
 
     ret = screenmirror_init();
-    if (ret < 0 && ret != SCREENMIRROR_ADAPTER_ERR_ALREADY_INIT) {
+    if (ret < 0 && ret != PROJECTOR_ADAPTER_SCREENMIRROR_ERR_ALREADY_INIT) {
         return ret;
     }
 
@@ -333,7 +333,7 @@ int projector_adapter_deinit(void)
     projector_adapter_stop_services();
 
     ret = screenmirror_exit();
-    if (ret < 0 && ret != SCREENMIRROR_ADAPTER_ERR_NOT_INIT) {
+    if (ret < 0 && ret != PROJECTOR_ADAPTER_SCREENMIRROR_ERR_NOT_INIT) {
         return ret;
     }
 
@@ -397,12 +397,12 @@ int projector_adapter_stop_services(void)
     int ret = 0;
 
     ret = screenmirror_stop_discovery();
-    if (ret < 0 && ret != SCREENMIRROR_ADAPTER_ERR_NOT_INIT) {
+    if (ret < 0 && ret != PROJECTOR_ADAPTER_SCREENMIRROR_ERR_NOT_INIT) {
         return ret;
     }
 
     ret = screenmirror_disconnect();
-    if (ret < 0 && ret != SCREENMIRROR_ADAPTER_ERR_NOT_INIT) {
+    if (ret < 0 && ret != PROJECTOR_ADAPTER_SCREENMIRROR_ERR_NOT_INIT) {
         return ret;
     }
 
@@ -501,4 +501,18 @@ const char *projector_adapter_get_device_name(void)
     pthread_mutex_unlock(&ctx->lock);
 
     return device_name;
+}
+
+int projector_adapter_copy_device_name(char *buffer, size_t buffer_size)
+{
+    ProjectorAdapterContext *ctx = projector_adapter_get_context();
+
+    if (buffer == NULL || buffer_size == 0) {
+        return PROJECTOR_ADAPTER_ERR_INVALID_PARAM;
+    }
+
+    pthread_mutex_lock(&ctx->lock);
+    projector_adapter_copy_string(buffer, buffer_size, ctx->device_name);
+    pthread_mutex_unlock(&ctx->lock);
+    return PROJECTOR_ADAPTER_SUCCESS;
 }

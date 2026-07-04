@@ -60,10 +60,12 @@ int lv_Pro_wirelesssp_create_ap(void)
 static void lv_pro_wirelesssp_ssid_info(void)
 {
     char device_name_info[64] = {0};
+    char adapter_device_name[32] = {0};
 
+    projector_adapter_copy_device_name(adapter_device_name, sizeof(adapter_device_name));
     snprintf(device_name_info, sizeof(device_name_info), "%s: %s",
              lv_get_string(STR_CAST_SSID_DEVICE),
-             projector_adapter_get_device_name());
+             adapter_device_name);
     lv_label_set_text_fmt(lv_obj_get_child(lv_obj_get_child(WirelessSP_activity, 2), 0), "#ffffff %s #", device_name_info);
 }
 

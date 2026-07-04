@@ -12,7 +12,10 @@ lv_projector/src/ProjectorAdapter/
 ├── ui_event_handler.c
 ├── mirror_event_handler.c
 ├── examples/basic_integration.c
-└── tests/projector_adapter_test.c
+└── INTEGRATION_GUIDE.md
+
+screenmirror_lib/tests/
+└── projector_adapter_test.c
 ```
 
 ## Makefile 修改点

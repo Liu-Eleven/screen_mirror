@@ -1,6 +1,7 @@
 #ifndef PROJECTOR_ADAPTER_H
 #define PROJECTOR_ADAPTER_H
 
+#include <stddef.h>
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -77,6 +78,7 @@ ProjectorAdapterState projector_adapter_get_state(void);
 ProjectorAdapterProtocol projector_adapter_get_protocol(void);
 int projector_adapter_get_current_device(ProjectorAdapterDevice *device);
 const char *projector_adapter_get_device_name(void);
+int projector_adapter_copy_device_name(char *buffer, size_t buffer_size);
 
 int projector_ui_on_screen_loaded(void);
 int projector_ui_on_screen_unloaded(void);

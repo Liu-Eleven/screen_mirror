@@ -1,4 +1,4 @@
-#include "../../lv_projector/src/ProjectorAdapter/projector_adapter.h"
+#include "projector_adapter.h"
 
 #include <assert.h>
 #include <stdio.h>

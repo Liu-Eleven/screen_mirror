@@ -6,6 +6,27 @@
 /* 全局引擎实例 */
 MirrorEngine *g_mirror_engine = NULL;
 
+static void emit_engine_event(MirrorEventType type, int error_code,
+                              const char *error_msg, void *data)
+{
+    MirrorEvent event;
+
+    if (g_mirror_engine == NULL || g_mirror_engine->event_sys == NULL) {
+        return;
+    }
+
+    event.type = type;
+    event.error_code = error_code;
+    event.error_msg = error_msg;
+    event.data = data;
+
+    event_system_emit(g_mirror_engine->event_sys, &event);
+
+    if (g_mirror_engine->user_event_callback) {
+        g_mirror_engine->user_event_callback(&event, g_mirror_engine->user_callback_data);
+    }
+}
+
 static void fill_mock_device(MirrorMode mode, MirrorDeviceInfo *device)
 {
     static const char *names[] = {
@@ -101,14 +122,19 @@ int screenmirror_exit(void)
     pthread_mutex_lock(&g_mirror_engine->lock);
     discovery_running = g_mirror_engine->discovery_running;
     has_active_session = (g_mirror_engine->state != MIRROR_STATE_IDLE);
+    g_mirror_engine->discovery_running = false;
+    g_mirror_engine->state = MIRROR_STATE_IDLE;
+    if (state_machine_get_state(g_mirror_engine->state_machine) != MIRROR_STATE_IDLE) {
+        state_machine_transition(g_mirror_engine->state_machine, MIRROR_STATE_IDLE);
+    }
     pthread_mutex_unlock(&g_mirror_engine->lock);
 
     if (discovery_running) {
-        screenmirror_stop_discovery();
+        emit_engine_event(MIRROR_EVENT_DISCOVERY_FINISHED, 0, NULL, NULL);
     }
 
     if (has_active_session) {
-        screenmirror_disconnect();
+        emit_engine_event(MIRROR_EVENT_DISCONNECTED, 0, NULL, NULL);
     }
 
     pthread_mutex_lock(&g_mirror_engine->lock);
@@ -159,7 +185,6 @@ int screenmirror_start_discovery(MirrorMode mode, int timeout_ms,
                                 MirrorDeviceListCallback callback,
                                 void *user_data)
 {
-    MirrorEvent event;
     MirrorDeviceInfo device;
 
     if (g_mirror_engine == NULL) {
@@ -188,33 +213,11 @@ int screenmirror_start_discovery(MirrorMode mode, int timeout_ms,
 
     printf("[MIRROR] Discovery started for mode: %d, timeout: %d ms\n", mode, timeout_ms);
 
-    /* 发送状态变化事件 */
-    event = (MirrorEvent) {
-        .type = MIRROR_EVENT_STATE_CHANGED,
-        .error_code = 0,
-        .error_msg = NULL,
-        .data = NULL,
-    };
-    event_system_emit(g_mirror_engine->event_sys, &event);
-
-    if (g_mirror_engine->user_event_callback) {
-        g_mirror_engine->user_event_callback(&event, g_mirror_engine->user_callback_data);
-    }
+    emit_engine_event(MIRROR_EVENT_STATE_CHANGED, 0, NULL, NULL);
 
     fill_mock_device(mode, &device);
     callback(&device, 1, user_data);
-
-    event = (MirrorEvent) {
-        .type = MIRROR_EVENT_DEVICE_FOUND,
-        .error_code = 0,
-        .error_msg = NULL,
-        .data = &device,
-    };
-    event_system_emit(g_mirror_engine->event_sys, &event);
-
-    if (g_mirror_engine->user_event_callback) {
-        g_mirror_engine->user_event_callback(&event, g_mirror_engine->user_callback_data);
-    }
+    emit_engine_event(MIRROR_EVENT_DEVICE_FOUND, 0, NULL, &device);
 
     return MIRROR_ERR_SUCCESS;
 }
@@ -245,18 +248,7 @@ int screenmirror_stop_discovery(void)
 
     printf("[MIRROR] Discovery stopped\n");
 
-    /* 发送发现完成事件 */
-    MirrorEvent event = {
-        .type = MIRROR_EVENT_DISCOVERY_FINISHED,
-        .error_code = 0,
-        .error_msg = NULL,
-        .data = NULL,
-    };
-    event_system_emit(g_mirror_engine->event_sys, &event);
-
-    if (g_mirror_engine->user_event_callback) {
-        g_mirror_engine->user_event_callback(&event, g_mirror_engine->user_callback_data);
-    }
+    emit_engine_event(MIRROR_EVENT_DISCOVERY_FINISHED, 0, NULL, NULL);
 
     return MIRROR_ERR_SUCCESS;
 }
@@ -267,8 +259,6 @@ int screenmirror_stop_discovery(void)
 int screenmirror_connect(const MirrorDeviceInfo *device,
                         const MirrorConfig *config)
 {
-    MirrorEvent event;
-
     if (g_mirror_engine == NULL) {
         return MIRROR_ERR_NOT_INIT;
     }
@@ -300,35 +290,14 @@ int screenmirror_connect(const MirrorDeviceInfo *device,
     printf("[MIRROR] Connecting to device: %s (mode: %d)\n",
            device->name, config->mode);
 
-    /* 发送连接开始事件 */
-    event = (MirrorEvent) {
-        .type = MIRROR_EVENT_STATE_CHANGED,
-        .error_code = 0,
-        .error_msg = NULL,
-        .data = (void *)device,
-    };
-    event_system_emit(g_mirror_engine->event_sys, &event);
-
-    if (g_mirror_engine->user_event_callback) {
-        g_mirror_engine->user_event_callback(&event, g_mirror_engine->user_callback_data);
-    }
+    emit_engine_event(MIRROR_EVENT_STATE_CHANGED, 0, NULL, (void *)device);
 
     pthread_mutex_lock(&g_mirror_engine->lock);
     g_mirror_engine->state = MIRROR_STATE_CONNECTED;
     state_machine_transition(g_mirror_engine->state_machine, MIRROR_STATE_CONNECTED);
     pthread_mutex_unlock(&g_mirror_engine->lock);
 
-    event = (MirrorEvent) {
-        .type = MIRROR_EVENT_CONNECTED,
-        .error_code = 0,
-        .error_msg = NULL,
-        .data = (void *)device,
-    };
-    event_system_emit(g_mirror_engine->event_sys, &event);
-
-    if (g_mirror_engine->user_event_callback) {
-        g_mirror_engine->user_event_callback(&event, g_mirror_engine->user_callback_data);
-    }
+    emit_engine_event(MIRROR_EVENT_CONNECTED, 0, NULL, (void *)device);
 
     return MIRROR_ERR_SUCCESS;
 }
@@ -357,18 +326,7 @@ int screenmirror_disconnect(void)
 
     printf("[MIRROR] Disconnected from device\n");
 
-    /* 发送断开连接事件 */
-    MirrorEvent event = {
-        .type = MIRROR_EVENT_DISCONNECTED,
-        .error_code = 0,
-        .error_msg = NULL,
-        .data = NULL,
-    };
-    event_system_emit(g_mirror_engine->event_sys, &event);
-
-    if (g_mirror_engine->user_event_callback) {
-        g_mirror_engine->user_event_callback(&event, g_mirror_engine->user_callback_data);
-    }
+    emit_engine_event(MIRROR_EVENT_DISCONNECTED, 0, NULL, NULL);
 
     return MIRROR_ERR_SUCCESS;
 }
