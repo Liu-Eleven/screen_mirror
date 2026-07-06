@@ -1,0 +1,9 @@
+/home/runner/work/screen_mirror/screen_mirror/screenmirror_demo/build/CMakeFiles/screenmirror_demo.dir
+/home/runner/work/screen_mirror/screen_mirror/screenmirror_demo/build/CMakeFiles/edit_cache.dir
+/home/runner/work/screen_mirror/screen_mirror/screenmirror_demo/build/CMakeFiles/rebuild_cache.dir
+/home/runner/work/screen_mirror/screen_mirror/screenmirror_demo/build/CMakeFiles/list_install_components.dir
+/home/runner/work/screen_mirror/screen_mirror/screenmirror_demo/build/CMakeFiles/install.dir
+/home/runner/work/screen_mirror/screen_mirror/screenmirror_demo/build/CMakeFiles/install/local.dir
+/home/runner/work/screen_mirror/screen_mirror/screenmirror_demo/build/CMakeFiles/install/strip.dir
+/home/runner/work/screen_mirror/screen_mirror/screenmirror_demo/build/CMakeFiles/screenmirror_demo_autogen_timestamp_deps.dir
+/home/runner/work/screen_mirror/screen_mirror/screenmirror_demo/build/CMakeFiles/screenmirror_demo_autogen.dir

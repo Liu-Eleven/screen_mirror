@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="qml/main.qml">../qml/main.qml</file>
+        <file alias="qml/pages/MainPage.qml">../qml/pages/MainPage.qml</file>
+        <file alias="qml/pages/WiFiPage.qml">../qml/pages/WiFiPage.qml</file>
+        <file alias="qml/pages/MirrorPage.qml">../qml/pages/MirrorPage.qml</file>
+        <file alias="qml/components/WiFiListView.qml">../qml/components/WiFiListView.qml</file>
+        <file alias="qml/components/DeviceListView.qml">../qml/components/DeviceListView.qml</file>
+        <file alias="qml/components/StatusIndicator.qml">../qml/components/StatusIndicator.qml</file>
+        <file alias="qml/components/ControlPanel.qml">../qml/components/ControlPanel.qml</file>
+    </qresource>
+</RCC>

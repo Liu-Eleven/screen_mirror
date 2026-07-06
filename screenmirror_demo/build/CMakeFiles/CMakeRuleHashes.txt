@@ -1,0 +1,4 @@
+# Hashes of file build rules.
+11ff4ed9aa60b10be14b8b38d2c54fb7 CMakeFiles/screenmirror_demo_autogen
+012173ebc64094ac2bf7ac5159a0c9c3 screenmirror_demo_autogen/3YJK5W5UP7/qrc_qml.cpp
+27625bb5186a6501913934c81b942c61 screenmirror_demo_autogen/timestamp
