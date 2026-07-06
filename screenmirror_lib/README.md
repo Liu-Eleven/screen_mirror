@@ -1,409 +1,396 @@
-# libscreenmirror - 高效易用的投屏库
+# libscreenmirror v2.0 — Allwinner H133 投屏库
 
-一个模块化、高性能的投屏库，支持多种投屏协议和传输方式，可轻松集成到任何项目中。
+高性能、模块化的投屏库。内部集成 Allwinner AWCast/USBCast 完整协议栈，对外保持统一的纯 C 公开 API。
 
 ## 功能特性
 
 ✨ **多协议支持**
-- Miracast (WiFi Direct)
-- AirPlay
-- DLNA
-- 有线投屏 (USB)
-- 无线投屏 (WiFi)
+- **Miracast** — AWCast `libwfd2.so` + P2P WiFi Direct（`ENABLE_MIRACAST`）
+- **DLNA / UPnP** — AWCast `libawdlna.so`（`ENABLE_DLNA`）
+- **AirPlay** — AWCast `libthirdparty_mirror.so` dlopen（`ENABLE_AIRPLAY`）
+- **USB 有线投屏** — USBCast `WSP_*`，dlopen Android/AirPlay 协议（`ENABLE_WIRED`）
+- **AWCast All-In-One** — 同时启动三种无线协议（`MIRROR_MODE_WIRELESS`）
+
+🔌 **连接管理**
+- **WiFi 管理** — 基于 `libwifimg.so`，支持 STA / P2P 并发模式（`ENABLE_WIFI`）
+- **蓝牙管理** — 基于 `libbtmanager.so`，A2DP Source/Sink 模式（`ENABLE_BT`）
 
 🎯 **核心特点**
-- 清晰的分层架构，应用层与投屏库完全解耦
-- 统一的 API 接口，支持任意投屏协议无缝切换
-- 观察者模式事件系统，实时反馈投屏状态
-- 严格的状态机管理，防止非法状态转移
-- 线程安全的实现，支持多线程并发调用
-- 易于扩展，新增协议只需实现固定接口
+- 公开 API 不变（`screenmirror.h` 中所有 `screenmirror_*` 函数签名保持向后兼容）
+- **完全剥离 LVGL 依赖** — 纯 C/C++，可在任意嵌入式 Linux 平台编译
+- 条件编译宏 — 本地（无 H133 BSP）编译自动使用 stub，不需要任何 BSP 库
+- 线程安全事件系统（消息队列 + mutex）
+- 严格状态机管理，防止非法状态转移
 
-⚡ **性能优化**
-- 最小化内存占用
-- 高效的事件分发机制
-- 异步设备发现
-- 支持流式数据传输
-
-🔧 **平台支持**
-- Allwinner Cedarx 平台优化
-- 通用 Linux 系统兼容
-- 易于移植到其他平台
+---
 
 ## 快速开始
 
-### 编译库
+### 本地 Host 编译（stub 模式，无需 H133）
 
 ```bash
 cd screenmirror_lib
-make all                 # 编译静态库和动态库
-make install-local       # 安装到 ./install 目录
+make all
 ```
 
 编译产物：
 ```
 build/
-├── libscreenmirror.a                    # 静态库
-├── libscreenmirror.so.1.0.0            # 动态库
-├── libscreenmirror.so.1                # 符号链接
-└── libscreenmirror.so                  # 符号链接
+├── libscreenmirror.a                      # 静态库
+├── libscreenmirror.so.2.0.0               # 动态库
+├── libscreenmirror.so.2                   # 符号链接
+└── libscreenmirror.so                     # 符号链接
 ```
 
-### 基本使用
+### H133 交叉编译（完整 BSP 功能）
+
+```bash
+cd screenmirror_lib
+make all \
+    CROSS_COMPILE=arm-linux-gnueabihf- \
+    H133_SYSROOT=/opt/h133-sysroot \
+    ENABLE_WIFI=1 \
+    ENABLE_BT=1 \
+    ENABLE_MIRACAST=1 \
+    ENABLE_DLNA=1 \
+    ENABLE_AIRPLAY=1 \
+    ENABLE_WIRED=1
+```
+
+### CMake 编译
+
+```bash
+# 本地编译
+mkdir build && cd build
+cmake ..
+make
+
+# H133 交叉编译
+cmake .. \
+    -DCMAKE_TOOLCHAIN_FILE=/path/to/arm-toolchain.cmake \
+    -DH133_SYSROOT=/opt/h133-sysroot \
+    -DH133_BOARD=ON \
+    -DENABLE_WIFI=ON \
+    -DENABLE_BT=ON \
+    -DENABLE_MIRACAST=ON \
+    -DENABLE_DLNA=ON \
+    -DENABLE_AIRPLAY=ON \
+    -DENABLE_WIRED=ON
+make
+```
+
+### 编译验证
+
+```bash
+make test    # 编译并运行 examples/basic_example.c
+```
+
+---
+
+## 编译配置宏
+
+| 宏 | 说明 | 依赖库 |
+|----|------|--------|
+| `H133_BOARD` | 启用 H133 BSP 硬件支持（自动启用当 H133_SYSROOT 设置时） | — |
+| `ENABLE_WIFI` | WiFi 管理（STA/AP/P2P） | `libwifimg.so` |
+| `ENABLE_BT` | 蓝牙管理（A2DP Source/Sink） | `libbtmanager.so` |
+| `ENABLE_MIRACAST` | Miracast P2P 投屏 | `libwfd2.so`, `libwpa_client.so` |
+| `ENABLE_DLNA` | DLNA UPnP 投屏 | `libawdlna.so` |
+| `ENABLE_AIRPLAY` | AirPlay 投屏 | `libthirdparty_mirror.so`（运行时 dlopen） |
+| `ENABLE_WIRED` | USB 有线投屏 | `libthirdparty_mirror.so`（运行时 dlopen） |
+
+未定义上述宏时，各协议模块编译为空 stub，本地测试正常通过。
+
+---
+
+## 基本使用
+
+### 1. 初始化和事件监听
 
 ```c
 #include <screenmirror.h>
 #include <stdio.h>
 #include <unistd.h>
 
-/* 事件回调函数 */
-void mirror_event_callback(const MirrorEvent *event, void *user_data)
+void on_mirror_event(const MirrorEvent *event, void *user_data)
 {
     switch (event->type) {
-        case MIRROR_EVENT_CONNECTED:
-            printf("Connected to device\n");
-            break;
-        case MIRROR_EVENT_DISCONNECTED:
-            printf("Disconnected from device\n");
-            break;
-        case MIRROR_EVENT_ERROR:
-            printf("Error: %s\n", event->error_msg);
-            break;
-        case MIRROR_EVENT_STATE_CHANGED:
-            printf("State changed\n");
-            break;
-        default:
-            break;
+    case MIRROR_EVENT_CONNECTED:
+        printf("[投屏] 已连接设备\n");
+        break;
+    case MIRROR_EVENT_DISCONNECTED:
+        printf("[投屏] 连接断开\n");
+        break;
+    case MIRROR_EVENT_ERROR:
+        printf("[投屏] 错误: %s (code=%d)\n",
+               event->error_msg, event->error_code);
+        break;
+    case MIRROR_EVENT_STATE_CHANGED:
+        printf("[投屏] 状态变化: %d\n",
+               screenmirror_get_state());
+        break;
+    default:
+        break;
     }
 }
 
-/* 设备发现回调函数 */
-void device_discovery_callback(const MirrorDeviceInfo *devices,
-                              int device_count, void *user_data)
+int main(void)
 {
-    printf("Found %d devices:\n", device_count);
-    for (int i = 0; i < device_count; i++) {
-        printf("  [%d] %s (%s) - Signal: %d%%\n",
-               i + 1,
-               devices[i].name,
+    /* 初始化库 */
+    if (screenmirror_init() < 0) {
+        fprintf(stderr, "screenmirror_init() 失败\n");
+        return -1;
+    }
+
+    /* 注册事件回调 */
+    screenmirror_set_event_callback(on_mirror_event, NULL);
+
+    printf("库版本: %s\n", screenmirror_get_version());
+    /* 输出: 库版本: libscreenmirror v2.0.0 */
+
+    /* ... 业务逻辑 ... */
+
+    screenmirror_exit();
+    return 0;
+}
+```
+
+### 2. Miracast 设备发现与连接
+
+```c
+void on_devices_found(const MirrorDeviceInfo *devices,
+                      int count, void *user_data)
+{
+    printf("发现 %d 台设备:\n", count);
+    for (int i = 0; i < count; i++) {
+        printf("  [%d] %s  MAC: %s  信号: %d%%\n",
+               i, devices[i].name,
                devices[i].mac_address,
                devices[i].signal_strength);
     }
 }
 
-int main(int argc, char *argv[])
+/* 开始 Miracast 设备发现（超时 5 秒） */
+screenmirror_start_discovery(MIRROR_MODE_MIRACAST, 5000,
+                             on_devices_found, NULL);
+sleep(6);
+screenmirror_stop_discovery();
+
+/* 选择设备并连接 */
+MirrorDeviceInfo dev = {0};
+strcpy(dev.name, "Living Room TV");
+strcpy(dev.mac_address, "AA:BB:CC:DD:EE:FF");
+dev.mode = MIRROR_MODE_MIRACAST;
+
+MirrorConfig cfg = {0};
+cfg.mode             = MIRROR_MODE_MIRACAST;
+cfg.max_bitrate      = 10000;    /* 10 Mbps */
+cfg.resolution_width = 1920;
+cfg.resolution_height = 1080;
+cfg.refresh_rate     = 60;
+cfg.enable_audio     = true;
+cfg.enable_hdcp      = true;     /* 需要 /data/miracast.dat HDCP key */
+cfg.connect_timeout_ms = 10000;
+
+screenmirror_connect(&dev, &cfg);
+/* 等待 MIRROR_EVENT_CONNECTED 回调 */
+sleep(5);
+
+screenmirror_disconnect();
+```
+
+### 3. 同时启动所有无线协议（AWCast All-In-One）
+
+```c
+/* MIRROR_MODE_WIRELESS 同时启动 Miracast + DLNA + AirPlay */
+MirrorDeviceInfo dev = {0};
+MirrorConfig cfg = {0};
+cfg.mode = MIRROR_MODE_WIRELESS;
+
+screenmirror_connect(&dev, &cfg);
+/* 设备现在可被手机以 Miracast、DLNA 或 AirPlay 三种方式投屏 */
+```
+
+### 4. USB 有线投屏
+
+```c
+MirrorDeviceInfo dev = {0};
+strcpy(dev.name, "USB Device");
+dev.mode = MIRROR_MODE_WIRED;
+
+MirrorConfig cfg = {0};
+cfg.mode = MIRROR_MODE_WIRED;
+
+screenmirror_connect(&dev, &cfg);
+/* 等待手机 USB 连接 */
+```
+
+### 5. WiFi 管理（需要 `ENABLE_WIFI`）
+
+```c
+#include "connectivity/wifi_core.h"
+
+void on_wifi_event(WifiEvent event, const WifiEventData *data,
+                  void *user_data)
 {
-    int ret;
-
-    /* 初始化投屏库 */
-    ret = screenmirror_init();
-    if (ret < 0) {
-        printf("Failed to initialize screenmirror library\n");
-        return -1;
+    switch (event) {
+    case WIFI_EVENT_SCAN_RESULT:
+        printf("扫描到 %d 个 AP\n", data->scan.ap_count);
+        for (int i = 0; i < data->scan.ap_count; i++) {
+            printf("  SSID: %-32s  信号: %d dBm\n",
+                   data->scan.aps[i].ssid,
+                   data->scan.aps[i].rssi);
+        }
+        break;
+    case WIFI_EVENT_CONNECTED:
+        printf("WiFi 已连接: %s  IP: %s\n",
+               data->conn.ssid, data->conn.ip_addr);
+        break;
+    case WIFI_EVENT_DISCONNECTED:
+        printf("WiFi 断开\n");
+        break;
+    default:
+        break;
     }
-
-    /* 设置事件回调 */
-    screenmirror_set_event_callback(mirror_event_callback, NULL);
-
-    /* 开始设备发现 */
-    printf("Discovering devices...\n");
-    screenmirror_start_discovery(MIRROR_MODE_MIRACAST, 5000,
-                                device_discovery_callback, NULL);
-
-    /* 等待发现完成 */
-    sleep(6);
-
-    /* 停止发现 */
-    screenmirror_stop_discovery();
-
-    /* 模拟选择设备并连接 */
-    MirrorDeviceInfo device;
-    strcpy(device.name, "Test Device 1");
-    strcpy(device.mac_address, "00:11:22:33:44:55");
-    strcpy(device.ip_address, "192.168.1.100");
-    device.signal_strength = 80;
-    device.mode = MIRROR_MODE_MIRACAST;
-
-    /* 配置连接参数 */
-    MirrorConfig config;
-    config.mode = MIRROR_MODE_MIRACAST;
-    config.max_bitrate = 10000;     /* 10 Mbps */
-    config.resolution_width = 1920;
-    config.resolution_height = 1080;
-    config.refresh_rate = 60;
-    config.enable_audio = true;
-    config.enable_hdcp = true;
-    config.connect_timeout_ms = 10000;
-
-    /* 连接设备 */
-    printf("Connecting to device: %s\n", device.name);
-    ret = screenmirror_connect(&device, &config);
-    if (ret < 0) {
-        printf("Failed to connect device\n");
-    }
-
-    /* 等待连接完成 */
-    sleep(3);
-
-    /* 检查当前状态 */
-    MirrorState state = screenmirror_get_state();
-    printf("Current state: %d\n", state);
-
-    /* 断开连接 */
-    printf("Disconnecting...\n");
-    screenmirror_disconnect();
-
-    /* 等待断开完成 */
-    sleep(1);
-
-    /* 反初始化 */
-    screenmirror_exit();
-
-    printf("Done\n");
-    return 0;
 }
+
+wifi_core_init(on_wifi_event, NULL);
+
+/* 开启 WiFi（STA + P2P 并发，支持 Miracast） */
+wifi_core_on();
+
+/* 扫描 */
+wifi_core_scan();
+
+/* 连接 */
+wifi_core_connect("MySSID", "MyPassword");
+
+/* 开启 AP 模式（SSID: allwinner-ap，密码: Aa123456，信道: 6） */
+/* wifi_core_ap_on("allwinner-ap", "Aa123456", 6); */
+
+wifi_core_off();
+wifi_core_deinit();
 ```
 
-### 编译示例
+### 6. 蓝牙管理（需要 `ENABLE_BT`）
 
-```bash
-# 使用静态库
-gcc -o example example.c -L./build -lscreenmirror -I./include -pthread
+```c
+#include "connectivity/bt_core.h"
 
-# 或使用动态库
-gcc -o example example.c -L./build -lscreenmirror -I./include -pthread
-export LD_LIBRARY_PATH=./build:$LD_LIBRARY_PATH
-./example
+void on_bt_event(BtEvent event, const BtEventData *data,
+                void *user_data)
+{
+    switch (event) {
+    case BT_EVENT_SCAN_RESULT:
+        printf("BT 扫描到 %d 台设备\n", data->scan.device_count);
+        for (int i = 0; i < data->scan.device_count; i++) {
+            printf("  %s  %s\n",
+                   data->scan.devices[i].name,
+                   data->scan.devices[i].addr);
+        }
+        break;
+    case BT_EVENT_CONNECTED:
+        printf("BT 已连接: %s\n", data->conn.device_name);
+        break;
+    case BT_EVENT_DISCONNECTED:
+        printf("BT 断开\n");
+        break;
+    default:
+        break;
+    }
+}
+
+/* sink_mode=false: A2DP Source（投影仪输出音频到 BT 音箱） */
+/* sink_mode=true:  A2DP Sink（手机推送音频到投影仪）       */
+bt_core_init(on_bt_event, NULL, /*sink_mode=*/false);
+
+bt_core_on();
+bt_core_scan();
+
+/* 连接配对设备 */
+bt_core_connect("AA:BB:CC:DD:EE:FF");
+
+bt_core_off();
+bt_core_deinit();
 ```
 
-## API 文档
+---
 
-### 初始化与清理
+## API 参考
 
-#### `int screenmirror_init(void)`
-初始化投屏库。必须在使用其他函数前调用。
+### 核心初始化
 
-**返回值：**
-- `0` - 成功
-- `< 0` - 失败（错误码见 screenmirror_internal.h）
+| 函数 | 说明 |
+|------|------|
+| `screenmirror_init()` | 初始化库，分配内部资源 |
+| `screenmirror_exit()` | 释放所有资源，停止所有协议 |
+| `screenmirror_get_version()` | 返回版本字符串（`"libscreenmirror v2.0.0"`） |
 
-#### `int screenmirror_exit(void)`
-反初始化投屏库。需要释放所有资源。
+### 事件
 
-**返回值：**
-- `0` - 成功
-- `< 0` - 失败
+| 函数 | 说明 |
+|------|------|
+| `screenmirror_set_event_callback(cb, data)` | 注册全局事件回调 |
 
-### 事件管理
+事件类型（`MirrorEventType`）：
 
-#### `int screenmirror_set_event_callback(MirrorEventCallback callback, void *user_data)`
-设置全局事件回调函数。投屏库将通过此回调报告所有事件。
-
-**参数：**
-- `callback` - 事件回调函数指针
-- `user_data` - 用户自定义数据，会在回调时传递
-
-**返回值：**
-- `0` - 成功
-- `< 0` - 失败
+| 值 | 含义 |
+|----|------|
+| `MIRROR_EVENT_STATE_CHANGED` | 状态机状态变化 |
+| `MIRROR_EVENT_DEVICE_FOUND` | 发现新设备 |
+| `MIRROR_EVENT_CONNECTED` | 投屏连接建立 |
+| `MIRROR_EVENT_DISCONNECTED` | 投屏连接断开 |
+| `MIRROR_EVENT_ERROR` | 错误发生 |
+| `MIRROR_EVENT_STREAM_STARTED` | 流传输开始 |
+| `MIRROR_EVENT_STREAM_STOPPED` | 流传输停止 |
 
 ### 设备发现
 
-#### `int screenmirror_start_discovery(MirrorMode mode, int timeout_ms, MirrorDeviceListCallback callback, void *user_data)`
-启动设备发现。
-
-**参数：**
-- `mode` - 投屏模式（MIRROR_MODE_MIRACAST 等）
-- `timeout_ms` - 发现超时时间（毫秒）
-- `callback` - 发现结果回调函数
-- `user_data` - 用户自定义数据
-
-**返回值：**
-- `0` - 成功
-- `< 0` - 失败
-
-#### `int screenmirror_stop_discovery(void)`
-停止设备发现。
-
-**返回值：**
-- `0` - 成功
-- `< 0` - 失败
+| 函数 | 说明 |
+|------|------|
+| `screenmirror_start_discovery(mode, timeout_ms, cb, data)` | 启动协议对应的设备发现 |
+| `screenmirror_stop_discovery()` | 停止设备发现 |
 
 ### 连接管理
 
-#### `int screenmirror_connect(const MirrorDeviceInfo *device, const MirrorConfig *config)`
-连接到指定设备。
-
-**参数：**
-- `device` - 目标设备信息
-- `config` - 连接配置参数
-
-**返回值：**
-- `0` - 成功
-- `< 0` - 失败
-
-#### `int screenmirror_disconnect(void)`
-断开当前连接。
-
-**返回值：**
-- `0` - 成功
-- `< 0` - 失败
+| 函数 | 说明 |
+|------|------|
+| `screenmirror_connect(device, config)` | 连接指定设备（或以服务器模式等待） |
+| `screenmirror_disconnect()` | 断开当前连接 |
 
 ### 状态查询
 
-#### `MirrorState screenmirror_get_state(void)`
-获取当前投屏状态。
-
-**返回值：**
-- `MIRROR_STATE_IDLE` - 空闲
-- `MIRROR_STATE_DISCOVERING` - 发现中
-- `MIRROR_STATE_CONNECTING` - 连接中
-- `MIRROR_STATE_CONNECTED` - 已连接
-- `MIRROR_STATE_STREAMING` - 传输中
-- `MIRROR_STATE_PAUSED` - 已暂停
-- `MIRROR_STATE_ERROR` - 错误
-
-#### `const MirrorDeviceInfo* screenmirror_get_device_info(void)`
-获取当前连接设备的信息。
-
-**返回值：**
-- 设备信息指针，如果未连接返回 NULL
-
-#### `const MirrorConfig* screenmirror_get_config(void)`
-获取当前连接的配置参数。
-
-**返回值：**
-- 配置参数指针，如果未连接返回 NULL
+| 函数 | 说明 |
+|------|------|
+| `screenmirror_get_state()` | 返回当前 `MirrorState` |
+| `screenmirror_get_device_info()` | 返回已连接设备信息（NULL 表示未连接） |
+| `screenmirror_get_config()` | 返回当前连接配置（NULL 表示未连接） |
 
 ### 数据传输
 
-#### `int screenmirror_send_video_frame(const uint8_t *data, int size)`
-发送视频数据帧。
+| 函数 | 说明 |
+|------|------|
+| `screenmirror_send_video_frame(data, size)` | 推送视频帧数据 |
+| `screenmirror_send_audio_frame(data, size)` | 推送音频帧数据 |
+| `screenmirror_control(command)` | 发送控制命令（`"pause"`, `"resume"`, `"stop"`, `"reset"`） |
 
-**参数：**
-- `data` - 视频数据指针
-- `size` - 数据大小（字节）
-
-**返回值：**
-- 已发送的字节数，< 0 表示失败
-
-#### `int screenmirror_send_audio_frame(const uint8_t *data, int size)`
-发送音频数据帧。
-
-**参数：**
-- `data` - 音频数据指针
-- `size` - 数据大小（字节）
-
-**返回值：**
-- 已发送的字节数，< 0 表示失败
-
-### 控制命令
-
-#### `int screenmirror_control(const char *command)`
-发送控制命令。
-
-**参数：**
-- `command` - 命令字符串（如 "pause", "resume", "stop"）
-
-**返回值：**
-- `0` - 成功
-- `< 0` - 失败
-
-### 版本信息
-
-#### `const char* screenmirror_get_version(void)`
-获取库版本号。
-
-**返回值：**
-- 版本字符串（如 "libscreenmirror v1.0.0"）
-
-## 数据结构
-
-### MirrorMode（投屏模式）
-```c
-typedef enum {
-    MIRROR_MODE_MIRACAST,    /* Miracast (WiFi Direct) */
-    MIRROR_MODE_AIRPLAY,     /* AirPlay */
-    MIRROR_MODE_DLNA,        /* DLNA */
-    MIRROR_MODE_WIRED,       /* USB 有线投屏 */
-    MIRROR_MODE_WIRELESS,    /* WiFi 无线投屏 */
-} MirrorMode;
-```
-
-### MirrorState（投屏状态）
-```c
-typedef enum {
-    MIRROR_STATE_IDLE,           /* 空闲 */
-    MIRROR_STATE_DISCOVERING,    /* 发现中 */
-    MIRROR_STATE_CONNECTING,     /* 连接中 */
-    MIRROR_STATE_CONNECTED,      /* 已连接 */
-    MIRROR_STATE_STREAMING,      /* 传输中 */
-    MIRROR_STATE_PAUSED,         /* 已暂停 */
-    MIRROR_STATE_ERROR,          /* 错误 */
-} MirrorState;
-```
-
-### MirrorEvent（事件结构）
-```c
-typedef struct {
-    MirrorEventType type;      /* 事件类型 */
-    int error_code;            /* 错误码 */
-    const char *error_msg;     /* 错误信息 */
-    void *data;                /* 事件数据 */
-} MirrorEvent;
-```
-
-### MirrorDeviceInfo（设备信息）
-```c
-typedef struct {
-    char name[128];            /* 设备名称 */
-    char mac_address[32];      /* MAC 地址 */
-    char ip_address[16];       /* IP 地址 */
-    int signal_strength;       /* 信号强度 0-100 */
-    MirrorMode mode;           /* 投屏模式 */
-    uint32_t model_id;         /* 型号 ID */
-    void *platform_data;       /* 平台特定数据 */
-} MirrorDeviceInfo;
-```
-
-### MirrorConfig（连接配置）
-```c
-typedef struct {
-    MirrorMode mode;           /* 投屏模式 */
-    int max_bitrate;           /* 最大码率 (Kbps) */
-    int resolution_width;      /* 分辨率宽度 */
-    int resolution_height;     /* 分辨率高度 */
-    int refresh_rate;          /* 刷新率 (Hz) */
-    bool enable_audio;         /* 是否启用音频 */
-    bool enable_hdcp;          /* 是否启用 HDCP */
-    int connect_timeout_ms;    /* 连接超时时间 (ms) */
-    void *extra_config;        /* 扩展配置指针 */
-} MirrorConfig;
-```
-
-## 错误码
-
-```c
-#define MIRROR_ERR_SUCCESS           0
-#define MIRROR_ERR_ALREADY_INIT     -1    /* 已初始化 */
-#define MIRROR_ERR_NOT_INIT         -2    /* 未初始化 */
-#define MIRROR_ERR_INVALID_PARAM    -3    /* 参数无效 */
-#define MIRROR_ERR_OUT_OF_MEMORY    -4    /* 内存不足 */
-#define MIRROR_ERR_CONNECT_FAILED   -5    /* 连接失败 */
-#define MIRROR_ERR_TIMEOUT          -6    /* 超时 */
-#define MIRROR_ERR_DEVICE_BUSY      -7    /* 设备忙 */
-#define MIRROR_ERR_UNKNOWN          -99   /* 未知错误 */
-```
+---
 
 ## 项目结构
 
 ```
 screenmirror_lib/
-├── Makefile                      # 编译配置
-├── README.md                     # 项目文档（本文件）
+├── Makefile                           # 编译系统（支持交叉编译和 BSP 特性开关）
+├── CMakeLists.txt                     # CMake 构建（同等特性支持）
+├── README.md                          # 本文件
 ├── include/
-│   ├── screenmirror.h           # 公开 API
-│   ├── screenmirror_internal.h  # 内部接口
+│   ├── screenmirror.h                 # 公开 API（不变）
+│   ├── screenmirror_internal.h        # 内部接口（ProtocolOps 等）
+│   ├── bsp/
+│   │   └── awcast_api.h               # AWCast/USBCast BSP 符号声明（H133_BOARD）
+│   ├── connectivity/
+│   │   ├── wifi_core.h                # WiFi 管理 API
+│   │   └── bt_core.h                  # 蓝牙管理 API
 │   ├── protocols/
 │   │   ├── miracast.h
 │   │   ├── airplay.h
@@ -417,110 +404,84 @@ screenmirror_lib/
 │       └── cedarx_platform.h
 ├── src/
 │   ├── core/
-│   │   ├── mirror_engine.c      # 核心引擎
-│   │   ├── event_system.c       # 事件系统
-│   │   └── state_machine.c      # 状态机
+│   │   ├── mirror_engine.c            # 协议分发、生命周期管理
+│   │   ├── event_system.c             # 线程安全事件系统
+│   │   └── state_machine.c            # 状态机
+│   ├── connectivity/
+│   │   ├── wifi_core.c                # WiFi（libwifimg，无 LVGL）
+│   │   └── bt_core.c                  # 蓝牙（libbtmanager，无 LVGL）
 │   ├── protocols/
-│   │   ├── miracast/
-│   │   ├── airplay/
-│   │   ├── dlna/
-│   │   ├── wired/
-│   │   └── wireless/
+│   │   ├── miracast/miracast.c        # AWCast Miracast（libwfd2）
+│   │   ├── airplay/airplay.c          # AirPlay stub（由 AWCast 统一管理）
+│   │   ├── dlna/dlna.c                # AWCast DLNA（libawdlna）
+│   │   ├── wired/wired.c              # USBCast 有线投屏
+│   │   └── wireless/wireless.c        # AWCast All-In-One 无线投屏
 │   ├── network/
 │   │   ├── discovery.c
 │   │   └── transport.c
 │   └── platform/
 │       └── cedarx_platform.c
-└── build/                        # 编译输出目录
+├── examples/
+│   └── basic_example.c                # 验证示例
+└── build/                             # 编译产物（gitignore）
     ├── libscreenmirror.a
-    ├── libscreenmirror.so.1.0.0
-    ├── libscreenmirror.so.1
+    ├── libscreenmirror.so.2.0.0
+    ├── libscreenmirror.so.2
     └── libscreenmirror.so
 ```
 
-## 集成到现有项目
+---
 
-### 方式1：使用编译好的库文件
+## 集成到你的项目
 
-```bash
-# 编译库
-cd screenmirror_lib
-make all
-
-# 安装到系统或项目路径
-cp build/libscreenmirror.a /path/to/your/project/lib/
-cp build/libscreenmirror.so* /path/to/your/project/lib/
-cp include/screenmirror.h /path/to/your/project/include/
-```
-
-然后在项目的 Makefile 中：
+### Makefile 方式
 
 ```makefile
-CFLAGS = -I/path/to/include
-LDFLAGS = -L/path/to/lib -lscreenmirror -pthread
+SCREENMIRROR_DIR = path/to/screenmirror_lib
+CFLAGS  += -I$(SCREENMIRROR_DIR)/include
+LDFLAGS += -L$(SCREENMIRROR_DIR)/build -lscreenmirror -pthread -ldl
 
-# 编译
-gcc $(CFLAGS) -o myapp myapp.c $(LDFLAGS)
+myapp: myapp.c
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 ```
 
-### 方式2：直接编译源码
+### CMake 方式
 
-在你的项目 Makefile 中添加投屏库源文件：
-
-```makefile
-MIRROR_SRCS = \
-    screenmirror_lib/src/core/mirror_engine.c \
-    screenmirror_lib/src/core/event_system.c \
-    screenmirror_lib/src/core/state_machine.c \
-    # ... 其他源文件
-
-CFLAGS = -I./screenmirror_lib/include
-SRCS += $(MIRROR_SRCS)
+```cmake
+add_subdirectory(screenmirror_lib)
+target_link_libraries(myapp screenmirror_static)
 ```
 
-## 扩展协议支持
+---
 
-### 添加新的投屏协议
+## H133 开发注意事项
 
-1. 创建新的协议模块文件：
-   ```
-   screenmirror_lib/include/protocols/my_protocol.h
-   screenmirror_lib/src/protocols/my_protocol/my_protocol.c
-   ```
+1. **HDCP Key** — Miracast HDCP 加密需要 `/data/miracast.dat`（902 字节），  
+   若文件不存在则以无 HDCP 模式运行（依然功能正常，部分内容保护内容不可用）
 
-2. 实现固定的协议接口（参考 miracast.c）：
-   ```c
-   typedef struct {
-       int (*init)(void);
-       void (*exit)(void);
-       int (*start_discovery)(int timeout_ms);
-       void (*stop_discovery)(void);
-       int (*connect)(const MirrorDeviceInfo *device, const MirrorConfig *config);
-       void (*disconnect)(void);
-       int (*send_video)(const uint8_t *data, int size);
-       int (*send_audio)(const uint8_t *data, int size);
-       int (*control)(const char *command);
-       MirrorState (*get_state)(void);
-   } ProtocolOps;
-   ```
+2. **WiFi 模式** — `wifi_core_on()` 使用 `WIFI_STATION_P2P` 并发模式，  
+   同时支持 STA（上网）和 P2P（Miracast 发现）
 
-3. 在 Makefile 中添加新协议的源文件
+3. **蓝牙模式** — 默认 A2DP Source（投影仪输出音频到 BT 音箱）；  
+   设置 `sink_mode=true` 改为 A2DP Sink（接收手机音频）
 
-4. 重新编译库
+4. **运行时 dlopen** — AirPlay 和 Android 有线协议在运行时动态加载，  
+   库路径：`/usr/lib/libthirdparty_mirror.so`
+
+5. **线程安全** — 所有公开 API 内部使用 mutex 保护，可从多个线程调用
+
+---
 
 ## 许可证
 
 Apache License 2.0
 
-## 贡献
-
-欢迎提交 Pull Request 或 Issue！
-
-## 联系方式
+## 联系
 
 - 作者：Liu-Eleven
 - GitHub：https://github.com/Liu-Eleven/screen_mirror
 
 ---
 
-**最后更新：2026-07-04**
+**最后更新：2026-07-06**
+
