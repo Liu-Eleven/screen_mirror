@@ -1,5 +1,6 @@
 #include "platform/cedarx_platform.h"
 #include <stdio.h>
+#include <stdbool.h>
 
 /* Allwinner Cedarx 平台适配实现 */
 
