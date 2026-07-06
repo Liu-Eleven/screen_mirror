@@ -49,6 +49,8 @@ static int load_hdcp_key(void)
         return -1;
     }
     Miracast_SetKey(key_buf);
+    /* Zero out key material after handing to BSP */
+    memset(key_buf, 0, sizeof(key_buf));
     printf("[MIRACAST] HDCP key loaded\n");
     return 0;
 }

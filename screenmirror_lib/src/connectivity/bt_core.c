@@ -105,9 +105,15 @@ static void adapter_status_cb(btmg_adapter_state_t status)
         char name[64] = {0};
         char suffix[8] = {0};
         bt_manager_get_adapter_address(addr);
-        /* generate a short device name from MAC */
-        snprintf(suffix, sizeof(suffix), "%c%c%c%c",
-                 addr[12], addr[13], addr[15], addr[16]);
+        /* generate a short device name from MAC last bytes
+         * MAC format: XX:XX:XX:XX:XX:XX (17 chars + null)
+         * indices 12-16 = last two bytes, e.g. "EE:FF" */
+        if (strlen(addr) == 17) {
+            snprintf(suffix, sizeof(suffix), "%c%c%c%c",
+                     addr[12], addr[13], addr[15], addr[16]);
+        } else {
+            snprintf(suffix, sizeof(suffix), "ANON");
+        }
         snprintf(name, sizeof(name), "AWCast-BT_%s", suffix);
         bt_manager_set_adapter_name(name);
         bt_manager_agent_set_io_capability(BTMG_IO_CAP_NOINPUTNOOUTPUT);

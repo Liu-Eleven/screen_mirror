@@ -21,6 +21,7 @@
 #include <netdb.h>
 #include <errno.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 /* ── internal state ──────────────────────────────────────────────────────── */
 
@@ -45,10 +46,30 @@ static struct {
 /* ── UUID generation ─────────────────────────────────────────────────────── */
 static void generate_uuid(char *uuid, size_t len)
 {
-    srand((unsigned int)time(NULL));
-    snprintf(uuid, len, "%08x-%04x-%04x-%04x-%012x",
-             rand(), rand() & 0xFFFF, rand() & 0xFFFF,
-             rand() & 0xFFFF, rand());
+    unsigned char rnd[16];
+    int fd = open("/dev/urandom", O_RDONLY);
+    if (fd >= 0) {
+        ssize_t n = read(fd, rnd, sizeof(rnd));
+        close(fd);
+        if (n == (ssize_t)sizeof(rnd)) {
+            /* Set version 4 bits (random UUID) */
+            rnd[6] = (rnd[6] & 0x0f) | 0x40;
+            rnd[8] = (rnd[8] & 0x3f) | 0x80;
+            snprintf(uuid, len,
+                "%02x%02x%02x%02x-%02x%02x-%02x%02x-%02x%02x"
+                "-%02x%02x%02x%02x%02x%02x",
+                rnd[0], rnd[1], rnd[2], rnd[3],
+                rnd[4], rnd[5], rnd[6], rnd[7],
+                rnd[8], rnd[9],
+                rnd[10], rnd[11], rnd[12], rnd[13], rnd[14], rnd[15]);
+            return;
+        }
+    }
+    /* Fallback: use time-based random (less secure but functional) */
+    srand((unsigned int)time(NULL) ^ (unsigned int)getpid());
+    snprintf(uuid, len, "%08x-%04x-4%03x-%04x-%012x",
+             rand(), rand() & 0xFFFF, rand() & 0x0FFF,
+             (rand() & 0x3FFF) | 0x8000, rand());
 }
 
 /* ── network reachability check (for DLNA) ───────────────────────────────── */

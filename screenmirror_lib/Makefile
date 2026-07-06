@@ -79,8 +79,16 @@ ALL_OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(ALL_SRCS:.c=.o)))
 CFLAGS = $(CC_FLAGS) \
     -I$(INCLUDE_DIR) \
     -I$(INCLUDE_DIR)/bsp \
-    -I/usr/include/x86_64-linux-gnu \
     -fPIC -pthread
+
+# On multi-arch systems the compiler may need its own arch-specific
+# system headers. Let the compiler find them automatically by using
+# $(shell $(CC) -print-file-name=include) where available; otherwise
+# rely on the toolchain's default search paths.
+MULTIARCH_INC := $(shell $(CC) -print-multiarch 2>/dev/null)
+ifneq ($(MULTIARCH_INC),)
+    CFLAGS += -I/usr/include/$(MULTIARCH_INC)
+endif
 
 # ── H133 / BSP feature flags ──────────────────────────────────────────────
 

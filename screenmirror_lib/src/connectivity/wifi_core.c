@@ -161,6 +161,7 @@ static void wifi_msg_cb(wifi_msg_data_t *msg)
             wifi_get_scan_results(raw, &n, SCAN_LIST_LEN);
             for (int i = 0; i < n && scan_results_num < SCAN_LIST_LEN; i++) {
                 wifi_core_scan_result_t *r = &scan_results[scan_results_num];
+                memset(r, 0, sizeof(*r));
                 strncpy(r->ssid,  raw[i].ssid,  sizeof(r->ssid)  - 1);
                 strncpy(r->bssid, raw[i].bssid, sizeof(r->bssid) - 1);
                 r->rssi     = raw[i].rssi;
